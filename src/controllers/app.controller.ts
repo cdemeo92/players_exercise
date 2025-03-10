@@ -16,9 +16,17 @@ export class AppController {
   @ApiOkResponse({
     description:
       'Players filtered by position, birth year range, active status, and club',
-    type: [GetPlayersResponse],
+    type: GetPlayersResponse,
   })
-  getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse[] {
-    return [];
+  getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse {
+    return {
+      page: 1,
+      pageSize: 10,
+      totalPage: 1,
+      players: this.getPlayersAction.execute(
+        params?.toFilter(),
+        params?.toPagination(),
+      ),
+    };
   }
 }

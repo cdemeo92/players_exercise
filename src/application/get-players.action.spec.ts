@@ -2,13 +2,13 @@ import { Player } from 'src/domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
 
 describe('GetPlayersAction', () => {
-  const getPlayersStub = jest.fn((): Array<Player> => []);
+  const getPlayersMock = jest.fn((): Array<Player> => []);
 
-  const playerRepositoryStub = {
-    getPlayers: getPlayersStub,
+  const playerRepository = {
+    getPlayers: getPlayersMock,
   };
 
-  const action = new GetPlayersAction(playerRepositoryStub);
+  const action = new GetPlayersAction(playerRepository);
 
   describe('execute', () => {
     afterEach(() => {
@@ -38,13 +38,12 @@ describe('GetPlayersAction', () => {
         clubId: '5',
         isActive: false,
       });
-      getPlayersStub.mockReturnValueOnce(players);
+      getPlayersMock.mockReturnValueOnce(players);
 
       const result = action.execute();
       expect(result).toEqual(players);
     });
 
-    //TODO: convert into integration test
     it.each([
       ['position', { position: 'Goalkeeper' }],
       ['active status', { isActive: true }],
@@ -61,21 +60,20 @@ describe('GetPlayersAction', () => {
       ],
     ])('should query the db filtering by %s', (_, filter) => {
       action.execute(filter);
-      expect(getPlayersStub).toHaveBeenCalledWith(filter, undefined);
+      expect(getPlayersMock).toHaveBeenCalledWith(filter, undefined);
     });
 
-    //TODO: convert into integration test
     it.each([
       ['page', { page: 2 }],
       ['page size', { pageSize: 200 }],
       ['page and the page size', { page: 2, pageSize: 200 }],
     ])('should select the %s to return', (_, pagination) => {
       action.execute(undefined, pagination);
-      expect(getPlayersStub).toHaveBeenCalledWith(undefined, pagination);
+      expect(getPlayersMock).toHaveBeenCalledWith(undefined, pagination);
     });
 
-    it('should throw an exception when the repository throws an exception', () => {
-      getPlayersStub.mockImplementationOnce(() => {
+    it('should throw an exception when an error occour', () => {
+      getPlayersMock.mockImplementationOnce(() => {
         throw new Error('Error');
       });
 
