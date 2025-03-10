@@ -3,7 +3,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   GetPlayersParams,
   GetPlayersResponse,
-} from 'src/application/dto/get-players.dto';
+} from '../application/dto/get-players.dto';
 import { GetPlayersAction } from '../application/get-players.action';
 
 @Controller('players')
@@ -21,7 +21,7 @@ export class AppController {
       'Players filtered by position, birth year range, active status, and club',
     type: [GetPlayersResponse],
   })
-  getPlayers(@Query() params: GetPlayersParams): GetPlayersResponse[] {
+  getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse[] {
     return this.getPlayersAction.execute(params);
   }
 }
