@@ -1,4 +1,4 @@
-type Stage = 'dev' | 'prod' | 'integ';
+type Stage = 'dev' | 'prod';
 
 interface Config {
   port: number;
@@ -7,9 +7,6 @@ interface Config {
 const config: Record<Stage, Config> = {
   dev: {
     port: 3000,
-  },
-  integ: {
-    port: 80,
   },
   prod: {
     port: 80,

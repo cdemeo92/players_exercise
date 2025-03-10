@@ -20,7 +20,8 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --coverage --ci --reporters=default --reporters=jest-junit --coverageReporters=json-summary",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:integ": "jest --config ./test/integ/jest-integ.json",
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json",
     "prepare": "husky"
   },
   "dependencies": {

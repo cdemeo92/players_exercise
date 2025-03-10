@@ -70,19 +70,17 @@ jobs:
           path: |
             .npm
             node_modules
-      - name: Run Tests
+      - name: Run tests
         run: npm run test:ci
       - name: Comment test results on PR
         uses: mikepenz/action-junit-report@v3
         with:
           report_paths: 'junit.xml'
-
-  e2e:
-    name: E2e tests
+  
+  integ:
+    name: Integration tests
     needs: build
     runs-on: ubuntu-latest
-    env:
-      STAGE: integ
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js ${{ env.NODE_VERSION }}
@@ -96,7 +94,27 @@ jobs:
           path: |
             .npm
             node_modules
-      - name: Run Tests
+      - name: Run integration tests
+        run: npm run test:integ
+
+  e2e:
+    name: e2e tests
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Retrieve node_modules from cache
+        uses: actions/cache/restore@v4
+        with:
+          key: cache-${{ hashFiles('package-lock.json') }}
+          path: |
+            .npm
+            node_modules
+      - name: Run e2e tests
         run: npm run test:e2e
 
   deploy:
