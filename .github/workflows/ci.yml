@@ -75,4 +75,4 @@ jobs:
       - name: Comment test results on PR
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: '${{ env.WORK_DIR }}/junit.xml'
+          report_paths: 'junit.xml'
