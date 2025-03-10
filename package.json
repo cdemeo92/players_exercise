@@ -83,7 +83,6 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageProvider": "v8",
-    "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],

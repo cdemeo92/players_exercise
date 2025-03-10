@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { BirthYearRange, Filter } from '../../domain/filter.value-object';
 
 export class GetPlayersParams {
   @ApiProperty({
@@ -30,6 +31,17 @@ export class GetPlayersParams {
     type: String,
   })
   club?: string;
+
+  public toFilter(): Filter {
+    return new Filter(
+      this.position,
+      this.birthYearRange
+        ? BirthYearRange.fromString(this.birthYearRange)
+        : undefined,
+      this.isActive,
+      this.club,
+    );
+  }
 }
 
 export class GetPlayersResponse {

@@ -1,10 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import {
-  GetPlayersParams,
-  GetPlayersResponse,
-} from '../application/dto/get-players.dto';
 import { GetPlayersAction } from '../application/get-players.action';
+import { GetPlayersParams, GetPlayersResponse } from './dto/get-players.dto';
 
 @Controller('players')
 @ApiTags('players')
@@ -22,6 +19,6 @@ export class AppController {
     type: [GetPlayersResponse],
   })
   getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse[] {
-    return this.getPlayersAction.execute(params);
+    return [];
   }
 }

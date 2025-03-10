@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { GetPlayersParams, GetPlayersResponse } from './dto/get-players.dto';
+import { Filter } from 'src/domain/filter.value-object';
+import { Player } from 'src/domain/player.entity';
+import { PlayerRepositoryPort } from './ports/player-repository.port';
 
 @Injectable()
 export class GetPlayersAction {
-  execute(params?: GetPlayersParams): GetPlayersResponse[] {
-    console.log(params);
-    return [];
+  public constructor(private readonly playerRepository: PlayerRepositoryPort) {}
+
+  execute(params?: Filter): Array<Player> {
+    return this.playerRepository.getPlayers(params);
   }
 }
