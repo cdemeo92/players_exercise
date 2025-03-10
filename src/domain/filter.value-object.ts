@@ -15,6 +15,13 @@ export class Filter {
     public readonly position?: string,
     public readonly birthYearRange?: BirthYearRange,
     public readonly isActive?: boolean,
-    public readonly club?: string,
+    public readonly clubId?: string,
+  ) {}
+}
+
+export class Pagination {
+  public constructor(
+    public readonly page?: number,
+    public readonly pageSize?: number,
   ) {}
 }

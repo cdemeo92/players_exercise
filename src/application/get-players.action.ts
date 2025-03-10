@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Filter } from 'src/domain/filter.value-object';
+import { Filter, Pagination } from 'src/domain/filter.value-object';
 import { Player } from 'src/domain/player.entity';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 
@@ -7,7 +7,7 @@ import { PlayerRepositoryPort } from './ports/player-repository.port';
 export class GetPlayersAction {
   public constructor(private readonly playerRepository: PlayerRepositoryPort) {}
 
-  execute(params?: Filter): Array<Player> {
-    return this.playerRepository.getPlayers(params);
+  execute(params?: Filter, pagination?: Pagination): Array<Player> {
+    return this.playerRepository.getPlayers(params, pagination);
   }
 }
