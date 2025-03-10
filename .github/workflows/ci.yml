@@ -2,7 +2,7 @@ name: Front-End CI
 run-name: ${{ github.actor }} is running
 env:
   WORK_DIR: front-end
-  NODE_VERSION: lts
+  NODE_VERSION: lts/*
 on:
   push:
     branches:
