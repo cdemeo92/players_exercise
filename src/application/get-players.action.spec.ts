@@ -11,6 +11,10 @@ describe('GetPlayersAction', () => {
   const action = new GetPlayersAction(playerRepositoryStub);
 
   describe('execute', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('should return an empty array when the DB is empty', () => {
       const result = action.execute();
       expect(result).toEqual([]);
@@ -34,7 +38,7 @@ describe('GetPlayersAction', () => {
         clubId: '5',
         isActive: false,
       });
-      getPlayersStub.mockReturnValue(players);
+      getPlayersStub.mockReturnValueOnce(players);
 
       const result = action.execute();
       expect(result).toEqual(players);
@@ -68,6 +72,16 @@ describe('GetPlayersAction', () => {
     ])('should select the %s to return', (_, pagination) => {
       action.execute(undefined, pagination);
       expect(getPlayersStub).toHaveBeenCalledWith(undefined, pagination);
+    });
+
+    it('should throw an exception when the repository throws an exception', () => {
+      getPlayersStub.mockImplementationOnce(() => {
+        throw new Error('Error');
+      });
+
+      expect(() => action.execute()).toThrow(
+        'An error occurred while fetching players: Error',
+      );
     });
   });
 });

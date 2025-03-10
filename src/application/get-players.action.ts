@@ -8,6 +8,12 @@ export class GetPlayersAction {
   public constructor(private readonly playerRepository: PlayerRepositoryPort) {}
 
   execute(params?: Filter, pagination?: Pagination): Array<Player> {
-    return this.playerRepository.getPlayers(params, pagination);
+    try {
+      return this.playerRepository.getPlayers(params, pagination);
+    } catch (error) {
+      throw new Error(
+        `An error occurred while fetching players: ${(error as Error).message}`,
+      );
+    }
   }
 }
