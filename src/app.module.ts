@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GetPlayersAction } from './application/get-players.action';
-import { AppController } from './controllers/app.controller';
 import configuration from './configuration';
+import { AppController } from './controllers/app.controller';
+import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 
 @Module({
   imports: [
@@ -11,6 +12,12 @@ import configuration from './configuration';
     }),
   ],
   controllers: [AppController],
-  providers: [GetPlayersAction],
+  providers: [
+    GetPlayersAction,
+    {
+      provide: 'PlayerRepositoryPort',
+      useClass: PlayerRepositoryAdapter,
+    },
+  ],
 })
 export class AppModule {}
