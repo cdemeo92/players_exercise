@@ -1,10 +1,13 @@
 import { Player } from 'src/domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
+import { PlayerRepositoryPort } from './ports/player-repository.port';
 
 describe('GetPlayersAction', () => {
-  const getPlayersMock = jest.fn((): Array<Player> => []);
+  const getPlayersMock = jest.fn(
+    (): Promise<Array<Player>> => Promise.resolve([]),
+  );
 
-  const playerRepository = {
+  const playerRepository: PlayerRepositoryPort = {
     getPlayers: getPlayersMock,
   };
 
@@ -15,12 +18,12 @@ describe('GetPlayersAction', () => {
       jest.clearAllMocks();
     });
 
-    it('should return an empty array when the DB is empty', () => {
-      const result = action.execute();
+    it('should return an empty array when the DB is empty', async () => {
+      const result = await action.execute();
       expect(result).toEqual([]);
     });
 
-    it('should return an array of players when the DB is not empty', () => {
+    it('should return an array of players when the DB is not empty', async () => {
       const players = Array<Player>(30).fill({
         id: '182906',
         name: 'Mike Maignan',
@@ -38,9 +41,9 @@ describe('GetPlayersAction', () => {
         clubId: '5',
         isActive: false,
       });
-      getPlayersMock.mockReturnValueOnce(players);
+      getPlayersMock.mockResolvedValueOnce(players);
 
-      const result = action.execute();
+      const result = await action.execute();
       expect(result).toEqual(players);
     });
 
@@ -58,8 +61,8 @@ describe('GetPlayersAction', () => {
           birthYearRange: { start: 1992, end: 2000 },
         },
       ],
-    ])('should query the db filtering by %s', (_, filter) => {
-      action.execute(filter);
+    ])('should query the db filtering by %s', async (_, filter) => {
+      await action.execute(filter);
       expect(getPlayersMock).toHaveBeenCalledWith(filter, undefined);
     });
 
@@ -67,17 +70,17 @@ describe('GetPlayersAction', () => {
       ['page', { page: 2 }],
       ['page size', { pageSize: 200 }],
       ['page and the page size', { page: 2, pageSize: 200 }],
-    ])('should select the %s to return', (_, pagination) => {
-      action.execute(undefined, pagination);
+    ])('should select the %s to return', async (_, pagination) => {
+      await action.execute(undefined, pagination);
       expect(getPlayersMock).toHaveBeenCalledWith(undefined, pagination);
     });
 
-    it('should throw an exception when an error occour', () => {
+    it('should throw an exception when an error occour', async () => {
       getPlayersMock.mockImplementationOnce(() => {
         throw new Error('Error');
       });
 
-      expect(() => action.execute()).toThrow(
+      await expect(async () => await action.execute()).rejects.toThrow(
         'An error occurred while fetching players: Error',
       );
     });

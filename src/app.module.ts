@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Db, MongoClient } from 'mongodb';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
@@ -17,6 +18,17 @@ import { AppController } from './controllers/app.controller';
     {
       provide: 'PlayerRepositoryPort',
       useClass: PlayerRepositoryAdapter,
+    },
+    {
+      provide: 'MONGO_CLIENT',
+      useFactory: async (configService: ConfigService): Promise<Db> => {
+        const client = new MongoClient(
+          configService.get<string>('MONGO_URI') ?? '',
+        );
+        await client.connect();
+        return client.db(configService.get<string>('MONGO_DB_NAME'));
+      },
+      inject: [ConfigService],
     },
   ],
 })

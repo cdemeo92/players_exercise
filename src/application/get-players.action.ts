@@ -10,7 +10,7 @@ export class GetPlayersAction {
     private readonly playerRepository: PlayerRepositoryPort,
   ) {}
 
-  execute(params?: Filter, pagination?: Pagination): Array<Player> {
+  execute(params?: Filter, pagination?: Pagination): Promise<Array<Player>> {
     try {
       return this.playerRepository.getPlayers(params, pagination);
     } catch (error) {

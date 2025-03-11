@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { PlayerRepositoryAdapter } from '../adapters/player-repository.adapter';
 import { GetPlayersAction } from '../application/get-players.action';
 import { BirthYearRange, Filter } from '../domain/filter.value-object';
 import { Player } from '../domain/player.entity';
@@ -8,7 +9,9 @@ import { GetPlayersParams } from './dto/get-players.dto';
 
 describe('AppController', () => {
   let appController: AppController;
-  const getPlayersActionExecuteMock = jest.fn((): Player[] => []);
+  const getPlayersActionExecuteMock = jest.fn(
+    (): Promise<Array<Player>> => Promise.resolve([]),
+  );
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -25,13 +28,13 @@ describe('AppController', () => {
   });
 
   describe('getPlayers', () => {
-    it('should return an empty array when there are no players', () => {
-      expect(appController.getPlayers()).toEqual(
+    it('should return an empty array when there are no players', async () => {
+      expect(await appController.getPlayers()).toEqual(
         expect.objectContaining({ players: [] }),
       );
     });
 
-    it('should return an array of players in the response when there are players', () => {
+    it('should return an array of players in the response when there are players', async () => {
       const players = Array<Player>(30).fill({
         id: '182906',
         name: 'Mike Maignan',
@@ -50,8 +53,8 @@ describe('AppController', () => {
         isActive: false,
       });
 
-      getPlayersActionExecuteMock.mockReturnValueOnce(players);
-      expect(appController.getPlayers()).toEqual(
+      getPlayersActionExecuteMock.mockResolvedValueOnce(players);
+      expect(await appController.getPlayers()).toEqual(
         expect.objectContaining({ players }),
       );
     });
@@ -67,20 +70,23 @@ describe('AppController', () => {
         clubId: '5',
         birthYearRange: '1992-2000',
       }),
-    ])('should filter players based on the query parameters', (queryParams) => {
-      appController.getPlayers(queryParams);
-      expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
-        new Filter(
-          queryParams.position,
-          queryParams.birthYearRange
-            ? BirthYearRange.fromString(queryParams.birthYearRange)
-            : undefined,
-          queryParams.isActive,
-          queryParams.clubId,
-        ),
-        expect.anything(),
-      );
-    });
+    ])(
+      'should filter players based on the query parameters',
+      async (queryParams) => {
+        await appController.getPlayers(queryParams);
+        expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
+          new Filter(
+            queryParams.position,
+            queryParams.birthYearRange
+              ? BirthYearRange.fromString(queryParams.birthYearRange)
+              : undefined,
+            queryParams.isActive,
+            queryParams.clubId,
+          ),
+          expect.anything(),
+        );
+      },
+    );
 
     it.each([
       new GetPlayersParams({ page: 2 }),
@@ -88,8 +94,8 @@ describe('AppController', () => {
       new GetPlayersParams({ page: 2, pageSize: 10 }),
     ])(
       'should paginate the players based on the query parameters',
-      (queryParams) => {
-        appController.getPlayers(queryParams);
+      async (queryParams) => {
+        await appController.getPlayers(queryParams);
         expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
           expect.anything(),
           { page: queryParams.page, pageSize: queryParams.pageSize },
@@ -97,7 +103,7 @@ describe('AppController', () => {
       },
     );
 
-    it('should filter and paginate the players based on the query parameters', () => {
+    it('should filter and paginate the players based on the query parameters', async () => {
       const queryParams = new GetPlayersParams({
         position: 'Goalkeeper',
         isActive: true,
@@ -107,7 +113,7 @@ describe('AppController', () => {
         pageSize: 10,
       });
 
-      appController.getPlayers(queryParams);
+      await appController.getPlayers(queryParams);
       expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
         new Filter(
           queryParams.position,
@@ -121,20 +127,20 @@ describe('AppController', () => {
       );
     });
 
-    it('should set the default page to 1 and the page size to 10 when not provided', () => {
-      appController.getPlayers(new GetPlayersParams());
+    it('should set the default page to 1 and the page size to 10 when not provided', async () => {
+      await appController.getPlayers(new GetPlayersParams());
       expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
         expect.anything(),
         { page: 1, pageSize: 10 },
       );
     });
 
-    it('should throw an HttpException when an error occurs while fetching players', () => {
-      getPlayersActionExecuteMock.mockImplementationOnce(() => {
-        throw new Error('Error message');
-      });
+    it('should throw an HttpException when an error occurs while fetching players', async () => {
+      getPlayersActionExecuteMock.mockImplementationOnce(() =>
+        Promise.reject(new Error('Error message')),
+      );
 
-      expect(() => appController.getPlayers()).toThrow(
+      await expect(appController.getPlayers()).rejects.toThrow(
         new HttpException(
           'Server Error: Error message',
           HttpStatus.INTERNAL_SERVER_ERROR,

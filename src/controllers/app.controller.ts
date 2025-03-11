@@ -24,10 +24,12 @@ export class AppController {
       'Players filtered by position, birth year range, active status, and club',
     type: GetPlayersResponse,
   })
-  getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse {
+  async getPlayers(
+    @Query() params?: GetPlayersParams,
+  ): Promise<GetPlayersResponse> {
     try {
       return new GetPlayersResponse(
-        this.getPlayersAction.execute(
+        await this.getPlayersAction.execute(
           params?.toFilter(),
           params?.toPagination(),
         ),
