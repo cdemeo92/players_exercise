@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { PlayerRepositoryAdapter } from '../adapters/player-repository.adapter';
 import { GetPlayersAction } from '../application/get-players.action';
 import { BirthYearRange, Filter } from '../domain/filter.value-object';
 import { Player } from '../domain/player.entity';
