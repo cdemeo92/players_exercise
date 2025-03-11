@@ -6,8 +6,9 @@ import {
   Filter,
   Pagination,
 } from '../../domain/filter.value-object';
+import { Player as DomainPlayer } from '../../domain/player.entity';
 
-//TODO: add integration test for parameters validation and serialization
+//TODO: add e2e test for parameters validation and serialization
 export class GetPlayersParams {
   @ApiProperty({
     required: false,
@@ -88,7 +89,7 @@ export class GetPlayersParams {
   }
 
   public toPagination(): Pagination {
-    return { page: this.page, pageSize: this.pageSize };
+    return new Pagination(this.page, this.pageSize);
   }
 }
 
@@ -153,6 +154,10 @@ export class Player {
     type: 'string',
   })
   clubId: string;
+
+  public constructor(player: Partial<Player>) {
+    Object.assign(this, player);
+  }
 }
 
 export class GetPlayersResponse {
@@ -179,4 +184,14 @@ export class GetPlayersResponse {
     type: 'number',
   })
   totalPage: number;
+
+  public constructor(
+    players: Array<DomainPlayer>,
+    pagination: { page: number; pageSize: number; totalPage: number },
+  ) {
+    this.page = pagination.page;
+    this.pageSize = pagination.pageSize;
+    this.totalPage = pagination.totalPage;
+    this.players = players.map((player) => new Player(player));
+  }
 }

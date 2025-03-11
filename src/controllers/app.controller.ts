@@ -26,15 +26,13 @@ export class AppController {
   })
   getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse {
     try {
-      return {
-        page: 1,
-        pageSize: 10,
-        totalPage: 1,
-        players: this.getPlayersAction.execute(
+      return new GetPlayersResponse(
+        this.getPlayersAction.execute(
           params?.toFilter(),
           params?.toPagination(),
         ),
-      };
+        { page: 1, pageSize: 10, totalPage: 10 },
+      );
     } catch (error) {
       throw new HttpException(
         `Server Error: ${(error as Error).message}`,

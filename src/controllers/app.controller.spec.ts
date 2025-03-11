@@ -14,7 +14,6 @@ describe('AppController', () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
-        GetPlayersAction,
         {
           provide: GetPlayersAction,
           useValue: { execute: getPlayersActionExecuteMock },
