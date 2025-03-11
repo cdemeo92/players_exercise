@@ -1,4 +1,10 @@
-import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Query,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetPlayersAction } from '../application/get-players.action';
 import { GetPlayersParams, GetPlayersResponse } from './dto/get-players.dto';
@@ -31,7 +37,7 @@ export class AppController {
       };
     } catch (error) {
       throw new HttpException(
-        `An error occurred: ${(error as Error).message}`,
+        `Server Error: ${(error as Error).message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

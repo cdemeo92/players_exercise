@@ -137,7 +137,7 @@ describe('AppController', () => {
 
       expect(() => appController.getPlayers()).toThrow(
         new HttpException(
-          'An error occurred: Error message',
+          'Server Error: Error message',
           HttpStatus.INTERNAL_SERVER_ERROR,
         ),
       );

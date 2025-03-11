@@ -7,6 +7,7 @@ import {
   Pagination,
 } from '../../domain/filter.value-object';
 
+//TODO: add integration test for parameters validation and serialization
 export class GetPlayersParams {
   @ApiProperty({
     required: false,
