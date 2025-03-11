@@ -97,9 +97,33 @@ jobs:
       - name: Run integration tests
         run: npm run test:integ
 
+  publish:
+    name: Publish
+    needs: [unit, integ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Retrieve node_modules from cache
+        uses: actions/cache/restore@v4
+        with:
+          key: cache-${{ hashFiles('package-lock.json') }}
+      - name: Semantic release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
   e2e:
     name: e2e tests
-    needs: build
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -117,33 +141,9 @@ jobs:
       - name: Run e2e tests
         run: npm run test:e2e
 
-  publish:
-    name: Publish
-    needs: [unit, e2e]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
-    steps:
-      - uses: actions/checkout@v4 
-      - name: Set up Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Retrieve node_modules from cache
-        uses: actions/cache/restore@v4
-        with:
-          key: cache-${{ hashFiles('package-lock.json') }}
-      - name: Semantic release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
-
   deploy:
     name: Deploy
-    needs: publish
+    needs: e2e
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
