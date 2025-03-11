@@ -1,3 +1,4 @@
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { GetPlayersAction } from '../application/get-players.action';
 import { BirthYearRange, Filter } from '../domain/filter.value-object';
@@ -118,6 +119,27 @@ describe('AppController', () => {
           queryParams.clubId,
         ),
         { page: queryParams.page, pageSize: queryParams.pageSize },
+      );
+    });
+
+    it('should set the default page to 1 and the page size to 10 when not provided', () => {
+      appController.getPlayers(new GetPlayersParams());
+      expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
+        expect.anything(),
+        { page: 1, pageSize: 10 },
+      );
+    });
+
+    it('should throw an HttpException when an error occurs while fetching players', () => {
+      getPlayersActionExecuteMock.mockImplementationOnce(() => {
+        throw new Error('Error message');
+      });
+
+      expect(() => appController.getPlayers()).toThrow(
+        new HttpException(
+          'An error occurred: Error message',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        ),
       );
     });
   });

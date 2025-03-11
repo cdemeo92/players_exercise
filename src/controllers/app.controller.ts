@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetPlayersAction } from '../application/get-players.action';
 import { GetPlayersParams, GetPlayersResponse } from './dto/get-players.dto';
@@ -19,14 +19,21 @@ export class AppController {
     type: GetPlayersResponse,
   })
   getPlayers(@Query() params?: GetPlayersParams): GetPlayersResponse {
-    return {
-      page: 1,
-      pageSize: 10,
-      totalPage: 1,
-      players: this.getPlayersAction.execute(
-        params?.toFilter(),
-        params?.toPagination(),
-      ),
-    };
+    try {
+      return {
+        page: 1,
+        pageSize: 10,
+        totalPage: 1,
+        players: this.getPlayersAction.execute(
+          params?.toFilter(),
+          params?.toPagination(),
+        ),
+      };
+    } catch (error) {
+      throw new HttpException(
+        `An error occurred: ${(error as Error).message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

@@ -50,26 +50,26 @@ export class GetPlayersParams {
   @ApiProperty({
     description: 'The page number to retrieve',
     required: false,
+    default: 1,
     type: Number,
   })
   @IsOptional()
-  @Transform(
-    ({ value }) => (typeof value === 'string' && parseInt(value)) ?? undefined,
-  )
+  @Transform(({ value }) => (typeof value === 'string' && parseInt(value)) ?? 1)
   @IsNumber()
-  page?: number;
+  page?: number = 1;
 
   @ApiProperty({
     description: 'The number of players to retrieve per page',
     required: false,
+    default: 10,
     type: Number,
   })
   @IsOptional()
   @Transform(
-    ({ value }) => (typeof value === 'string' && parseInt(value)) ?? undefined,
+    ({ value }) => (typeof value === 'string' && parseInt(value)) ?? 10,
   )
   @IsNumber()
-  pageSize?: number;
+  pageSize?: number = 10;
 
   public constructor(query?: Partial<GetPlayersParams>) {
     Object.assign(this, query);
