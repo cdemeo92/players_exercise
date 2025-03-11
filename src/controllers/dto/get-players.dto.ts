@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 import {
   BirthYearRange,
   Filter,
@@ -11,6 +13,8 @@ export class GetPlayersParams {
     description: 'The position of a player in the club',
     type: String,
   })
+  @IsOptional()
+  @IsString()
   position?: string;
 
   @ApiProperty({
@@ -18,6 +22,8 @@ export class GetPlayersParams {
     required: false,
     type: String,
   })
+  @IsOptional()
+  @IsString()
   birthYearRange?: string;
 
   @ApiProperty({
@@ -27,6 +33,9 @@ export class GetPlayersParams {
     required: false,
     type: Boolean,
   })
+  @IsOptional()
+  @Transform(({ value }) => !!value)
+  @IsBoolean()
   isActive?: boolean;
 
   @ApiProperty({
@@ -34,13 +43,20 @@ export class GetPlayersParams {
     required: false,
     type: String,
   })
-  club?: string;
+  @IsOptional()
+  @IsString()
+  clubId?: string;
 
   @ApiProperty({
     description: 'The page number to retrieve',
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @Transform(
+    ({ value }) => (typeof value === 'string' && parseInt(value)) ?? undefined,
+  )
+  @IsNumber()
   page?: number;
 
   @ApiProperty({
@@ -48,7 +64,16 @@ export class GetPlayersParams {
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @Transform(
+    ({ value }) => (typeof value === 'string' && parseInt(value)) ?? undefined,
+  )
+  @IsNumber()
   pageSize?: number;
+
+  public constructor(query?: Partial<GetPlayersParams>) {
+    Object.assign(this, query);
+  }
 
   public toFilter(): Filter {
     return new Filter(
@@ -57,7 +82,7 @@ export class GetPlayersParams {
         ? BirthYearRange.fromString(this.birthYearRange)
         : undefined,
       this.isActive,
-      this.club,
+      this.clubId,
     );
   }
 

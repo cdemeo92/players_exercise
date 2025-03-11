@@ -20,7 +20,7 @@ describe('GetPlayersAction', () => {
       expect(result).toEqual([]);
     });
 
-    it('should return an array with of players when the DB is not empty', () => {
+    it('should return an array of players when the DB is not empty', () => {
       const players = Array<Player>(30).fill({
         id: '182906',
         name: 'Mike Maignan',
