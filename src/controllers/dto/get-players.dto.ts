@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 import {
   BirthYearRange,
@@ -75,6 +75,11 @@ export class GetPlayersParams {
 
   public constructor(query?: Partial<GetPlayersParams>) {
     Object.assign(this, query);
+  }
+
+  @Type(() => GetPlayersParams)
+  static fromQuery(query: Partial<GetPlayersParams>): GetPlayersParams {
+    return new GetPlayersParams(query);
   }
 
   public toFilter(): Filter {

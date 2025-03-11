@@ -57,11 +57,11 @@ describe('AppController', () => {
     });
 
     it.each([
-      new GetPlayersParams({ position: 'Goalkeeper' }),
-      new GetPlayersParams({ isActive: true }),
-      new GetPlayersParams({ clubId: '5' }),
-      new GetPlayersParams({ birthYearRange: '1992-2000' }),
-      new GetPlayersParams({
+      GetPlayersParams.fromQuery({ position: 'Goalkeeper' }),
+      GetPlayersParams.fromQuery({ isActive: true }),
+      GetPlayersParams.fromQuery({ clubId: '5' }),
+      GetPlayersParams.fromQuery({ birthYearRange: '1992-2000' }),
+      GetPlayersParams.fromQuery({
         position: 'Goalkeeper',
         isActive: true,
         clubId: '5',
