@@ -74,7 +74,7 @@ describe('AppController (e2e)', () => {
     it('should filter the players by position, active status, club id and birth year range', () => {
       return request(app.getHttpServer())
         .get(
-          '/players?position=Goalkeeper&birthYearRange=1992-2000&isActive=false&clubId=5',
+          '/players?position=Goalkeeper&birthYearRange=1992-2000&isActive=true&clubId=5',
         )
         .expect(200)
         .expect((res: { body: GetPlayersResponse }) => {
@@ -91,6 +91,26 @@ describe('AppController (e2e)', () => {
             );
           });
         });
+    });
+
+    it('should ignore the isActive parameter when not valid', () => {
+      return request(app.getHttpServer())
+        .get('/players?isActive=not-valid')
+        .expect(200)
+        .expect((res: { body: GetPlayersResponse }) =>
+          expect(res.body.players.length).toBe(10),
+        );
+    });
+
+    it('should return 400 bad request when the birth year range parameter is not valid', () => {
+      return request(app.getHttpServer())
+        .get('/players?birthYearRange=not-valid')
+        .expect(400)
+        .expect((res: { body: { message: string[] } }) =>
+          expect(res.body.message).toContain(
+            'birthYearRange must be in the format YYYY-YYYY (e.g., 1992-2000)',
+          ),
+        );
     });
   });
 

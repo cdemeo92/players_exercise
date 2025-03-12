@@ -1,11 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Matches,
+} from 'class-validator';
 import { GetPlayersResult } from '../../application/ports/player-repository.port';
 import { BirthYearRange, Filter } from '../../domain/filter.value-object';
 import { Pagination } from '../../domain/pagination.value-object';
 
-//TODO: add e2e test for parameters validation and serialization
 export class GetPlayersParams {
   @ApiProperty({
     required: false,
@@ -23,6 +28,9 @@ export class GetPlayersParams {
   })
   @IsOptional()
   @IsString()
+  @Matches(/^\d{4}-\d{4}$/, {
+    message: 'birthYearRange must be in the format YYYY-YYYY (e.g., 1992-2000)',
+  })
   birthYearRange?: string;
 
   @ApiProperty({
@@ -33,7 +41,11 @@ export class GetPlayersParams {
     type: Boolean,
   })
   @IsOptional()
-  @Transform(({ value }) => !!value)
+  @Transform(({ value }) => {
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return undefined;
+  })
   @IsBoolean()
   isActive?: boolean;
 

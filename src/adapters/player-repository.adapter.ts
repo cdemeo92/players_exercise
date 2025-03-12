@@ -55,16 +55,18 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
   private filterToMatch(filter?: Filter): Record<string, unknown> {
     return {
       ...(filter?.position !== undefined && { position: filter.position }),
-      ...(filter?.birthYearRange !== undefined && {
-        dateOfBirth: {
-          ...(filter?.birthYearRange?.start != undefined && {
-            $gte: `${filter.birthYearRange.start}-01-01`,
-          }),
-          ...(filter?.birthYearRange?.end != undefined && {
-            $lte: `${filter.birthYearRange.end}-12-31`,
-          }),
-        },
-      }),
+      ...(filter?.birthYearRange !== undefined &&
+        (filter?.birthYearRange?.start != undefined ||
+          filter?.birthYearRange?.end != undefined) && {
+          dateOfBirth: {
+            ...(filter?.birthYearRange?.start != undefined && {
+              $gte: `${filter.birthYearRange.start}-01-01`,
+            }),
+            ...(filter?.birthYearRange?.end != undefined && {
+              $lte: `${filter.birthYearRange.end}-12-31`,
+            }),
+          },
+        }),
       ...(filter?.isActive !== undefined && { isActive: filter.isActive }),
       ...(filter?.clubId !== undefined && { clubId: filter.clubId }),
     };

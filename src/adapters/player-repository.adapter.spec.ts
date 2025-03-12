@@ -109,7 +109,7 @@ describe('PlayerRepositoryAdapter', () => {
         },
       ],
       [
-        'position, active status, club and birth year range',
+        'position, active status and club',
         {
           position: 'Goalkeeper',
           isActive: true,
@@ -142,6 +142,24 @@ describe('PlayerRepositoryAdapter', () => {
               dateOfBirth: {
                 $gte: '1992-01-01',
                 $lte: '2000-12-31',
+              },
+            },
+          },
+        ]),
+      );
+    });
+
+    it('should not query the db filtering by birth year range when not valid', async () => {
+      await repository.getPlayers(
+        new Filter(undefined, { start: undefined, end: undefined }),
+      );
+      expect(spyAggregate).toHaveBeenCalledWith(
+        expect.not.arrayContaining([
+          {
+            $match: {
+              dateOfBirth: {
+                $gte: expect.any(String),
+                $lte: expect.any(String),
               },
             },
           },
