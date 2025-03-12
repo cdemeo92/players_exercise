@@ -156,7 +156,7 @@ jobs:
             .npm
             node_modules
       - name: Run e2e tests
-        run: npm run test:e2e
+        run: npm run test:e2e:ci
 
   deploy:
     name: Deploy
