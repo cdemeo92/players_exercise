@@ -182,15 +182,15 @@ export class GetPlayersResponse {
   pageSize: number;
 
   @ApiProperty({
-    description: 'The total number of pages',
+    description: 'The total number of players with the given filter',
     type: 'number',
   })
-  totalPage: number;
+  totalCount: number;
 
   public constructor(playerResult: GetPlayersResult) {
     this.page = playerResult.page;
     this.pageSize = playerResult.pageSize;
-    this.totalPage = playerResult.totalCount;
+    this.totalCount = playerResult.totalCount;
     this.players = playerResult.players.map((player) => new Player(player));
   }
 }

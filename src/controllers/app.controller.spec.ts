@@ -30,9 +30,12 @@ describe('AppController', () => {
 
   describe('getPlayers', () => {
     it('should return an empty array when there are no players', async () => {
-      expect(await appController.getPlayers()).toEqual(
-        expect.objectContaining({ players: [] }),
-      );
+      expect(await appController.getPlayers()).toEqual({
+        players: [],
+        page: 1,
+        pageSize: 10,
+        totalCount: 0,
+      });
     });
 
     it('should return an array of players in the response when there are players', async () => {
@@ -60,9 +63,12 @@ describe('AppController', () => {
         pageSize: 30,
         totalCount: 30,
       });
-      expect(await appController.getPlayers()).toEqual(
-        expect.objectContaining({ players }),
-      );
+      expect(await appController.getPlayers()).toEqual({
+        players,
+        page: 1,
+        pageSize: 30,
+        totalCount: 30,
+      });
     });
 
     it.each([

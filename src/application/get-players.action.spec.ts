@@ -26,7 +26,12 @@ describe('GetPlayersAction', () => {
 
     it('should return an empty array when the DB is empty', async () => {
       const result = await action.execute();
-      expect(result).toEqual(expect.objectContaining({ players: [] }));
+      expect(result).toEqual({
+        players: [],
+        page: 1,
+        pageSize: 10,
+        totalCount: 0,
+      });
     });
 
     it('should return an array of players when the DB is not empty', async () => {
@@ -55,7 +60,12 @@ describe('GetPlayersAction', () => {
       });
 
       const result = await action.execute();
-      expect(result).toEqual(expect.objectContaining({ players }));
+      expect(result).toEqual({
+        players,
+        page: 1,
+        pageSize: 30,
+        totalCount: 30,
+      });
     });
 
     it.each([

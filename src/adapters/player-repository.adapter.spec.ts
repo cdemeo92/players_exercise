@@ -38,13 +38,16 @@ describe('PlayerRepositoryAdapter', () => {
 
   describe('getPlayers', () => {
     it('should return an empty array when the DB is empty', async () => {
-      expect(await repository.getPlayers()).toEqual(
-        expect.objectContaining({ players: [] }),
-      );
+      expect(await repository.getPlayers()).toEqual({
+        players: [],
+        page: 1,
+        pageSize: 10,
+        totalCount: 0,
+      });
     });
 
     it('should return an array of players when the DB is not empty', async () => {
-      const players = Array<Player>(30).fill({
+      const players = Array<Player>(10).fill({
         id: '182906',
         name: 'Mike Maignan',
         position: 'Goalkeeper',
@@ -62,9 +65,16 @@ describe('PlayerRepositoryAdapter', () => {
         isActive: false,
       });
 
-      mockAggregateCoursor.toArray.mockResolvedValue([{ players }]);
+      mockAggregateCoursor.toArray.mockResolvedValue([
+        { players, metadata: [{ totalCount: 10 }] },
+      ]);
       const result = await repository.getPlayers();
-      expect(result).toEqual(expect.objectContaining({ players }));
+      expect(result).toEqual({
+        players,
+        page: 1,
+        pageSize: 10,
+        totalCount: 10,
+      });
     });
 
     it.each([
