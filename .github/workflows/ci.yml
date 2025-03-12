@@ -55,7 +55,7 @@ jobs:
 
   unit:
     name: Unit tests
-    needs: build
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -79,7 +79,7 @@ jobs:
 
   integ:
     name: Integration tests
-    needs: build
+    needs: [build, unit]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -141,7 +141,9 @@ jobs:
           --health-timeout=5s
           --health-retries=5
           -p 27017:27017
-          -e MONGO_INITDB_ROOT_USERNAME=$DB_USER -e MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
+        env:
+          MONGO_INITDB_ROOT_USERNAME: ${{ env.DB_USER }}
+          MONGO_INITDB_ROOT_PASSWORD: ${{ env.DB_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js ${{ env.NODE_VERSION }}
