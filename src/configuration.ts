@@ -13,7 +13,7 @@ interface Config {
 const config: Record<Stage, Config> = {
   dev: {
     port: 3000,
-    dbHost: 'localhost',
+    dbHost: (process.env.DB_HOST as string) ?? 'localhost',
     dbPort: 27017,
     dbName: 'players_dev',
     dbUser: process.env.DB_USER as string,

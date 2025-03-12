@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
-import { GetPlayersResult } from 'src/application/ports/player-repository.port';
+import { GetPlayersResult } from '../../application/ports/player-repository.port';
 import { BirthYearRange, Filter } from '../../domain/filter.value-object';
 import { Pagination } from '../../domain/pagination.value-object';
 
