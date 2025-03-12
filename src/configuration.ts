@@ -31,7 +31,7 @@ const config: Record<Stage, Config> = {
   },
   prod: {
     port: 80,
-    dbHost: 'localhost',
+    dbHost: process.env.DB_HOST as string,
     dbPort: 27017,
     dbName: 'players_prod',
     dbUser: process.env.DB_USER as string,
