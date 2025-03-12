@@ -22,11 +22,15 @@ import { AppController } from './controllers/app.controller';
     {
       provide: 'MONGO_CLIENT',
       useFactory: async (configService: ConfigService): Promise<Db> => {
+        const username = configService.get<string>('dbUser');
+        const password = configService.get<string>('dbPassword');
+        const host = configService.get<string>('dbHost');
+        const port = configService.get<number>('dbPort');
         const client = new MongoClient(
-          configService.get<string>('MONGO_URI') ?? '',
+          `mongodb://${username}:${password}@${host}:${port}`,
         );
         await client.connect();
-        return client.db(configService.get<string>('MONGO_DB_NAME'));
+        return client.db(configService.get<string>('dbName'));
       },
       inject: [ConfigService],
     },
