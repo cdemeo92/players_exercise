@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Collection, Db } from 'mongodb';
-import { PlayerRepositoryPort } from '../application/ports/player-repository.port';
+import {
+  GetPlayersResult,
+  PlayerRepositoryPort,
+} from '../application/ports/player-repository.port';
 import { Filter } from '../domain/filter.value-object';
 import { Pagination } from '../domain/pagination.value-object';
 import { Player } from '../domain/player.entity';
@@ -16,12 +19,15 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
   public async getPlayers(
     filter?: Filter,
     pagination?: Pagination,
-  ): Promise<Array<Player>> {
+  ): Promise<GetPlayersResult> {
     const page = pagination?.getPage() ?? 1;
     const pageSize = pagination?.getPageSize(10) ?? 10;
 
     const playersDocument = await this.playerCollection
-      .aggregate([
+      .aggregate<{
+        metadata: Array<{ totalCount: number }>;
+        players: Array<Player>;
+      }>([
         { $match: filter?.getFilterObject() ?? {} },
         {
           $facet: {
@@ -32,6 +38,11 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
       ])
       .toArray();
 
-    return playersDocument?.[0]?.players ?? [];
+    return {
+      page: page,
+      pageSize: pageSize,
+      totalCount: playersDocument?.[0]?.metadata?.[0]?.totalCount ?? 0,
+      players: playersDocument?.[0]?.players ?? [],
+    };
   }
 }

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { GetPlayersAction } from '../application/get-players.action';
+import { GetPlayersResult } from '../application/ports/player-repository.port';
 import { BirthYearRange, Filter } from '../domain/filter.value-object';
 import { Player } from '../domain/player.entity';
 import { AppController } from './app.controller';
@@ -9,7 +10,8 @@ import { GetPlayersParams } from './dto/get-players.dto';
 describe('AppController', () => {
   let appController: AppController;
   const getPlayersActionExecuteMock = jest.fn(
-    (): Promise<Array<Player>> => Promise.resolve([]),
+    (): Promise<GetPlayersResult> =>
+      Promise.resolve({ players: [], page: 1, pageSize: 10, totalCount: 0 }),
   );
 
   beforeEach(async () => {
@@ -52,7 +54,12 @@ describe('AppController', () => {
         isActive: false,
       });
 
-      getPlayersActionExecuteMock.mockResolvedValueOnce(players);
+      getPlayersActionExecuteMock.mockResolvedValueOnce({
+        players,
+        page: 1,
+        pageSize: 30,
+        totalCount: 30,
+      });
       expect(await appController.getPlayers()).toEqual(
         expect.objectContaining({ players }),
       );

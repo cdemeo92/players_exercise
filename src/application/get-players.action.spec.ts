@@ -2,11 +2,15 @@ import { Filter } from '../domain/filter.value-object';
 import { Pagination } from '../domain/pagination.value-object';
 import { Player } from '../domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
-import { PlayerRepositoryPort } from './ports/player-repository.port';
+import {
+  GetPlayersResult,
+  PlayerRepositoryPort,
+} from './ports/player-repository.port';
 
 describe('GetPlayersAction', () => {
   const getPlayersMock = jest.fn(
-    (): Promise<Array<Player>> => Promise.resolve([]),
+    (): Promise<GetPlayersResult> =>
+      Promise.resolve({ players: [], page: 1, pageSize: 10, totalCount: 0 }),
   );
 
   const playerRepository: PlayerRepositoryPort = {
@@ -22,7 +26,7 @@ describe('GetPlayersAction', () => {
 
     it('should return an empty array when the DB is empty', async () => {
       const result = await action.execute();
-      expect(result).toEqual([]);
+      expect(result).toEqual(expect.objectContaining({ players: [] }));
     });
 
     it('should return an array of players when the DB is not empty', async () => {
@@ -43,10 +47,15 @@ describe('GetPlayersAction', () => {
         clubId: '5',
         isActive: false,
       });
-      getPlayersMock.mockResolvedValueOnce(players);
+      getPlayersMock.mockResolvedValueOnce({
+        players,
+        page: 1,
+        pageSize: 30,
+        totalCount: 30,
+      });
 
       const result = await action.execute();
-      expect(result).toEqual(players);
+      expect(result).toEqual(expect.objectContaining({ players }));
     });
 
     it.each([

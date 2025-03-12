@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { GetPlayersResult } from 'src/application/ports/player-repository.port';
 import { BirthYearRange, Filter } from '../../domain/filter.value-object';
 import { Pagination } from '../../domain/pagination.value-object';
-import { Player as DomainPlayer } from '../../domain/player.entity';
 
 //TODO: add e2e test for parameters validation and serialization
 export class GetPlayersParams {
@@ -187,13 +187,10 @@ export class GetPlayersResponse {
   })
   totalPage: number;
 
-  public constructor(
-    players: Array<DomainPlayer>,
-    pagination: { page: number; pageSize: number; totalPage: number },
-  ) {
-    this.page = pagination.page;
-    this.pageSize = pagination.pageSize;
-    this.totalPage = pagination.totalPage;
-    this.players = players.map((player) => new Player(player));
+  public constructor(playerResult: GetPlayersResult) {
+    this.page = playerResult.page;
+    this.pageSize = playerResult.pageSize;
+    this.totalPage = playerResult.totalCount;
+    this.players = playerResult.players.map((player) => new Player(player));
   }
 }

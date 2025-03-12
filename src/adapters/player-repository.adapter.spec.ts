@@ -38,7 +38,9 @@ describe('PlayerRepositoryAdapter', () => {
 
   describe('getPlayers', () => {
     it('should return an empty array when the DB is empty', async () => {
-      expect(await repository.getPlayers()).toEqual([]);
+      expect(await repository.getPlayers()).toEqual(
+        expect.objectContaining({ players: [] }),
+      );
     });
 
     it('should return an array of players when the DB is not empty', async () => {
@@ -62,7 +64,7 @@ describe('PlayerRepositoryAdapter', () => {
 
       mockAggregateCoursor.toArray.mockResolvedValue([{ players }]);
       const result = await repository.getPlayers();
-      expect(result).toEqual(players);
+      expect(result).toEqual(expect.objectContaining({ players }));
     });
 
     it.each([

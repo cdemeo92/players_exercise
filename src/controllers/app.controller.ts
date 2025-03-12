@@ -33,7 +33,6 @@ export class AppController {
           params?.toFilter(),
           params?.toPagination(),
         ),
-        { page: 1, pageSize: 10, totalPage: 10 },
       );
     } catch (error) {
       throw new HttpException(
