@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/devclay92/players_exercise/compare/v1.0.0...v1.1.0) (2025-03-12)
+
+
+### Features
+
+* return pagination info int the API response ([c677892](https://github.com/devclay92/players_exercise/commit/c677892e715ceada291b2059a011105e2cd235da))
+
 # 1.0.0 (2025-03-12)
 
 
