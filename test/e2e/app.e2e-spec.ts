@@ -1,20 +1,40 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MongoClient } from 'mongodb';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from '../../src/app.module';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
+import * as playersStub from './stub/players.stub.json';
+
+jest.setTimeout(30000);
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
+  let mongoClient: MongoClient;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    mongoClient = app.get<MongoClient>('MONGO_CLIENT');
+
     await app.init();
+  });
+
+  beforeEach(async () => {
+    await mongoClient.db('players_e2e').dropCollection('players');
+    await mongoClient
+      .db('players_e2e')
+      .collection('players')
+      .insertMany(playersStub);
+  });
+
+  afterAll(async () => {
+    await mongoClient.close();
+    await app.close();
   });
 
   describe('/players (GET)', () => {

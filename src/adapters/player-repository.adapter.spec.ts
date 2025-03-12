@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { mock } from 'jest-mock-extended';
 import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
 import { Filter } from '../domain/filter.value-object';
@@ -32,8 +33,10 @@ describe('PlayerRepositoryAdapter', () => {
     });
 
     const client = await MongoClient.connect('mongodb://mock-uri');
-    const db = client.db();
-    repository = new PlayerRepositoryAdapter(db);
+    repository = new PlayerRepositoryAdapter(
+      client,
+      new ConfigService({ dbName: 'players_e2e', collectionName: 'players' }),
+    );
   });
 
   describe('getPlayers', () => {

@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -18,7 +19,7 @@ describe('AppController (integ)', () => {
   beforeEach(async () => {
     mongodb = await MongoMemoryServer.create();
     mongoClient = await MongoClient.connect(mongodb.getUri());
-    db = mongoClient.db();
+    db = mongoClient.db('players_integ');
 
     await db.collection('players').insertMany(playersStub);
 
@@ -32,7 +33,14 @@ describe('AppController (integ)', () => {
         },
         {
           provide: 'MONGO_CLIENT',
-          useValue: db,
+          useValue: mongoClient,
+        },
+        {
+          provide: ConfigService,
+          useValue: new ConfigService({
+            dbName: 'players_integ',
+            collectionName: 'players',
+          }),
         },
       ],
     }).compile();

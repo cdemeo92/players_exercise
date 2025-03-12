@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Collection, Db } from 'mongodb';
+import { ConfigService } from '@nestjs/config';
+import { Collection, MongoClient } from 'mongodb';
 import {
   GetPlayersResult,
   PlayerRepositoryPort,
@@ -12,8 +13,13 @@ import { Player } from '../domain/player.entity';
 export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
   private readonly playerCollection: Collection<Player>;
 
-  public constructor(@Inject('MONGO_CLIENT') private readonly dbClient: Db) {
-    this.playerCollection = dbClient.collection<Player>('players');
+  public constructor(
+    @Inject('MONGO_CLIENT') private readonly dbClient: MongoClient,
+    private readonly configService: ConfigService,
+  ) {
+    this.playerCollection = dbClient
+      .db(configService.get<string>('dbName'))
+      .collection<Player>(configService.get<string>('collectionName') ?? '');
   }
 
   public async getPlayers(

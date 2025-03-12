@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Db, MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
@@ -21,7 +21,9 @@ import { AppController } from './controllers/app.controller';
     },
     {
       provide: 'MONGO_CLIENT',
-      useFactory: async (configService: ConfigService): Promise<Db> => {
+      useFactory: async (
+        configService: ConfigService,
+      ): Promise<MongoClient> => {
         const username = configService.get<string>('dbUser');
         const password = configService.get<string>('dbPassword');
         const host = configService.get<string>('dbHost');
@@ -30,7 +32,14 @@ import { AppController } from './controllers/app.controller';
           `mongodb://${username}:${password}@${host}:${port}`,
         );
         await client.connect();
-        return client.db(configService.get<string>('dbName'));
+        return client;
+      },
+      inject: [ConfigService],
+    },
+    {
+      provide: 'COLLECTION_NAME',
+      useFactory: (configService: ConfigService): string => {
+        return configService.get<string>('collectionName') ?? '';
       },
       inject: [ConfigService],
     },

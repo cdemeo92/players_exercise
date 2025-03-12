@@ -7,6 +7,7 @@ interface Config {
   dbName: string;
   dbUser: string;
   dbPassword: string;
+  collectionName: string;
 }
 
 const config: Record<Stage, Config> = {
@@ -17,6 +18,7 @@ const config: Record<Stage, Config> = {
     dbName: 'players_dev',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
+    collectionName: 'players',
   },
   e2e: {
     port: 8080,
@@ -25,6 +27,7 @@ const config: Record<Stage, Config> = {
     dbName: 'players_e2e',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
+    collectionName: 'players',
   },
   prod: {
     port: 80,
@@ -33,6 +36,7 @@ const config: Record<Stage, Config> = {
     dbName: 'players_prod',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
+    collectionName: 'players',
   },
 };
 
