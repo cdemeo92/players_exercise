@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MongoClient } from 'mongodb';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
-import { AppModule } from '../../src/app.module';
+import { appBuilder, AppModule } from '../../src/app.module';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
 import * as playersStub from './stub/players.stub.json';
 
@@ -18,7 +18,10 @@ describe('AppController (e2e)', () => {
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = appBuilder(
+      moduleFixture.createNestApplication(),
+    ) as INestApplication<App>;
+
     mongoClient = app.get<MongoClient>('MONGO_CLIENT');
 
     await app.init();
@@ -46,7 +49,7 @@ describe('AppController (e2e)', () => {
           expect(res.body.players.length).toBe(10);
           expect(res.body.pageSize).toBe(10);
           expect(res.body.page).toBe(1);
-          expect(res.body.totalCount).toBe(Number);
+          expect(res.body.totalCount).toEqual(expect.any(Number));
         });
     });
 
@@ -59,10 +62,19 @@ describe('AppController (e2e)', () => {
         });
     });
 
+    it('should return the required amounth of players per page', async () => {
+      return request(app.getHttpServer())
+        .get('/players?pageSize=30')
+        .expect(200)
+        .expect((res: { body: GetPlayersResponse }) => {
+          expect(res.body.players.length).toBe(30);
+        });
+    });
+
     it('should filter the players by position, active status, club id and birth year range', () => {
       return request(app.getHttpServer())
         .get(
-          '/players?position=Goalkeeper&isActive=true&clubId=5&dateOfBirth=1995-2000',
+          '/players?position=Goalkeeper&birthYearRange=1992-2000&isActive=false&clubId=5',
         )
         .expect(200)
         .expect((res: { body: GetPlayersResponse }) => {
@@ -73,6 +85,17 @@ describe('AppController (e2e)', () => {
             expect(p.dateOfBirth.split('-')[0]).toBeGreaterThanOrEqual(1995);
             expect(p.dateOfBirth.split('-')[0]).toBeLessThanOrEqual(2000);
           });
+        });
+    });
+  });
+
+  describe('/docs (GET)', () => {
+    it('should return the swagger page', () => {
+      return request(app.getHttpServer())
+        .get('/docs')
+        .expect(200)
+        .expect((res) => {
+          expect(res.text).toContain('Swagger UI');
         });
     });
   });

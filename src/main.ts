@@ -1,36 +1,12 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
-import { GetPlayersParams } from './controllers/dto/get-players.dto';
+import { appBuilder, AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = appBuilder(await NestFactory.create(AppModule));
   const configService = app.get(ConfigService);
   const logger = new Logger('bootstrap');
-
-  const docConfig = new DocumentBuilder()
-    .setTitle('Players API')
-    .setVersion('1.0')
-    .build();
-
-  const document = SwaggerModule.createDocument(app, docConfig);
-  SwaggerModule.setup('docs', app, document);
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-        exposeDefaultValues: true,
-        targetMaps: [GetPlayersParams],
-      },
-      validateCustomDecorators: true,
-    }),
-  );
 
   const port = configService.get<number>('port') || 3000;
 

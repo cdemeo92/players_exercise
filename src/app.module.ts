@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
+import { INestApplication, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { MongoClient } from 'mongodb';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
 import { AppController } from './controllers/app.controller';
+import { GetPlayersParams } from './controllers/dto/get-players.dto';
 
 @Module({
   imports: [
@@ -46,3 +48,29 @@ import { AppController } from './controllers/app.controller';
   ],
 })
 export class AppModule {}
+
+export function appBuilder(app: INestApplication): INestApplication {
+  const docConfig = new DocumentBuilder()
+    .setTitle('Players API')
+    .setVersion('1.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, docConfig);
+  SwaggerModule.setup('docs', app, document);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+        exposeDefaultValues: true,
+        targetMaps: [GetPlayersParams],
+      },
+      validateCustomDecorators: true,
+    }),
+  );
+
+  return app;
+}
