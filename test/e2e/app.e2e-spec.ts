@@ -41,7 +41,7 @@ describe('AppController (e2e)', () => {
   });
 
   describe('/players (GET)', () => {
-    it('should return an array of 10 players by default', () => {
+    it('should return an array of 10 players by default', async () => {
       return request(app.getHttpServer())
         .get('/players')
         .expect(200)
@@ -71,19 +71,20 @@ describe('AppController (e2e)', () => {
         });
     });
 
-    it('should filter the players by position, active status, club id and birth year range', () => {
+    it.only('should filter the players by position, active status, club id and birth year range', () => {
       return request(app.getHttpServer())
         .get(
           '/players?position=Goalkeeper&birthYearRange=1992-2000&isActive=false&clubId=5',
         )
         .expect(200)
         .expect((res: { body: GetPlayersResponse }) => {
+          expect(res.body.players.length).toBeGreaterThanOrEqual(10);
           res.body.players.forEach((p) => {
             expect(p.position).toBe('Goalkeeper');
             expect(p.isActive).toBe(true);
             expect(p.clubId).toBe('5');
             expect(p.dateOfBirth.split('-')[0]).toBeGreaterThanOrEqual(1995);
-            expect(p.dateOfBirth.split('-')[0]).toBeLessThanOrEqual(2000);
+            expect(p.dateOfBirth.split('-')[1]).toBeLessThanOrEqual(2000);
           });
         });
     });

@@ -22,7 +22,7 @@ const config: Record<Stage, Config> = {
   },
   e2e: {
     port: 8080,
-    dbHost: 'localhost',
+    dbHost: (process.env.DB_HOST as string) ?? 'localhost',
     dbPort: 27017,
     dbName: 'players_e2e',
     dbUser: process.env.DB_USER as string,

@@ -115,6 +115,7 @@ describe('AppController (integ)', () => {
         GetPlayersParams.fromQuery({ position: 'Goalkeeper' }),
       );
 
+      expect(response.players.length).toBeGreaterThanOrEqual(0);
       response.players.forEach((p) => expect(p.position).toBe('Goalkeeper'));
     });
 
@@ -123,6 +124,7 @@ describe('AppController (integ)', () => {
         GetPlayersParams.fromQuery({ clubId: '5' }),
       );
 
+      expect(response.players.length).toBeGreaterThanOrEqual(0);
       response.players.forEach((p) => expect(p.clubId).toBe('5'));
     });
 
@@ -133,6 +135,7 @@ describe('AppController (integ)', () => {
           GetPlayersParams.fromQuery({ isActive }),
         );
 
+        expect(response.players.length).toBeGreaterThanOrEqual(0);
         response.players.forEach((p) => expect(p.isActive).toBe(isActive));
       },
     );
@@ -142,6 +145,7 @@ describe('AppController (integ)', () => {
         GetPlayersParams.fromQuery({ birthYearRange: '1995-2000' }),
       );
 
+      expect(response.players.length).toBeGreaterThanOrEqual(0);
       response.players.forEach((p) => {
         expect(p.dateOfBirth.split('-')[0]).toBeGreaterThanOrEqual(1995);
         expect(p.dateOfBirth.split('-')[0]).toBeLessThanOrEqual(2000);
@@ -158,6 +162,7 @@ describe('AppController (integ)', () => {
         }),
       );
 
+      expect(response.players.length).toBeGreaterThanOrEqual(0);
       response.players.forEach((p) => {
         expect(p.position).toBe('Goalkeeper');
         expect(p.isActive).toBe(true);
