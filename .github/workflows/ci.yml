@@ -116,6 +116,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: cache-${{ hashFiles('package-lock.json') }}
+          path: |
+            .npm
+            node_modules
       - name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -155,6 +158,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: cache-${{ hashFiles('package-lock.json') }}
+          path: |
+            .npm
+            node_modules
       - name: Deploy
         run: echo "Deploying to production"
 
