@@ -17,11 +17,22 @@ export class Filter {
     public readonly isActive?: boolean,
     public readonly clubId?: string,
   ) {}
-}
 
-export class Pagination {
-  public constructor(
-    public readonly page?: number,
-    public readonly pageSize?: number,
-  ) {}
+  public getFilterObject(): Record<string, unknown> {
+    return {
+      ...(this.position !== undefined && { position: this.position }),
+      ...(this.birthYearRange !== undefined && {
+        birthYearRange: {
+          ...(this.birthYearRange.start != undefined && {
+            start: this.birthYearRange.start,
+          }),
+          ...(this.birthYearRange.end != undefined && {
+            end: this.birthYearRange.end,
+          }),
+        },
+      }),
+      ...(this.isActive !== undefined && { isActive: this.isActive }),
+      ...(this.clubId !== undefined && { clubId: this.clubId }),
+    };
+  }
 }

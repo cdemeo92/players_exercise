@@ -1,4 +1,6 @@
-import { Player } from 'src/domain/player.entity';
+import { Filter } from '../domain/filter.value-object';
+import { Pagination } from '../domain/pagination.value-object';
+import { Player } from '../domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 
@@ -48,10 +50,42 @@ describe('GetPlayersAction', () => {
     });
 
     it.each([
-      ['position', { position: 'Goalkeeper' }],
-      ['active status', { isActive: true }],
-      ['club', { clubId: '5' }],
-      ['birth year range', { birthYearRange: { start: 1992, end: 2000 } }],
+      [
+        'position',
+        {
+          position: 'Goalkeeper',
+          isActive: undefined,
+          clubId: undefined,
+          birthYearRange: undefined,
+        },
+      ],
+      [
+        'active status',
+        {
+          position: undefined,
+          isActive: true,
+          clubId: undefined,
+          birthYearRange: undefined,
+        },
+      ],
+      [
+        'club',
+        {
+          position: undefined,
+          isActive: undefined,
+          clubId: '5',
+          birthYearRange: undefined,
+        },
+      ],
+      [
+        'birth year range',
+        {
+          position: undefined,
+          isActive: undefined,
+          clubId: undefined,
+          birthYearRange: { start: 1992, end: 2000 },
+        },
+      ],
       [
         'position, active status, club and birth year range',
         {
@@ -62,7 +96,14 @@ describe('GetPlayersAction', () => {
         },
       ],
     ])('should query the db filtering by %s', async (_, filter) => {
-      await action.execute(filter);
+      await action.execute(
+        new Filter(
+          filter.position,
+          filter.birthYearRange,
+          filter.isActive,
+          filter.clubId,
+        ),
+      );
       expect(getPlayersMock).toHaveBeenCalledWith(filter, undefined);
     });
 
@@ -71,7 +112,10 @@ describe('GetPlayersAction', () => {
       ['page size', { pageSize: 200 }],
       ['page and the page size', { page: 2, pageSize: 200 }],
     ])('should select the %s to return', async (_, pagination) => {
-      await action.execute(undefined, pagination);
+      const page = 'page' in pagination ? pagination.page : undefined;
+      const pageSize =
+        'pageSize' in pagination ? pagination.pageSize : undefined;
+      await action.execute(undefined, new Pagination(page, pageSize));
       expect(getPlayersMock).toHaveBeenCalledWith(undefined, pagination);
     });
 

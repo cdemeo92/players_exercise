@@ -1,11 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
-import {
-  BirthYearRange,
-  Filter,
-  Pagination,
-} from '../../domain/filter.value-object';
+import { BirthYearRange, Filter } from '../../domain/filter.value-object';
+import { Pagination } from '../../domain/pagination.value-object';
 import { Player as DomainPlayer } from '../../domain/player.entity';
 
 //TODO: add e2e test for parameters validation and serialization
