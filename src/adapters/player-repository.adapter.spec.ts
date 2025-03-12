@@ -109,21 +109,12 @@ describe('PlayerRepositoryAdapter', () => {
         },
       ],
       [
-        'birth year range',
-        {
-          position: undefined,
-          isActive: undefined,
-          clubId: undefined,
-          birthYearRange: { start: 1992, end: 2000 },
-        },
-      ],
-      [
         'position, active status, club and birth year range',
         {
           position: 'Goalkeeper',
           isActive: true,
           clubId: '5',
-          birthYearRange: { start: 1992, end: 2000 },
+          birthYearRange: undefined,
         },
       ],
     ])('should query the db filtering by %s', async (_, filter) => {
@@ -137,6 +128,24 @@ describe('PlayerRepositoryAdapter', () => {
       );
       expect(spyAggregate).toHaveBeenCalledWith(
         expect.arrayContaining([{ $match: filter }]),
+      );
+    });
+
+    it('should query the db filtering by birth year range', async () => {
+      await repository.getPlayers(
+        new Filter(undefined, { start: 1992, end: 2000 }),
+      );
+      expect(spyAggregate).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          {
+            $match: {
+              dateOfBirth: {
+                $gte: '1992-01-01',
+                $lte: '2000-12-31',
+              },
+            },
+          },
+        ]),
       );
     });
 

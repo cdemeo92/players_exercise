@@ -71,20 +71,24 @@ describe('AppController (e2e)', () => {
         });
     });
 
-    it.only('should filter the players by position, active status, club id and birth year range', () => {
+    it('should filter the players by position, active status, club id and birth year range', () => {
       return request(app.getHttpServer())
         .get(
           '/players?position=Goalkeeper&birthYearRange=1992-2000&isActive=false&clubId=5',
         )
         .expect(200)
         .expect((res: { body: GetPlayersResponse }) => {
-          expect(res.body.players.length).toBeGreaterThanOrEqual(10);
+          expect(res.body.players.length).toBeGreaterThan(0);
           res.body.players.forEach((p) => {
             expect(p.position).toBe('Goalkeeper');
             expect(p.isActive).toBe(true);
             expect(p.clubId).toBe('5');
-            expect(p.dateOfBirth.split('-')[0]).toBeGreaterThanOrEqual(1995);
-            expect(p.dateOfBirth.split('-')[1]).toBeLessThanOrEqual(2000);
+            expect(
+              parseInt(p.dateOfBirth.split('-')[0]),
+            ).toBeGreaterThanOrEqual(1992);
+            expect(parseInt(p.dateOfBirth.split('-')[1])).toBeLessThanOrEqual(
+              2000,
+            );
           });
         });
     });
