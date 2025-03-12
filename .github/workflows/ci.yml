@@ -72,7 +72,7 @@ jobs:
             node_modules
       - name: Run tests
         run: npm run test:ci
-      - name: Comment test results on PR
+      - name: Comment test results
         uses: mikepenz/action-junit-report@v3
         with:
           report_paths: 'junit.xml'
@@ -140,11 +140,8 @@ jobs:
           MONGO_INITDB_ROOT_PASSWORD: ${{ env.DB_PASSWORD }}
         ports:
           - 27017:27017
-        options: >
-          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 })'" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js ${{ env.NODE_VERSION }}
