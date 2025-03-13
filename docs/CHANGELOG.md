@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/devclay92/players_exercise/compare/v1.4.0...v1.5.0) (2025-03-13)
+
+
+### Features
+
+* add ProviderRepositoryAdapter to fetch players by club ID using axios ([a065b42](https://github.com/devclay92/players_exercise/commit/a065b4251957ec4e117cd77dde3264cbd74d2ebd))
+
 # [1.4.0](https://github.com/devclay92/players_exercise/compare/v1.3.3...v1.4.0) (2025-03-13)
 
 
