@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/devclay92/players_exercise/compare/v1.1.5...v1.2.0) (2025-03-13)
+
+
+### Features
+
+* implement PutPlayersAction ([af9b580](https://github.com/devclay92/players_exercise/commit/af9b5804f701003ee2d94cb082915574ede89d87))
+
 ## [1.1.5](https://github.com/devclay92/players_exercise/compare/v1.1.4...v1.1.5) (2025-03-12)
 
 ## [1.1.4](https://github.com/devclay92/players_exercise/compare/v1.1.3...v1.1.4) (2025-03-12)
