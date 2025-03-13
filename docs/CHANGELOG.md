@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/devclay92/players_exercise/compare/v1.2.1...v1.3.0) (2025-03-13)
+
+
+### Features
+
+* implement putPlayers method in PlayerRepositoryAdapter and update related tests ([576ab7f](https://github.com/devclay92/players_exercise/commit/576ab7f75cfe56701bfbc1ff99f5a400813f0774))
+
 ## [1.2.1](https://github.com/devclay92/players_exercise/compare/v1.2.0...v1.2.1) (2025-03-13)
 
 # [1.2.0](https://github.com/devclay92/players_exercise/compare/v1.1.5...v1.2.0) (2025-03-13)
