@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Collection, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
@@ -11,7 +11,9 @@ import {
 } from '../application/ports/player-repository.port';
 
 @Injectable()
-export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
+export class PlayerRepositoryAdapter
+  implements PlayerRepositoryPort, OnModuleInit
+{
   private readonly playerCollection: Collection<Player>;
 
   public constructor(
@@ -21,6 +23,10 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     this.playerCollection = dbClient
       .db(configService.get<string>('dbName'))
       .collection<Player>(configService.get<string>('collectionName') ?? '');
+  }
+
+  async onModuleInit() {
+    await this.playerCollection.createIndex({ id: 1 });
   }
 
   public async getPlayers(
@@ -54,9 +60,20 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
   }
 
   public async putPlayers(players: Array<Player>): Promise<PurPlayersResult> {
-    const result = await this.playerCollection.insertMany(players);
+    const result = await this.playerCollection.bulkWrite(
+      players.map((player) => ({
+        updateOne: {
+          filter: { id: player.id },
+          update: { $set: player },
+          upsert: true,
+        },
+      })),
+    );
 
-    return { insertedPlayers: result.insertedCount };
+    return {
+      ...(result.upsertedCount && { insertedPlayers: result.upsertedCount }),
+      ...(result.modifiedCount && { modifiedPlayers: result.modifiedCount }),
+    };
   }
 
   private filterToMatch(filter?: Filter): Record<string, unknown> {

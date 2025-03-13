@@ -1,12 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { mock } from 'jest-mock-extended';
-import {
-  AggregationCursor,
-  Collection,
-  Db,
-  InsertManyResult,
-  MongoClient,
-} from 'mongodb';
+import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
 import { Pagination } from '../application/domain/pagination.value-object';
 import { Player } from '../application/domain/player.entity';
@@ -19,37 +13,11 @@ jest.mock('mongodb', () => ({
   },
 }));
 
-const playersStub = Array<Player>(10).fill({
-  id: '182906',
-  name: 'Mike Maignan',
-  position: 'Goalkeeper',
-  dateOfBirth: '1995-07-03',
-  age: 29,
-  nationality: ['France', 'French Guiana'],
-  height: 191,
-  foot: 'right',
-  joinedOn: '2021-07-01',
-  signedFrom: 'LOSC Lille',
-  contract: '2026-06-30',
-  marketValue: 35000000,
-  status: 'Team captain',
-  clubId: '5',
-  isActive: false,
-});
-
 describe('PlayerRepositoryAdapter', () => {
   const mockAggregateCoursor = mock<AggregationCursor>();
-  const mockInsertMany = jest.fn(
-    (documents: Array<{ id: any }>): Promise<InsertManyResult> =>
-      Promise.resolve({
-        acknowledged: true,
-        insertedIds: documents.map((d) => d.id),
-        insertedCount: documents.length,
-      }),
-  );
   let repository: PlayerRepositoryAdapter;
   let spyAggregate: jest.SpyInstance;
-  let spyInsertMany: jest.SpyInstance;
+  let spyBulkWrite: jest.SpyInstance;
 
   beforeEach(async () => {
     const mockDb = mock<Db>();
@@ -57,11 +25,15 @@ describe('PlayerRepositoryAdapter', () => {
 
     mockDb.collection.mockReturnValue(mockCollection);
     mockCollection.aggregate.mockReturnValue(mockAggregateCoursor);
-    mockCollection.insertMany.mockImplementation(mockInsertMany);
+    mockCollection.bulkWrite.mockImplementation(jest.fn());
     mockAggregateCoursor.toArray.mockResolvedValue([]);
 
     spyAggregate = jest.spyOn(mockCollection, 'aggregate');
-    spyInsertMany = jest.spyOn(mockCollection, 'insertMany');
+    spyBulkWrite = jest.spyOn(mockCollection, 'bulkWrite');
+
+    spyBulkWrite.mockImplementation((docs: Array<unknown>) => ({
+      upsertedCount: docs.length,
+    }));
 
     (MongoClient.connect as jest.Mock).mockResolvedValue({
       db: () => mockDb,
@@ -85,6 +57,24 @@ describe('PlayerRepositoryAdapter', () => {
     });
 
     it('should return an array of players when the DB is not empty', async () => {
+      const playersStub = Array<Player>(10).fill({
+        id: '182906',
+        name: 'Mike Maignan',
+        position: 'Goalkeeper',
+        dateOfBirth: '1995-07-03',
+        age: 29,
+        nationality: ['France', 'French Guiana'],
+        height: 191,
+        foot: 'right',
+        joinedOn: '2021-07-01',
+        signedFrom: 'LOSC Lille',
+        contract: '2026-06-30',
+        marketValue: 35000000,
+        status: 'Team captain',
+        clubId: '5',
+        isActive: false,
+      });
+
       mockAggregateCoursor.toArray.mockResolvedValue([
         { players: playersStub, metadata: [{ totalCount: 10 }] },
       ]);
@@ -243,16 +233,91 @@ describe('PlayerRepositoryAdapter', () => {
   });
 
   describe('putPlayers', () => {
+    const playersStub = [
+      {
+        id: '182906',
+        name: 'Mike Maignan',
+        position: 'Goalkeeper',
+        dateOfBirth: '1995-07-03',
+        age: 29,
+        nationality: ['France', 'French Guiana'],
+        height: 191,
+        foot: 'right',
+        joinedOn: '2021-07-01',
+        signedFrom: 'LOSC Lille',
+        contract: '2026-06-30',
+        marketValue: 35000000,
+        status: 'Team captain',
+        clubId: '5',
+        isActive: false,
+      },
+      {
+        id: '199976',
+        name: 'Marco Sportiello',
+        position: 'Goalkeeper',
+        dateOfBirth: '1992-05-10',
+        age: 32,
+        nationality: ['Italy'],
+        height: 192,
+        foot: 'right',
+        joinedOn: '2023-07-01',
+        signedFrom: 'Atalanta BC',
+        contract: '2027-06-30',
+        marketValue: 1500000,
+        clubId: '5',
+        isActive: true,
+      },
+    ];
     it('should insert the players in the db', async () => {
       await repository.putPlayers(playersStub);
 
-      expect(spyInsertMany).toHaveBeenCalledWith(playersStub);
+      expect(spyBulkWrite).toHaveBeenCalledWith([
+        {
+          updateOne: {
+            filter: { id: playersStub[0].id },
+            update: { $set: playersStub[0] },
+            upsert: true,
+          },
+        },
+        {
+          updateOne: {
+            filter: { id: playersStub[1].id },
+            update: { $set: playersStub[1] },
+            upsert: true,
+          },
+        },
+      ]);
     });
 
     it('should return the numbers of inserted players', async () => {
+      spyBulkWrite.mockResolvedValue({
+        upsertedCount: 10,
+      });
       const result = await repository.putPlayers(playersStub);
       expect(result).toEqual({
         insertedPlayers: 10,
+      });
+    });
+
+    it('should return the numbers of modified players', async () => {
+      spyBulkWrite.mockResolvedValue({
+        modifiedCount: 5,
+      });
+      const result = await repository.putPlayers(playersStub);
+      expect(result).toEqual({
+        modifiedPlayers: 5,
+      });
+    });
+
+    it('should return the numbers of inserted and modified players', async () => {
+      spyBulkWrite.mockResolvedValue({
+        upsertedCount: 5,
+        modifiedCount: 10,
+      });
+      const result = await repository.putPlayers(playersStub);
+      expect(result).toEqual({
+        insertedPlayers: 5,
+        modifiedPlayers: 10,
       });
     });
   });

@@ -10,7 +10,8 @@ export interface GetPlayersResult {
 }
 
 export interface PurPlayersResult {
-  insertedPlayers: number;
+  insertedPlayers?: number;
+  modifiedPlayers?: number;
 }
 
 export interface PlayerRepositoryPort {
