@@ -1,9 +1,9 @@
 import { ConfigService } from '@nestjs/config';
 import { mock } from 'jest-mock-extended';
 import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
-import { Filter } from '../domain/filter.value-object';
-import { Pagination } from '../domain/pagination.value-object';
-import { Player } from '../domain/player.entity';
+import { Filter } from '../application/domain/filter.value-object';
+import { Pagination } from '../application/domain/pagination.value-object';
+import { Player } from '../application/domain/player.entity';
 import { PlayerRepositoryAdapter } from './player-repository.adapter';
 
 jest.mock('mongodb', () => ({

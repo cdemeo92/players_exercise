@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Collection, MongoClient } from 'mongodb';
+import { Filter } from '../application/domain/filter.value-object';
+import { Pagination } from '../application/domain/pagination.value-object';
+import { Player } from '../application/domain/player.entity';
 import {
   GetPlayersResult,
   PlayerRepositoryPort,
 } from '../application/ports/player-repository.port';
-import { Filter } from '../domain/filter.value-object';
-import { Pagination } from '../domain/pagination.value-object';
-import { Player } from '../domain/player.entity';
 
 @Injectable()
 export class PlayerRepositoryAdapter implements PlayerRepositoryPort {

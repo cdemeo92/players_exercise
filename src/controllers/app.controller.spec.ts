@@ -1,9 +1,12 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import {
+  BirthYearRange,
+  Filter,
+} from '../application/domain/filter.value-object';
+import { Player } from '../application/domain/player.entity';
 import { GetPlayersAction } from '../application/get-players.action';
 import { GetPlayersResult } from '../application/ports/player-repository.port';
-import { BirthYearRange, Filter } from '../domain/filter.value-object';
-import { Player } from '../domain/player.entity';
 import { AppController } from './app.controller';
 import { GetPlayersParams } from './dto/get-players.dto';
 

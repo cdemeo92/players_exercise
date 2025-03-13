@@ -1,6 +1,6 @@
-import { Filter } from '../domain/filter.value-object';
-import { Pagination } from '../domain/pagination.value-object';
-import { Player } from '../domain/player.entity';
+import { Filter } from './domain/filter.value-object';
+import { Pagination } from './domain/pagination.value-object';
+import { Player } from './domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 

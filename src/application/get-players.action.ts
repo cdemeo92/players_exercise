@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Filter } from '../domain/filter.value-object';
-import { Pagination } from '../domain/pagination.value-object';
+import { Filter } from './domain/filter.value-object';
+import { Pagination } from './domain/pagination.value-object';
 import {
   GetPlayersResult,
   PlayerRepositoryPort,

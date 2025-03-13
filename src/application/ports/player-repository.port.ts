@@ -1,6 +1,6 @@
-import { Filter } from '../../domain/filter.value-object';
-import { Pagination } from '../../domain/pagination.value-object';
-import { Player } from '../../domain/player.entity';
+import { Filter } from '../domain/filter.value-object';
+import { Pagination } from '../domain/pagination.value-object';
+import { Player } from '../domain/player.entity';
 
 export interface GetPlayersResult {
   players: Array<Player>;

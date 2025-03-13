@@ -7,9 +7,12 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
+import {
+  BirthYearRange,
+  Filter,
+} from '../../application/domain/filter.value-object';
+import { Pagination } from '../../application/domain/pagination.value-object';
 import { GetPlayersResult } from '../../application/ports/player-repository.port';
-import { BirthYearRange, Filter } from '../../domain/filter.value-object';
-import { Pagination } from '../../domain/pagination.value-object';
 
 export class GetPlayersParams {
   @ApiProperty({

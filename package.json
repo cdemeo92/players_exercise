@@ -21,8 +21,8 @@
     "test:ci": "jest --coverage --ci --reporters=default --reporters=jest-junit --coverageReporters=json-summary",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:integ": "jest --config ./test/integ/jest-integ.json",
-    "pretest:e2e": "./scripts/int_environment_for_e2e.sh",
-    "test:e2e": "jest --config ./test/e2e/jest-e2e.json",
+    "pretest:e2e": "source .env && ./scripts/int_environment_for_e2e.sh",
+    "test:e2e": "source .env && jest --config ./test/e2e/jest-e2e.json",
     "test:e2e:ci": "jest --config ./test/e2e/jest-e2e.json",
     "prepare": "husky"
   },
