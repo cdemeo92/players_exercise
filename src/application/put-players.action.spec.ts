@@ -1,7 +1,7 @@
 import { Player } from './domain/player.entity';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 import { ProviderRepositoryPort } from './ports/provider-repository.port';
-import { PutPlayersAction } from './put-player.action';
+import { PutPlayersAction } from './put-players.action';
 
 describe('PutPlayerAction', () => {
   const playersStub: Array<Player> = [

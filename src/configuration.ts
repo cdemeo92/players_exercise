@@ -44,4 +44,4 @@ const config: Record<Stage, Config> = {
   },
 };
 
-export default () => config[process.env.STAGE as Stage] || config.dev;
+export default (): Config => config[process.env.STAGE as Stage] || config.dev;
