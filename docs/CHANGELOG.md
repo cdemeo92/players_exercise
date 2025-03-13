@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/devclay92/players_exercise/compare/v1.5.0...v1.6.0) (2025-03-13)
+
+
+### Features
+
+* implement PutPlayers Job ([3e3f701](https://github.com/devclay92/players_exercise/commit/3e3f701cc76dbabdff035c8deee81815f5fea707))
+
 # [1.5.0](https://github.com/devclay92/players_exercise/compare/v1.4.0...v1.5.0) (2025-03-13)
 
 
