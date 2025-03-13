@@ -79,9 +79,7 @@ describe('PutPlayerAction', () => {
       getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
       const result = await action.execute('5');
 
-      expect(result).toEqual({
-        success: true,
-      });
+      expect(result).toEqual({ success: true });
     });
 
     it('should return a success true and a message when there are no players with the given id', async () => {
@@ -111,6 +109,50 @@ describe('PutPlayerAction', () => {
       expect(result).toEqual({
         success: false,
         message: 'PUT PLAYERS ERROR: Error message',
+      });
+    });
+
+    it('should return the numbers of inserted players', async () => {
+      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
+      putPlayersMock.mockResolvedValueOnce({
+        insertedPlayers: 5,
+      });
+      const result = await action.execute('5');
+      expect(result).toEqual({
+        success: true,
+        result: {
+          insertedPlayers: 5,
+        },
+      });
+    });
+
+    it('should return the numbers of modified players', async () => {
+      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
+      putPlayersMock.mockResolvedValueOnce({
+        modifiedPlayers: 5,
+      });
+      const result = await action.execute('5');
+      expect(result).toEqual({
+        success: true,
+        result: {
+          modifiedPlayers: 5,
+        },
+      });
+    });
+
+    it('should return the numbers of inserted and modified players', async () => {
+      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
+      putPlayersMock.mockResolvedValueOnce({
+        insertedPlayers: 10,
+        modifiedPlayers: 5,
+      });
+      const result = await action.execute('5');
+      expect(result).toEqual({
+        success: true,
+        result: {
+          insertedPlayers: 10,
+          modifiedPlayers: 5,
+        },
       });
     });
   });
