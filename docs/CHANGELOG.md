@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/devclay92/players_exercise/compare/v1.3.3...v1.4.0) (2025-03-13)
+
+
+### Features
+
+* return detailed results for inserted and modified players ([56f67be](https://github.com/devclay92/players_exercise/commit/56f67be4b4412b999047587895389f49f768c3fb))
+
 ## [1.3.3](https://github.com/devclay92/players_exercise/compare/v1.3.2...v1.3.3) (2025-03-13)
 
 ## [1.3.2](https://github.com/devclay92/players_exercise/compare/v1.3.1...v1.3.2) (2025-03-13)
