@@ -21,6 +21,9 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
       .db(configService.get<string>('dbName'))
       .collection<Player>(configService.get<string>('collectionName') ?? '');
   }
+  putPlayers(players: Array<Player>): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 
   public async getPlayers(
     filter?: Filter,

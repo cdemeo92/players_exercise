@@ -2,19 +2,16 @@ import { Filter } from '../domain/filter.value-object';
 import { Pagination } from '../domain/pagination.value-object';
 import { Player } from '../domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
-import {
-  GetPlayersResult,
-  PlayerRepositoryPort,
-} from './ports/player-repository.port';
+import { PlayerRepositoryPort } from './ports/player-repository.port';
 
 describe('GetPlayersAction', () => {
-  const getPlayersMock = jest.fn(
-    (): Promise<GetPlayersResult> =>
-      Promise.resolve({ players: [], page: 1, pageSize: 10, totalCount: 0 }),
-  );
+  const getPlayersMock = jest
+    .fn()
+    .mockResolvedValue({ players: [], page: 1, pageSize: 10, totalCount: 0 });
 
   const playerRepository: PlayerRepositoryPort = {
     getPlayers: getPlayersMock,
+    putPlayers: jest.fn(),
   };
 
   const action = new GetPlayersAction(playerRepository);
@@ -144,7 +141,7 @@ describe('GetPlayersAction', () => {
       });
 
       await expect(async () => await action.execute()).rejects.toThrow(
-        'An error occurred while fetching players: Error',
+        'GET PLAYERS ERROR: Error',
       );
     });
   });

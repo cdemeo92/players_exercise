@@ -14,4 +14,6 @@ export interface PlayerRepositoryPort {
     filter?: Filter,
     pagination?: Pagination,
   ): Promise<GetPlayersResult>;
+
+  putPlayers(players: Array<Player>): Promise<void>;
 }

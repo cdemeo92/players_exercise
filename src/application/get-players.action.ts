@@ -17,9 +17,7 @@ export class GetPlayersAction {
     try {
       return this.playerRepository.getPlayers(params, pagination);
     } catch (error) {
-      throw new Error(
-        `An error occurred while fetching players: ${(error as Error).message}`,
-      );
+      throw new Error(`GET PLAYERS ERROR: ${(error as Error).message}`);
     }
   }
 }

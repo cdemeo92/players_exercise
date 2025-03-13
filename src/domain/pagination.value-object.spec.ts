@@ -2,7 +2,7 @@ import { Pagination } from './pagination.value-object';
 
 describe('Pagination', () => {
   describe('getPage', () => {
-    it('should return the page property if greather than 0', () => {
+    it('should return the page property if greater than 0', () => {
       expect(new Pagination(10).getPage()).toBe(10);
     });
 
@@ -20,7 +20,7 @@ describe('Pagination', () => {
   });
 
   describe('getPageSize', () => {
-    it('should return the pageSize property if greather than 0', () => {
+    it('should return the pageSize property if greater than 0', () => {
       expect(new Pagination(undefined, 10).getPageSize(0)).toBe(10);
     });
 
