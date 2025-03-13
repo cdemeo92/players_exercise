@@ -54,23 +54,25 @@ describe('PlayerRepositoryAdapter', () => {
     });
 
     it('should return an array of players when the DB is not empty', async () => {
-      const playersStub = Array<Player>(10).fill({
-        id: '182906',
-        name: 'Mike Maignan',
-        position: 'Goalkeeper',
-        dateOfBirth: '1995-07-03',
-        age: 29,
-        nationality: ['France', 'French Guiana'],
-        height: 191,
-        foot: 'right',
-        joinedOn: '2021-07-01',
-        signedFrom: 'LOSC Lille',
-        contract: '2026-06-30',
-        marketValue: 35000000,
-        status: 'Team captain',
-        clubId: '5',
-        isActive: false,
-      });
+      const playersStub = Array<Player>(10).fill(
+        new Player({
+          id: '182906',
+          name: 'Mike Maignan',
+          position: 'Goalkeeper',
+          dateOfBirth: '1995-07-03',
+          age: 29,
+          nationality: ['France', 'French Guiana'],
+          height: 191,
+          foot: 'right',
+          joinedOn: '2021-07-01',
+          signedFrom: 'LOSC Lille',
+          contract: '2026-06-30',
+          marketValue: 35000000,
+          status: 'Team captain',
+          clubId: '5',
+          isActive: false,
+        }),
+      );
 
       mockAggregateCoursor.toArray.mockResolvedValue([
         { players: playersStub, metadata: [{ totalCount: 10 }] },
@@ -231,7 +233,7 @@ describe('PlayerRepositoryAdapter', () => {
 
   describe('putPlayers', () => {
     const playersStub = [
-      {
+      new Player({
         id: '182906',
         name: 'Mike Maignan',
         position: 'Goalkeeper',
@@ -247,8 +249,8 @@ describe('PlayerRepositoryAdapter', () => {
         status: 'Team captain',
         clubId: '5',
         isActive: false,
-      },
-      {
+      }),
+      new Player({
         id: '199976',
         name: 'Marco Sportiello',
         position: 'Goalkeeper',
@@ -263,7 +265,7 @@ describe('PlayerRepositoryAdapter', () => {
         marketValue: 1500000,
         clubId: '5',
         isActive: true,
-      },
+      }),
     ];
     it('should insert the players in the db', async () => {
       await repository.putPlayers(playersStub);

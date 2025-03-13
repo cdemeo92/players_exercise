@@ -8,6 +8,7 @@ interface Config {
   dbUser: string;
   dbPassword: string;
   collectionName: string;
+  providerDomain: string;
 }
 
 const config: Record<Stage, Config> = {
@@ -19,6 +20,7 @@ const config: Record<Stage, Config> = {
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
+    providerDomain: 'https://transfermarkt-api.fly.dev',
   },
   e2e: {
     port: 8080,
@@ -28,6 +30,7 @@ const config: Record<Stage, Config> = {
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
+    providerDomain: 'https://transfermarkt-api.fly.dev',
   },
   prod: {
     port: 80,
@@ -37,6 +40,7 @@ const config: Record<Stage, Config> = {
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
+    providerDomain: 'https://transfermarkt-api.fly.dev',
   },
 };
 

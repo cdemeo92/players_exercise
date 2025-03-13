@@ -5,7 +5,7 @@ import { PutPlayersAction } from './put-player.action';
 
 describe('PutPlayerAction', () => {
   const playersStub: Array<Player> = [
-    {
+    new Player({
       id: '182906',
       name: 'Mike Maignan',
       position: 'Goalkeeper',
@@ -21,8 +21,8 @@ describe('PutPlayerAction', () => {
       status: 'Team captain',
       clubId: '5',
       isActive: true,
-    },
-    {
+    }),
+    new Player({
       id: '199976',
       name: 'Marco Sportiello',
       position: 'Goalkeeper',
@@ -37,7 +37,7 @@ describe('PutPlayerAction', () => {
       marketValue: 1500000,
       clubId: '5',
       isActive: true,
-    },
+    }),
   ];
   const getPlayersByClubIdMock = jest.fn().mockResolvedValue([]);
 

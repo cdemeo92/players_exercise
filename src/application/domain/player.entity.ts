@@ -30,6 +30,9 @@ export class Player {
     this.contract = players.contract as string;
     this.marketValue = players.marketValue as number;
     this.status = players.status as string;
-    this.isActive = players.isActive as boolean;
+  }
+
+  public setIsActive(isActive: boolean): void {
+    this.isActive = isActive;
   }
 }

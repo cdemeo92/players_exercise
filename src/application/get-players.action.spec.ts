@@ -32,23 +32,25 @@ describe('GetPlayersAction', () => {
     });
 
     it('should return an array of players when the DB is not empty', async () => {
-      const players = Array<Player>(30).fill({
-        id: '182906',
-        name: 'Mike Maignan',
-        position: 'Goalkeeper',
-        dateOfBirth: '1995-07-03',
-        age: 29,
-        nationality: ['France', 'French Guiana'],
-        height: 191,
-        foot: 'right',
-        joinedOn: '2021-07-01',
-        signedFrom: 'LOSC Lille',
-        contract: '2026-06-30',
-        marketValue: 35000000,
-        status: 'Team captain',
-        clubId: '5',
-        isActive: false,
-      });
+      const players = Array<Player>(30).fill(
+        new Player({
+          id: '182906',
+          name: 'Mike Maignan',
+          position: 'Goalkeeper',
+          dateOfBirth: '1995-07-03',
+          age: 29,
+          nationality: ['France', 'French Guiana'],
+          height: 191,
+          foot: 'right',
+          joinedOn: '2021-07-01',
+          signedFrom: 'LOSC Lille',
+          contract: '2026-06-30',
+          marketValue: 35000000,
+          status: 'Team captain',
+          clubId: '5',
+          isActive: false,
+        }),
+      );
       getPlayersMock.mockResolvedValueOnce({
         players,
         page: 1,
