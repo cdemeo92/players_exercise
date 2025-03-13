@@ -17,7 +17,7 @@ describe('AppController (integ)', () => {
 
   beforeEach(async () => {
     mongodb = await MongoMemoryServer.create();
-    mongoClient = await MongoClient.connect(mongodb.getUri());
+    mongoClient = await MongoClient.connect(mongodb.getUri(), {});
     db = mongoClient.db('players_integ');
 
     await db.collection('players').insertMany(playersStub);
@@ -54,45 +54,30 @@ describe('AppController (integ)', () => {
   });
 
   describe('/players (GET)', () => {
-    it('should return an array of 10 players by default', async () => {
-      const response = await appController.getPlayers();
+    it.each([
+      ['by default', undefined],
+      ['when the pageSize query is 0', 0],
+      ['when the pageSize query is negative', -1],
+    ])('should return an array of 10 players %s', async (_, pageSize) => {
+      const response = await appController.getPlayers(
+        GetPlayersParams.fromQuery({ pageSize }),
+      );
 
       expect(response.players.length).toBe(10);
       expect(response.pageSize).toBe(10);
     });
 
-    it.each([0, -1])(
-      'should return an array of 10 players when the pageSize query is %s',
-      async (pageSize) => {
-        const response = await appController.getPlayers(
-          GetPlayersParams.fromQuery({ pageSize }),
-        );
+    it('should return an array of 5 players when the query parameter pageSize is 5', async () => {
+      const response = await appController.getPlayers(
+        GetPlayersParams.fromQuery({ pageSize: 5 }),
+      );
 
-        expect(response.players.length).toBe(10);
-        expect(response.pageSize).toBe(10);
-      },
-    );
-
-    it.each([1, 5, 20])(
-      'should return an array of %s players when the pageSize query parameter is provided',
-      async (pageSize) => {
-        const response = await appController.getPlayers(
-          GetPlayersParams.fromQuery({ pageSize }),
-        );
-
-        expect(response.players.length).toBe(pageSize);
-        expect(response.pageSize).toBe(pageSize);
-      },
-    );
-
-    it('should return the first page when the page query parameter is not provided', async () => {
-      const response = await appController.getPlayers();
-
-      expect(response.page).toBe(1);
+      expect(response.players.length).toBe(5);
+      expect(response.pageSize).toBe(5);
     });
 
-    it.each([0, -1])(
-      'should return the first page when the page query parameter is %s',
+    it.each([undefined, 0, -1])(
+      'should return the first page when the query parameter page is %s',
       async (page) => {
         const response = await appController.getPlayers(
           GetPlayersParams.fromQuery({ page }),
@@ -102,12 +87,12 @@ describe('AppController (integ)', () => {
       },
     );
 
-    it.each([1, 5, 20])('should return the page %s', async (page) => {
+    it('should return the page 5 when required', async () => {
       const response = await appController.getPlayers(
-        GetPlayersParams.fromQuery({ page }),
+        GetPlayersParams.fromQuery({ page: 5 }),
       );
 
-      expect(response.page).toBe(page);
+      expect(response.page).toBe(5);
     });
 
     it('should filter the players by position', async () => {

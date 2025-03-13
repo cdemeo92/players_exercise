@@ -21,13 +21,6 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     this.playerCollection = dbClient
       .db(dbName)
       .collection<Player>(collectionName);
-
-    this.playerCollection
-      .createIndex({ id: 1 })
-      .then(() => {})
-      .catch((error) => {
-        console.error('Error creating index:', error);
-      });
   }
 
   public async getPlayers(
