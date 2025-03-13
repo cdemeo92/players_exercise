@@ -1,5 +1,4 @@
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable } from '@nestjs/common';
 import { Collection, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
 import { Pagination } from '../application/domain/pagination.value-object';
@@ -11,22 +10,24 @@ import {
 } from '../application/ports/player-repository.port';
 
 @Injectable()
-export class PlayerRepositoryAdapter
-  implements PlayerRepositoryPort, OnModuleInit
-{
+export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
   private readonly playerCollection: Collection<Player>;
 
   public constructor(
     @Inject('MONGO_CLIENT') private readonly dbClient: MongoClient,
-    private readonly configService: ConfigService,
+    @Inject('DB_NAME') private readonly dbName: string,
+    @Inject('COLLECTION_NAME') private readonly collectionName: string,
   ) {
     this.playerCollection = dbClient
-      .db(configService.get<string>('dbName'))
-      .collection<Player>(configService.get<string>('collectionName') ?? '');
-  }
+      .db(dbName)
+      .collection<Player>(collectionName);
 
-  async onModuleInit() {
-    await this.playerCollection.createIndex({ id: 1 });
+    this.playerCollection
+      .createIndex({ id: 1 })
+      .then(() => {})
+      .catch((error) => {
+        console.error('Error creating index:', error);
+      });
   }
 
   public async getPlayers(

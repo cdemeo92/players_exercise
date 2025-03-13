@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { mock } from 'jest-mock-extended';
 import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
@@ -26,6 +25,7 @@ describe('PlayerRepositoryAdapter', () => {
     mockDb.collection.mockReturnValue(mockCollection);
     mockCollection.aggregate.mockReturnValue(mockAggregateCoursor);
     mockCollection.bulkWrite.mockImplementation(jest.fn());
+    mockCollection.createIndex.mockResolvedValue('success');
     mockAggregateCoursor.toArray.mockResolvedValue([]);
 
     spyAggregate = jest.spyOn(mockCollection, 'aggregate');
@@ -40,10 +40,7 @@ describe('PlayerRepositoryAdapter', () => {
     });
 
     const client = await MongoClient.connect('mongodb://mock-uri');
-    repository = new PlayerRepositoryAdapter(
-      client,
-      new ConfigService({ dbName: 'players_e2e', collectionName: 'players' }),
-    );
+    repository = new PlayerRepositoryAdapter(client, 'players_e2e', 'players');
   });
 
   describe('getPlayers', () => {

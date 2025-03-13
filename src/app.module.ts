@@ -45,6 +45,13 @@ import { GetPlayersParams } from './controllers/dto/get-players.dto';
       },
       inject: [ConfigService],
     },
+    {
+      provide: 'DB_NAME',
+      useFactory: (configService: ConfigService): string => {
+        return configService.get<string>('dbName') ?? '';
+      },
+      inject: [ConfigService],
+    },
   ],
 })
 export class AppModule {}

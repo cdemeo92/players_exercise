@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -36,11 +35,12 @@ describe('AppController (integ)', () => {
           useValue: mongoClient,
         },
         {
-          provide: ConfigService,
-          useValue: new ConfigService({
-            dbName: 'players_integ',
-            collectionName: 'players',
-          }),
+          provide: 'COLLECTION_NAME',
+          useValue: 'players',
+        },
+        {
+          provide: 'DB_NAME',
+          useValue: 'players_integ',
         },
       ],
     }).compile();
