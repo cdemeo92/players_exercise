@@ -1,6 +1,12 @@
 import { ConfigService } from '@nestjs/config';
 import { mock } from 'jest-mock-extended';
-import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
+import {
+  AggregationCursor,
+  Collection,
+  Db,
+  InsertManyResult,
+  MongoClient,
+} from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
 import { Pagination } from '../application/domain/pagination.value-object';
 import { Player } from '../application/domain/player.entity';
@@ -13,10 +19,37 @@ jest.mock('mongodb', () => ({
   },
 }));
 
+const playersStub = Array<Player>(10).fill({
+  id: '182906',
+  name: 'Mike Maignan',
+  position: 'Goalkeeper',
+  dateOfBirth: '1995-07-03',
+  age: 29,
+  nationality: ['France', 'French Guiana'],
+  height: 191,
+  foot: 'right',
+  joinedOn: '2021-07-01',
+  signedFrom: 'LOSC Lille',
+  contract: '2026-06-30',
+  marketValue: 35000000,
+  status: 'Team captain',
+  clubId: '5',
+  isActive: false,
+});
+
 describe('PlayerRepositoryAdapter', () => {
   const mockAggregateCoursor = mock<AggregationCursor>();
+  const mockInsertMany = jest.fn(
+    (documents: Array<{ id: any }>): Promise<InsertManyResult> =>
+      Promise.resolve({
+        acknowledged: true,
+        insertedIds: documents.map((d) => d.id),
+        insertedCount: documents.length,
+      }),
+  );
   let repository: PlayerRepositoryAdapter;
   let spyAggregate: jest.SpyInstance;
+  let spyInsertMany: jest.SpyInstance;
 
   beforeEach(async () => {
     const mockDb = mock<Db>();
@@ -24,9 +57,11 @@ describe('PlayerRepositoryAdapter', () => {
 
     mockDb.collection.mockReturnValue(mockCollection);
     mockCollection.aggregate.mockReturnValue(mockAggregateCoursor);
+    mockCollection.insertMany.mockImplementation(mockInsertMany);
     mockAggregateCoursor.toArray.mockResolvedValue([]);
 
     spyAggregate = jest.spyOn(mockCollection, 'aggregate');
+    spyInsertMany = jest.spyOn(mockCollection, 'insertMany');
 
     (MongoClient.connect as jest.Mock).mockResolvedValue({
       db: () => mockDb,
@@ -50,30 +85,12 @@ describe('PlayerRepositoryAdapter', () => {
     });
 
     it('should return an array of players when the DB is not empty', async () => {
-      const players = Array<Player>(10).fill({
-        id: '182906',
-        name: 'Mike Maignan',
-        position: 'Goalkeeper',
-        dateOfBirth: '1995-07-03',
-        age: 29,
-        nationality: ['France', 'French Guiana'],
-        height: 191,
-        foot: 'right',
-        joinedOn: '2021-07-01',
-        signedFrom: 'LOSC Lille',
-        contract: '2026-06-30',
-        marketValue: 35000000,
-        status: 'Team captain',
-        clubId: '5',
-        isActive: false,
-      });
-
       mockAggregateCoursor.toArray.mockResolvedValue([
-        { players, metadata: [{ totalCount: 10 }] },
+        { players: playersStub, metadata: [{ totalCount: 10 }] },
       ]);
       const result = await repository.getPlayers();
       expect(result).toEqual({
-        players,
+        players: playersStub,
         page: 1,
         pageSize: 10,
         totalCount: 10,
@@ -222,6 +239,21 @@ describe('PlayerRepositoryAdapter', () => {
           },
         ]),
       );
+    });
+  });
+
+  describe('putPlayers', () => {
+    it('should insert the players in the db', async () => {
+      await repository.putPlayers(playersStub);
+
+      expect(spyInsertMany).toHaveBeenCalledWith(playersStub);
+    });
+
+    it('should return the numbers of inserted players', async () => {
+      const result = await repository.putPlayers(playersStub);
+      expect(result).toEqual({
+        insertedPlayers: 10,
+      });
     });
   });
 });

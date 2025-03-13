@@ -7,6 +7,7 @@ import { Player } from '../application/domain/player.entity';
 import {
   GetPlayersResult,
   PlayerRepositoryPort,
+  PurPlayersResult,
 } from '../application/ports/player-repository.port';
 
 @Injectable()
@@ -20,9 +21,6 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     this.playerCollection = dbClient
       .db(configService.get<string>('dbName'))
       .collection<Player>(configService.get<string>('collectionName') ?? '');
-  }
-  putPlayers(players: Array<Player>): Promise<void> {
-    throw new Error('Method not implemented.');
   }
 
   public async getPlayers(
@@ -53,6 +51,12 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
       totalCount: playersDocument?.[0]?.metadata?.[0]?.totalCount ?? 0,
       players: playersDocument?.[0]?.players ?? [],
     };
+  }
+
+  public async putPlayers(players: Array<Player>): Promise<PurPlayersResult> {
+    const result = await this.playerCollection.insertMany(players);
+
+    return { insertedPlayers: result.insertedCount };
   }
 
   private filterToMatch(filter?: Filter): Record<string, unknown> {

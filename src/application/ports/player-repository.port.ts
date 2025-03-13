@@ -9,11 +9,15 @@ export interface GetPlayersResult {
   totalCount: number;
 }
 
+export interface PurPlayersResult {
+  insertedPlayers: number;
+}
+
 export interface PlayerRepositoryPort {
   getPlayers(
     filter?: Filter,
     pagination?: Pagination,
   ): Promise<GetPlayersResult>;
 
-  putPlayers(players: Array<Player>): Promise<void>;
+  putPlayers(players: Array<Player>): Promise<PurPlayersResult>;
 }

@@ -108,7 +108,8 @@
     "coveragePathIgnorePatterns": [
       "main.ts",
       "app.module.ts",
-      "configuration.ts"
+      "configuration.ts",
+      "application/ports/*"
     ],
     "testEnvironment": "node"
   }
