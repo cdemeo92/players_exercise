@@ -22,7 +22,6 @@
           "npmPublish": false
         }
       ],
-      "@semantic-release/exec",
       [
           "@semantic-release/changelog",
           {
@@ -39,6 +38,12 @@
               ],
               "message": "chore(release): ${nextRelease.version}\n"
           }
+      ],
+      [
+        "@semantic-release/exec", 
+        {
+          "publishCmd": "docker build -t ghcr.io/${{ github.repository_owner }}/players:${nextRelease.version} -t ghcr.io/${{ github.repository_owner }}/players:latest . && docker push ghcr.io/${{ github.repository_owner }}/players --all-tags"
+        }
       ]
   ]
 }
