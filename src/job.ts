@@ -4,7 +4,7 @@ import { ProviderRepositoryAdapter } from './adapters/provider-repository.adapte
 import { PutPlayersAction } from './application/put-players.action';
 import config from './configuration';
 
-export class JobController {
+export class PutPlayersJob {
   public async putPlayersById(clubId: string): Promise<void> {
     const action = await this.buildAction();
 
@@ -35,6 +35,6 @@ export class JobController {
   }
 }
 
-new JobController()
+new PutPlayersJob()
   .putPlayersById(process.argv[2])
   .catch((err) => console.error(err));

@@ -109,6 +109,7 @@
       "lcov"
     ],
     "coveragePathIgnorePatterns": [
+      "job.ts",
       "main.ts",
       "app.module.ts",
       "configuration.ts",

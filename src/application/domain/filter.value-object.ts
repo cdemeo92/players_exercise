@@ -6,7 +6,10 @@ export class BirthYearRange {
 
   public static fromString(birthYearRange: string): BirthYearRange {
     const [start, end] = birthYearRange.split('-').map(Number);
-    return new BirthYearRange(start, end);
+    return new BirthYearRange(
+      !isNaN(start) ? start : undefined,
+      !isNaN(end) ? end : undefined,
+    );
   }
 }
 
