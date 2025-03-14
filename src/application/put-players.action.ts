@@ -1,3 +1,5 @@
+import { Filter } from './domain/filter.value-object';
+import { UPDATE_STATUS } from './domain/player.entity';
 import {
   PlayerRepositoryPort,
   PurPlayersResult,
@@ -23,6 +25,9 @@ export class PutPlayersAction {
       const players = await this.providerRepository.getPlayersByClubId(clubId);
       if (players.length > 0) {
         const result = await this.playerRepository.putPlayers(players);
+        const playersToUpdate = await this.playerRepository.getPlayers(
+          new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
+        );
         return new PutPlayerResponse(true, result);
       } else {
         return new PutPlayerResponse(

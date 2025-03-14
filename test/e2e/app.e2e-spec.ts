@@ -5,7 +5,7 @@ import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { appBuilder, AppModule } from '../../src/app.module';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
-import * as playersStub from './stub/players.stub.json';
+import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(30000);
 

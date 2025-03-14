@@ -33,7 +33,7 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     const playersDocument = await this.playerCollection
       .aggregate<{
         metadata: Array<{ totalCount: number }>;
-        players: Array<Player>;
+        players: Array<Record<string, unknown>>;
       }>([
         { $match: this.filterToMatch(filter) },
         {
@@ -49,7 +49,7 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
       page: page,
       pageSize: pageSize,
       totalCount: playersDocument?.[0]?.metadata?.[0]?.totalCount ?? 0,
-      players: playersDocument?.[0]?.players ?? [],
+      players: playersDocument?.[0]?.players.map((p) => new Player(p)) ?? [],
     };
   }
 

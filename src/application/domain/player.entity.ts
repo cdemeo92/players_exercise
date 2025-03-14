@@ -35,6 +35,7 @@ export class Player {
     this.contract = players.contract as string;
     this.marketValue = players.marketValue as number;
     this.status = players.status as string;
+    this.isActive = players.isActive as boolean;
     this.updateStatus = [
       UPDATE_STATUS.TO_UPDATE,
       UPDATE_STATUS.UPDATED,

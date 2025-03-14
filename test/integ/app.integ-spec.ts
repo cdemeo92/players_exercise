@@ -5,7 +5,7 @@ import { PlayerRepositoryAdapter } from '../../src/adapters/player-repository.ad
 import { GetPlayersAction } from '../../src/application/get-players.action';
 import { AppController } from '../../src/controllers/app.controller';
 import { GetPlayersParams } from '../../src/controllers/dto/get-players.dto';
-import * as playersStub from './stub/players.stub.json';
+import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(30000);
 
@@ -119,7 +119,6 @@ describe('AppController (integ)', () => {
         const response = await appController.getPlayers(
           GetPlayersParams.fromQuery({ isActive }),
         );
-
         expect(response.players.length).toBeGreaterThan(0);
         response.players.forEach((p) => expect(p.isActive).toBe(isActive));
       },

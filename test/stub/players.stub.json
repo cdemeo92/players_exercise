@@ -15,7 +15,8 @@
     "contract": "2026-06-30",
     "marketValue": 600000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "109855",
@@ -33,7 +34,8 @@
     "contract": "2025-06-30",
     "marketValue": 100000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "949387",
@@ -50,7 +52,8 @@
     "signedFrom": "1.FC Saarbrücken U19",
     "contract": "2025-06-30",
     "clubId": "1",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "339151",
@@ -68,7 +71,8 @@
     "contract": "2026-06-30",
     "marketValue": 450000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "335998",
@@ -86,7 +90,8 @@
     "contract": "2025-06-30",
     "marketValue": 250000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "620834",
@@ -104,7 +109,8 @@
     "contract": "2026-06-30",
     "marketValue": 250000,
     "clubId": "1",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "91280",
@@ -124,7 +130,8 @@
     "marketValue": 175000,
     "status": "Red card suspension -  - Landespokal Saarland; Torn muscle fiber - Return unknown",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "94210",
@@ -143,7 +150,8 @@
     "marketValue": 175000,
     "status": "Ill - Return unknown",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "692020",
@@ -161,7 +169,8 @@
     "contract": "2026-06-30",
     "marketValue": 175000,
     "clubId": "1",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "85960",
@@ -180,7 +189,8 @@
     "marketValue": 150000,
     "status": "Team captain",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "236467",
@@ -199,7 +209,8 @@
     "marketValue": 400000,
     "status": "Ligament injury - Return unknown",
     "clubId": "1",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "690425",
@@ -217,7 +228,8 @@
     "contract": "2026-06-30",
     "marketValue": 300000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "93753",
@@ -236,7 +248,8 @@
     "contract": "2026-06-30",
     "marketValue": 225000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "296897",
@@ -254,7 +267,8 @@
     "contract": "2025-06-30",
     "marketValue": 450000,
     "clubId": "1",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "638631",
@@ -272,7 +286,8 @@
     "contract": "2026-06-30",
     "marketValue": 350000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "333516",
@@ -291,7 +306,8 @@
     "contract": "2026-06-30",
     "marketValue": 500000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "993212",
@@ -310,7 +326,8 @@
     "marketValue": 400000,
     "status": "Torn lateral knee ligament - Return unknown",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "588747",
@@ -329,7 +346,8 @@
     "contract": "2026-06-30",
     "marketValue": 300000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "228953",
@@ -348,7 +366,8 @@
     "marketValue": 350000,
     "status": "Adductor injury - Return unknown",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "161079",
@@ -366,7 +385,8 @@
     "contract": "2025-06-30",
     "marketValue": 225000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "877234",
@@ -383,7 +403,8 @@
     "contract": "2026-06-30",
     "marketValue": 75000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "833372",
@@ -403,7 +424,8 @@
     "marketValue": 325000,
     "status": "Cruciate ligament tear - Return expected on Jun 1, 2025",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "196146",
@@ -422,7 +444,8 @@
     "contract": "2025-06-30",
     "marketValue": 275000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "557205",
@@ -441,7 +464,8 @@
     "contract": "2025-06-30",
     "marketValue": 350000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "187496",
@@ -459,7 +483,8 @@
     "contract": "2026-06-30",
     "marketValue": 300000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 0
   },
   {
     "id": "317740",
@@ -477,7 +502,8 @@
     "contract": "2025-06-30",
     "marketValue": 400000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "284058",
@@ -496,7 +522,8 @@
     "marketValue": 350000,
     "status": "Broken jaw - Return expected on Mar 31, 2025",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "404949",
@@ -515,7 +542,8 @@
     "marketValue": 350000,
     "status": "muscle stiffness - Return unknown",
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "124416",
@@ -533,7 +561,8 @@
     "contract": "2027-06-30",
     "marketValue": 250000,
     "clubId": "1",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "182906",
@@ -553,7 +582,8 @@
     "marketValue": 35000000,
     "status": "Team captain",
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "199976",
@@ -571,7 +601,8 @@
     "contract": "2027-06-30",
     "marketValue": 1500000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "939745",
@@ -590,7 +621,8 @@
     "marketValue": 500000,
     "status": "In training camp with first team - until Apr 28, 2025 - Serie C - Girone B - 14 matchdays",
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "303254",
@@ -609,7 +641,8 @@
     "contract": "2027-06-30",
     "marketValue": 22000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "521964",
@@ -628,7 +661,8 @@
     "contract": "2027-06-30",
     "marketValue": 20000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "323167",
@@ -646,7 +680,8 @@
     "contract": "2029-06-30",
     "marketValue": 20000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "574671",
@@ -664,7 +699,8 @@
     "contract": "2028-06-30",
     "marketValue": 17000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "339808",
@@ -683,7 +719,8 @@
     "contract": "2026-06-30",
     "marketValue": 50000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "476344",
@@ -702,7 +739,8 @@
     "marketValue": 14000000,
     "status": "Calf injury - Return expected on Mar 24, 2025",
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "95424",
@@ -720,7 +758,8 @@
     "contract": "2025-06-30",
     "marketValue": 10000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "741257",
@@ -738,7 +777,8 @@
     "contract": "2028-06-30",
     "marketValue": 5000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "631007",
@@ -756,7 +796,8 @@
     "contract": "2028-06-30",
     "marketValue": 4500000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "130365",
@@ -774,7 +815,8 @@
     "contract": "2025-06-30",
     "marketValue": 1500000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "569598",
@@ -793,7 +835,8 @@
     "contract": "2028-06-30",
     "marketValue": 30000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "460939",
@@ -811,7 +854,8 @@
     "contract": "2030-06-30",
     "marketValue": 50000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "503991",
@@ -830,7 +874,8 @@
     "contract": "2028-06-30",
     "marketValue": 22000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "202886",
@@ -850,7 +895,8 @@
     "marketValue": 20000000,
     "status": "muscular problems - Return expected on Mar 15, 2025",
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "659516",
@@ -869,7 +915,8 @@
     "contract": "2029-06-30",
     "marketValue": 7000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "357164",
@@ -888,7 +935,8 @@
     "contract": "2028-06-30",
     "marketValue": 75000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "386455",
@@ -906,7 +954,8 @@
     "contract": "2025-06-30",
     "marketValue": 6000000,
     "clubId": "5",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "315779",
@@ -925,7 +974,8 @@
     "contract": "2027-06-30",
     "marketValue": 50000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "401922",
@@ -943,7 +993,8 @@
     "contract": "2028-06-30",
     "marketValue": 18000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "462250",
@@ -961,7 +1012,8 @@
     "contract": "2025-06-30",
     "marketValue": 30000000,
     "clubId": "5",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "552955",
@@ -980,7 +1032,8 @@
     "contract": "2029-06-30",
     "marketValue": 37000000,
     "clubId": "5",
-    "isActive": false
+    "isActive": false,
+    "updateStatus": 1
   },
   {
     "id": "331726",
@@ -999,7 +1052,8 @@
     "contract": "2025-06-30",
     "marketValue": 20000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   },
   {
     "id": "257462",
@@ -1018,6 +1072,7 @@
     "contract": "2025-06-30",
     "marketValue": 4000000,
     "clubId": "5",
-    "isActive": true
+    "isActive": true,
+    "updateStatus": 1
   }
 ]
