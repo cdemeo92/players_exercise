@@ -1,4 +1,4 @@
-name: Front-End CI
+name: Players Esercise CI/CD
 run-name: ${{ github.actor }} is running
 env:
   WORK_DIR: front-end
