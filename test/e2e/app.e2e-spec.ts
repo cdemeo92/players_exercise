@@ -39,10 +39,6 @@ describe('AppController (e2e)', () => {
     await putPlayersAction.execute('6');
   });
 
-  beforeEach(async () => {
-    await mongoClient.db('players_e2e').dropCollection('players');
-  });
-
   afterAll(async () => {
     await mongoClient.close();
     await app.close();
