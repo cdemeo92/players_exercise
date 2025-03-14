@@ -20,7 +20,7 @@ const config: Record<Stage, Config> = {
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
-    providerDomain: 'https://transfermarkt-api.fly.dev',
+    providerDomain: 'http://localhost:8000',
   },
   e2e: {
     port: 8080,
@@ -30,7 +30,8 @@ const config: Record<Stage, Config> = {
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
-    providerDomain: 'https://transfermarkt-api.fly.dev',
+    providerDomain:
+      (process.env.PROVIDER_DOMAIN as string) ?? 'http://localhost:8000',
   },
   prod: {
     port: 80,

@@ -94,6 +94,8 @@ export class PutPlayersAction {
           response.addToSkipped(player.id);
         }
       }
+    } else {
+      console.log('0 players to insert');
     }
   }
 
@@ -102,6 +104,7 @@ export class PutPlayersAction {
       player.id,
     );
     player.setIsActive(isActive);
+    console.log(`Saving player ${player.id}`);
     await this.playerRepository.putPlayers([player], true);
   }
 }
