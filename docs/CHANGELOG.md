@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/devclay92/players_exercise/compare/v1.6.1...v1.6.2) (2025-03-14)
+
+
+### Bug Fixes
+
+* fix semantic release command ([9752f0e](https://github.com/devclay92/players_exercise/commit/9752f0eca04f3ffc51c4518b6850581267e994db))
+
 ## [1.6.1](https://github.com/devclay92/players_exercise/compare/v1.6.0...v1.6.1) (2025-03-14)
 
 # [1.6.0](https://github.com/devclay92/players_exercise/compare/v1.5.0...v1.6.0) (2025-03-13)
