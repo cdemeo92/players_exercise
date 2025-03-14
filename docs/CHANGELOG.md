@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/devclay92/players_exercise/compare/v1.7.0...v1.8.0) (2025-03-14)
+
+
+### Features
+
+* implement player active status retrieval and enhance putPlayers logic ([0ba3da5](https://github.com/devclay92/players_exercise/commit/0ba3da5808a14c77a95258d27ac3fb38af18469c))
+
 # [1.7.0](https://github.com/devclay92/players_exercise/compare/v1.6.5...v1.7.0) (2025-03-14)
 
 
