@@ -202,5 +202,17 @@ describe('PutPlayerAction', () => {
         message: 'PUT PLAYERS ERROR: Error message',
       });
     });
+
+    it('should skip players whose status cannot be retrieved', async () => {
+      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
+      getPlayersMock.mockResolvedValueOnce({ players: playersStub });
+      getPlayerActiveStatusMock.mockRejectedValue(new Error('Error message'));
+      const result = await action.execute('5');
+
+      expect(result).toMatchObject({
+        success: true,
+        skipped: ['182906', '199976'],
+      });
+    });
   });
 });

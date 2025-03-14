@@ -11,6 +11,7 @@ export class PutPlayerResponse {
   private updatedPlayers: number = 0;
   private newPlayers: number = 0;
   private message?: string;
+  private skipped: string[] = [];
 
   public toObject(): Record<string, unknown> {
     return {
@@ -18,6 +19,7 @@ export class PutPlayerResponse {
       updatedPlayers: this.updatedPlayers,
       newPlayers: this.newPlayers,
       message: this.message,
+      skipped: this.skipped,
     };
   }
 
@@ -31,8 +33,8 @@ export class PutPlayerResponse {
     return this;
   }
 
-  public setMessage(message: string): PutPlayerResponse {
-    this.message = message;
+  public addToSkipped(id: string): PutPlayerResponse {
+    this.skipped.push(id);
     return this;
   }
 
@@ -84,8 +86,13 @@ export class PutPlayersAction {
   ): Promise<void> {
     if (playersToUpdate.players.length > 0) {
       for (const player of playersToUpdate.players) {
-        await this.updateIsActiveFor(player);
-        response.increaseUpdatedPlayers();
+        try {
+          await this.updateIsActiveFor(player);
+          response.increaseUpdatedPlayers();
+        } catch (error) {
+          console.log(`PutPlayersAction Error ${(error as Error).message}`);
+          response.addToSkipped(player.id);
+        }
       }
     }
   }

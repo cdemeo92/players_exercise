@@ -1,0 +1,272 @@
+{
+  "182906": {
+    "updatedAt": "2025-03-14T18:15:42.047858",
+    "id": "182906",
+    "url": "https://www.transfermarkt.com/mike-maignan/profil/spieler/182906",
+    "name": "Mike Maignan",
+    "description": "Mike Maignan, 29, from France ➤ AC Milan, since 2021 ➤ Goalkeeper ➤ Market value: €35.00m ➤ * Jul 3, 1995 in Cayenne, French Guiana",
+    "nameInHomeCountry": "Mike Peterson Maignan",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/182906-1681459155.jpg?lm=1",
+    "dateOfBirth": "1995-07-03",
+    "placeOfBirth": {
+      "city": "Cayenne",
+      "country": "French Guiana"
+    },
+    "age": 29,
+    "height": 191,
+    "citizenship": [
+      "France",
+      "French Guiana"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#16",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2021-07-01",
+      "contractExpires": "2026-06-30"
+    },
+    "marketValue": 35000000,
+    "agent": {
+      "name": "ESN",
+      "url": "/excellence-sport-nation/beraterfirma/berater/5024"
+    },
+    "outfitter": "Uhlsport",
+    "socialMedia": [
+      "http://twitter.com/mmseize",
+      "http://instagram.com/magicmikemaignan"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "199976": {
+    "updatedAt": "2025-03-14T18:07:59.288852",
+    "id": "199976",
+    "url": "https://www.transfermarkt.com/marco-sportiello/profil/spieler/199976",
+    "name": "Marco Sportiello",
+    "description": "Marco Sportiello, 32, from Italy ➤ AC Milan, since 2023 ➤ Goalkeeper ➤ Market value: €1.50m ➤ * May 10, 1992 in Desio, Italy",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/199976-1661351013.jpg?lm=1",
+    "dateOfBirth": "1992-05-10",
+    "placeOfBirth": {
+      "city": "Desio",
+      "country": "Italy"
+    },
+    "age": 32,
+    "height": 192,
+    "citizenship": [
+      "Italy"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#57",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2023-07-01",
+      "contractExpires": "2027-06-30"
+    },
+    "marketValue": 1500000,
+    "agent": {
+      "name": "GR Sports",
+      "url": "/gr-sports/beraterfirma/berater/3733"
+    },
+    "outfitter": "Nike",
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "939745": {
+    "updatedAt": "2025-03-14T18:16:37.811831",
+    "id": "939745",
+    "url": "https://www.transfermarkt.com/lorenzo-torriani/profil/spieler/939745",
+    "name": "Lorenzo Torriani",
+    "description": "Lorenzo Torriani, 20, from Italy ➤ AC Milan, since 2024 ➤ Goalkeeper ➤ Market value: €500k ➤ * Jan 31, 2005 in Vimodrone, Italy",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/939745-1730184012.jpg?lm=1",
+    "dateOfBirth": "2005-01-31",
+    "placeOfBirth": {
+      "city": "Vimodrone",
+      "country": "Italy"
+    },
+    "age": 20,
+    "height": 197,
+    "citizenship": [
+      "Italy"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#96",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2024-07-01",
+      "contractExpires": "2027-06-30"
+    },
+    "marketValue": 500000,
+    "agent": {
+      "name": "Un1que Football",
+      "url": "/un1que-football/beraterfirma/berater/4555"
+    },
+    "outfitter": "adidas",
+    "socialMedia": [
+      "http://www.instagram.com/_lorenzo.torriani_/"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "303254": {
+    "updatedAt": "2025-03-14T18:17:18.867352",
+    "id": "303254",
+    "url": "https://www.transfermarkt.com/fikayo-tomori/profil/spieler/303254",
+    "name": "Fikayo Tomori",
+    "description": "Fikayo Tomori, 27, from England ➤ AC Milan, since 2021 ➤ Centre-Back ➤ Market value: €22.00m ➤ * Dec 19, 1997 in Calgary, Alberta, Canada",
+    "nameInHomeCountry": "Oluwafikayomi Oluwadamilola Tomori",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/303254-1684856117.jpg?lm=1",
+    "dateOfBirth": "1997-12-19",
+    "placeOfBirth": {
+      "city": "Calgary, Alberta",
+      "country": "Canada"
+    },
+    "age": 27,
+    "height": 185,
+    "citizenship": [
+      "England",
+      "Canada"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Right-Back"
+      ]
+    },
+    "foot": "right",
+    "shirtNumber": "#23",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2021-07-01",
+      "contractExpires": "2027-06-30"
+    },
+    "marketValue": 22000000,
+    "agent": {
+      "name": "SPORT INVEST",
+      "url": "/sport-invest-international-a-s-/beraterfirma/berater/11"
+    },
+    "outfitter": "adidas",
+    "socialMedia": [
+      "http://twitter.com/fikayotomori_",
+      "http://www.instagram.com/fikayotomori/"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "257462": {
+    "updatedAt": "2025-03-14T18:18:01.329573",
+    "id": "257462",
+    "url": "https://www.transfermarkt.com/luka-jovic/profil/spieler/257462",
+    "name": "Luka Jović",
+    "description": "Luka Jović, 27, from Serbia ➤ AC Milan, since 2023 ➤ Centre-Forward ➤ Market value: €4.00m ➤ * Dec 23, 1997 in Loznica, Yugoslavia (Republic)",
+    "nameInHomeCountry": "Лука Јовић",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/257462-1657519856.jpg?lm=1",
+    "dateOfBirth": "1997-12-23",
+    "placeOfBirth": {
+      "city": "Loznica",
+      "country": "Yugoslavia (Republic)"
+    },
+    "age": 27,
+    "height": 182,
+    "citizenship": [
+      "Serbia",
+      "Bosnia-Herzegovina"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#9",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2023-09-01",
+      "contractExpires": "2025-06-30"
+    },
+    "marketValue": 4000000,
+    "agent": {
+      "name": "LIAN Sports Group",
+      "url": "/lian-sports-group/beraterfirma/berater/13"
+    },
+    "outfitter": "adidas",
+    "socialMedia": [
+      "http://www.instagram.com/lukajovic/"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "default": {
+    "updatedAt": "2025-03-14T18:19:23.005588",
+    "id": "331726",
+    "url": "https://www.transfermarkt.com/tammy-abraham/profil/spieler/331726",
+    "name": "Tammy Abraham",
+    "description": "Tammy Abraham, 27, from England ➤ AC Milan, since 2024 ➤ Centre-Forward ➤ Market value: €20.00m ➤ * Oct 2, 1997 in London, England",
+    "nameInHomeCountry": "Kevin Oghenetega Tamaraebi Bakumo-Abraham",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/331726-1725531680.jpg?lm=1",
+    "dateOfBirth": "1997-10-02",
+    "placeOfBirth": {
+      "city": "London",
+      "country": "England"
+    },
+    "age": 27,
+    "height": 194,
+    "citizenship": [
+      "England",
+      "Nigeria"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Forward",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#90",
+    "club": {
+      "id": "5",
+      "name": "AC Milan",
+      "joined": "2024-08-30",
+      "contractExpires": "2025-06-30"
+    },
+    "marketValue": 20000000,
+    "agent": {
+      "name": "ROOF",
+      "url": "/roof/beraterfirma/berater/2295"
+    },
+    "outfitter": "Nike",
+    "socialMedia": [
+      "http://twitter.com/tammyabraham",
+      "http://www.instagram.com/tammyabraham/"
+    ],
+    "trainerProfile": {},
+    "relatives": [
+      {
+        "id": "506199",
+        "url": "/timmy-abraham/profil/spieler/506199",
+        "name": "Timmy Abraham",
+        "profileType": "player"
+      }
+    ]
+  }
+}

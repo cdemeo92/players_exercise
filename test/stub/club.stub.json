@@ -1,0 +1,91 @@
+{
+  "updatedAt": "2025-03-14T18:07:16.121354",
+  "id": "5",
+  "players": [
+    {
+      "id": "182906",
+      "name": "Mike Maignan",
+      "position": "Goalkeeper",
+      "dateOfBirth": "1995-07-03",
+      "age": 29,
+      "nationality": [
+        "France",
+        "French Guiana"
+      ],
+      "height": 191,
+      "foot": "right",
+      "joinedOn": "2021-07-01",
+      "signedFrom": "LOSC Lille",
+      "contract": "2026-06-30",
+      "marketValue": 35000000,
+      "status": "Team captain"
+    },
+    {
+      "id": "199976",
+      "name": "Marco Sportiello",
+      "position": "Goalkeeper",
+      "dateOfBirth": "1992-05-10",
+      "age": 32,
+      "nationality": [
+        "Italy"
+      ],
+      "height": 192,
+      "foot": "right",
+      "joinedOn": "2023-07-01",
+      "signedFrom": "Atalanta BC",
+      "contract": "2027-06-30",
+      "marketValue": 1500000
+    },
+    {
+      "id": "939745",
+      "name": "Lorenzo Torriani",
+      "position": "Goalkeeper",
+      "dateOfBirth": "2005-01-31",
+      "age": 20,
+      "nationality": [
+        "Italy"
+      ],
+      "height": 197,
+      "foot": "right",
+      "joinedOn": "2024-07-01",
+      "signedFrom": "AC Milan Primavera",
+      "contract": "2027-06-30",
+      "marketValue": 500000,
+      "status": "In training camp with first team - until Apr 28, 2025 - Serie C - Girone B - 14 matchdays"
+    },
+    {
+      "id": "303254",
+      "name": "Fikayo Tomori",
+      "position": "Centre-Back",
+      "dateOfBirth": "1997-12-19",
+      "age": 27,
+      "nationality": [
+        "England",
+        "Canada"
+      ],
+      "height": 185,
+      "foot": "right",
+      "joinedOn": "2021-07-01",
+      "signedFrom": "Chelsea FC",
+      "contract": "2027-06-30",
+      "marketValue": 22000000
+    },
+    {
+      "id": "257462",
+      "name": "Luka Jović",
+      "position": "Centre-Forward",
+      "dateOfBirth": "1997-12-23",
+      "age": 27,
+      "nationality": [
+        "Serbia",
+        "Bosnia-Herzegovina"
+      ],
+      "height": 182,
+      "foot": "right",
+      "joinedOn": "2023-09-01",
+      "signedFrom": "ACF Fiorentina",
+      "contract": "2025-06-30",
+      "marketValue": 4000000
+    }
+  ]
+}
