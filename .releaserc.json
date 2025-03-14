@@ -42,7 +42,7 @@
       [
         "@semantic-release/exec", 
         {
-          "publishCmd": "docker build -t ghcr.io/${{ github.repository_owner }}/players:${nextRelease.version} -t ghcr.io/${{ github.repository_owner }}/players:latest . && docker push ghcr.io/${{ github.repository_owner }}/players --all-tags"
+          "publishCmd": "docker build -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players:${nextRelease.version} -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players:latest . && docker push ghcr.io/$GITHUB_REPOSITORY_OWNER/players --all-tags"
         }
       ]
   ]
