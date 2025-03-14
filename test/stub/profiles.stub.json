@@ -217,6 +217,306 @@
     "trainerProfile": {},
     "relatives": []
   },
+  "109855":{
+    "updatedAt": "2025-03-14T19:18:05.840910",
+    "id": "109855",
+    "url": "https://www.transfermarkt.com/tim-paterok/profil/spieler/109855",
+    "name": "Tim Paterok",
+    "description": "Tim Paterok, 32, from Germany ➤ 1.FC Saarbrücken, since 2022 ➤ Goalkeeper ➤ Market value: €100k ➤ * Aug 5, 1992 in Paderborn, Germany",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/109855-1657889553.jpg?lm=1",
+    "dateOfBirth": "1992-08-05",
+    "placeOfBirth": {
+      "city": "Paderborn",
+      "country": "Germany"
+    },
+    "age": 32,
+    "height": 192,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Goalkeeper",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#1",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2022-07-01",
+      "contractExpires": "2025-06-30"
+    },
+    "marketValue": 100000,
+    "agent": {
+      "name": "Funke ...",
+      "url": "/funke-spielerberatung/beraterfirma/berater/3770"
+    },
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "335998":{
+    "updatedAt": "2025-03-14T19:18:35.154497",
+    "id": "335998",
+    "url": "https://www.transfermarkt.com/dominik-becker/profil/spieler/335998",
+    "name": "Dominik Becker",
+    "description": "Dominik Becker, 25, from Germany ➤ 1.FC Saarbrücken, since 2023 ➤ Centre-Back ➤ Market value: €250k ➤ * Jan 9, 2000 in Koblenz, Germany",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/335998-1657889643.jpg?lm=1",
+    "dateOfBirth": "2000-01-09",
+    "placeOfBirth": {
+      "city": "Koblenz",
+      "country": "Germany"
+    },
+    "age": 25,
+    "height": 188,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#17",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2023-07-01",
+      "contractExpires": "2025-06-30"
+    },
+    "marketValue": 250000,
+    "agent": {
+      "name": "Dirk Hebel",
+      "url": "/dirk-hebel/beraterfirma/berater/8547"
+    },
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "85960":{
+    "updatedAt": "2025-03-14T19:18:57.607892",
+    "id": "85960",
+    "url": "https://www.transfermarkt.com/manuel-zeitz/profil/spieler/85960",
+    "name": "Manuel Zeitz",
+    "description": "Manuel Zeitz, 34, from Germany ➤ 1.FC Saarbrücken, since 2016 ➤ Centre-Back ➤ Market value: €150k ➤ * Aug 1, 1990 in Völklingen, Germany",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/85960-1657890299.jpg?lm=1",
+    "dateOfBirth": "1990-08-01",
+    "placeOfBirth": {
+      "city": "Völklingen",
+      "country": "Germany"
+    },
+    "age": 34,
+    "height": 181,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Back",
+      "other": [
+        "Defensive Midfield",
+        "Central Midfield"
+      ]
+    },
+    "foot": "right",
+    "shirtNumber": "#8",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2016-07-01",
+      "contractExpires": "2026-06-30"
+    },
+    "marketValue": 150000,
+    "agent": {
+      "name": "Soccer and more",
+      "url": "/soccer-and-more-ltd-/beraterfirma/berater/496"
+    },
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "638631":{
+    "updatedAt": "2025-03-14T19:19:16.665717",
+    "id": "638631",
+    "url": "https://www.transfermarkt.com/elijah-krahn/profil/spieler/638631",
+    "name": "Elijah Krahn",
+    "description": "Elijah Krahn, 21, from Germany ➤ 1.FC Saarbrücken, since 2024 ➤ Defensive Midfield ➤ Market value: €350k ➤ * Aug 24, 2003 in Hamburg, Germany",
+    "nameInHomeCountry": "Elijah Akwasi Krahn",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/638631-1663257141.jpg?lm=1",
+    "dateOfBirth": "2003-08-24",
+    "placeOfBirth": {
+      "city": "Hamburg",
+      "country": "Germany"
+    },
+    "age": 21,
+    "height": 188,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Defensive Midfield",
+      "other": [
+        "Central Midfield",
+        "Centre-Back"
+      ]
+    },
+    "foot": "right",
+    "shirtNumber": "#5",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2024-07-01",
+      "contractExpires": "2026-06-30"
+    },
+    "marketValue": 350000,
+    "agent": {
+      "name": "GKM 360",
+      "url": "/george-kelbel-management-360/beraterfirma/berater/10333"
+    },
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "588747":{
+    "updatedAt": "2025-03-14T19:19:31.513528",
+    "id": "588747",
+    "url": "https://www.transfermarkt.com/tim-civeja/profil/spieler/588747",
+    "name": "Tim Civeja",
+    "description": "Tim Civeja, 23, from Albania ➤ 1.FC Saarbrücken, since 2023 ➤ Central Midfield ➤ Market value: €300k ➤ * Jan 4, 2002 in Dachau, Germany",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/588747-1658133277.jpg?lm=1",
+    "dateOfBirth": "2002-01-04",
+    "placeOfBirth": {
+      "city": "Dachau",
+      "country": "Germany"
+    },
+    "age": 23,
+    "height": 180,
+    "citizenship": [
+      "Albania",
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Central Midfield",
+      "other": [
+        "Defensive Midfield",
+        "Attacking Midfield"
+      ]
+    },
+    "foot": "both",
+    "shirtNumber": "#23",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2023-07-04",
+      "contractExpires": "2026-06-30"
+    },
+    "marketValue": 300000,
+    "agent": {
+      "name": "11WINS",
+      "url": "/11wins-gmbh/beraterfirma/berater/2773"
+    },
+    "outfitter": "Nike",
+    "socialMedia": [
+      "http://instagram.com/tim_civ/"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "187496":{
+    "updatedAt": "2025-03-14T19:19:46.510289",
+    "id": "187496",
+    "url": "https://www.transfermarkt.com/maurice-multhaup/profil/spieler/187496",
+    "name": "Maurice Multhaup",
+    "description": "Maurice Multhaup, 28, from Germany ➤ 1.FC Saarbrücken, since 2024 ➤ Right Winger ➤ Market value: €300k ➤ * Dec 15, 1996 in Bottrop, Germany",
+    "nameInHomeCountry": "Maurice Michael Multhaup",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/187496-1657638725.jpg?lm=1",
+    "dateOfBirth": "1996-12-15",
+    "placeOfBirth": {
+      "city": "Bottrop",
+      "country": "Germany"
+    },
+    "age": 28,
+    "height": 173,
+    "citizenship": [
+      "Germany"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Right Winger",
+      "other": [
+        "Left Winger",
+        "Right Midfield"
+      ]
+    },
+    "foot": "right",
+    "shirtNumber": "#11",
+    "club": {
+      "id": "1",
+      "name": "Saarbrücken",
+      "joined": "2024-07-01",
+      "contractExpires": "2026-06-30"
+    },
+    "marketValue": 300000,
+    "agent": {
+      "name": "KL Sportsbase",
+      "url": "/kl-sportsbase/beraterfirma/berater/1875"
+    },
+    "socialMedia": [
+      "http://www.instagram.com/multi_31/"
+    ],
+    "trainerProfile": {},
+    "relatives": []
+  },
+  "337516":{
+    "updatedAt": "2025-03-14T19:30:32.055257",
+    "id": "337516",
+    "url": "https://www.transfermarkt.com/fatih-kurucuk/profil/spieler/337516",
+    "name": "Fatih Kurucuk",
+    "description": "Fatih Kurucuk, 27, from Türkiye ➤ Adanaspor, since 2023 ➤ Centre-Back ➤ Market value: €300k ➤ * Jan 21, 1998 in Izmir, Türkiye",
+    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/337516-1729265666.jpg?lm=1",
+    "dateOfBirth": "1998-01-21",
+    "placeOfBirth": {
+      "city": "Izmir",
+      "country": "Türkiye"
+    },
+    "age": 27,
+    "height": 192,
+    "citizenship": [
+      "Türkiye"
+    ],
+    "isRetired": false,
+    "position": {
+      "main": "Centre-Back",
+      "other": []
+    },
+    "foot": "right",
+    "shirtNumber": "#22",
+    "club": {
+      "id": "6",
+      "name": "Adanaspor",
+      "joined": "2023-08-08",
+      "contractExpires": "2025-06-30"
+    },
+    "marketValue": 300000,
+    "agent": {
+      "name": "EMG Mundial",
+      "url": "/emg-mundial-sports-media-gmbh/beraterfirma/berater/2793"
+    },
+    "socialMedia": [],
+    "trainerProfile": {},
+    "relatives": [
+      {
+        "id": "949048",
+        "url": "/salih-kurucuk/profil/spieler/949048",
+        "name": "Salih Kurucuk",
+        "profileType": "player"
+      }
+    ]
+  },
   "default": {
     "updatedAt": "2025-03-14T18:19:23.005588",
     "id": "331726",

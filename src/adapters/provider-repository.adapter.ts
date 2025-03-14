@@ -27,22 +27,21 @@ export class ProviderRepositoryAdapter implements ProviderRepositoryPort {
     console.log(
       `PUT PLAYERS JOB: get player ${playerId} retiring status from ${this.domain}`,
     );
-    const result = await axios.get<{ isRetired: boolean }>(
+    const response = await axios.get<{ isRetired: boolean }>(
       `${this.domain}/players/${playerId}/profile`,
     );
 
-    if (!result.data || result.data.isRetired === undefined) {
+    if (!response.data || response.data.isRetired === undefined) {
       throw new Error(
         'ProviderRepositoryAdapter.getPlayerActiveStatus ERROR: unable to fatch retiring status',
       );
     }
 
     console.log(
-      `PUT PLAYERS JOB: player ${playerId} ` + result.data?.isRetired
-        ? 'retired'
-        : 'active',
+      `PUT PLAYERS JOB: player ${playerId}`,
+      response.data?.isRetired ? 'retired' : 'active',
     );
 
-    return !result.data.isRetired;
+    return !response.data.isRetired;
   }
 }
