@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/devclay92/players_exercise/compare/v1.6.5...v1.7.0) (2025-03-14)
+
+
+### Features
+
+* get only updated player and insert only new players ([b777b35](https://github.com/devclay92/players_exercise/commit/b777b354824ad7172b755a419d3e31b67e36f0d4))
+
 ## [1.6.5](https://github.com/devclay92/players_exercise/compare/v1.6.4...v1.6.5) (2025-03-14)
 
 ## [1.6.4](https://github.com/devclay92/players_exercise/compare/v1.6.3...v1.6.4) (2025-03-14)
