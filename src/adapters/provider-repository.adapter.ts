@@ -22,4 +22,8 @@ export class ProviderRepositoryAdapter implements ProviderRepositoryPort {
       ) || []
     );
   }
+
+  public getPlayerActiveStatus(playerId: string): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
 }

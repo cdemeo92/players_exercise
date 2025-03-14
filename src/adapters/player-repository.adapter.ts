@@ -53,13 +53,18 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     };
   }
 
-  public async putPlayers(players: Array<Player>): Promise<PurPlayersResult> {
+  public async putPlayers(
+    players: Array<Player>,
+    overwrite?: boolean,
+  ): Promise<PurPlayersResult> {
     const result = await this.playerCollection.bulkWrite(
       players.map((player) => ({
         updateOne: {
           filter: {
             id: player.id,
-            updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+            ...(!overwrite && {
+              updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+            }),
           },
           update: { $set: player.toObject() },
           upsert: true,
@@ -68,8 +73,8 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     );
 
     return {
-      ...(result.upsertedCount && { insertedPlayers: result.upsertedCount }),
-      ...(result.modifiedCount && { modifiedPlayers: result.modifiedCount }),
+      insertedPlayers: result.upsertedCount,
+      modifiedPlayers: result.modifiedCount,
     };
   }
 

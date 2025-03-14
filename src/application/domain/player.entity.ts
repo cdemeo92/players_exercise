@@ -44,6 +44,10 @@ export class Player {
       : UPDATE_STATUS.TO_UPDATE;
   }
 
+  public getUpdateStatus(): UPDATE_STATUS {
+    return this.updateStatus;
+  }
+
   public setIsActive(isActive: boolean): void {
     this.isActive = isActive;
     this.updateStatus = UPDATE_STATUS.UPDATED;

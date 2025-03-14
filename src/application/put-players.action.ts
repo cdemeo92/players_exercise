@@ -1,17 +1,46 @@
 import { Filter } from './domain/filter.value-object';
-import { UPDATE_STATUS } from './domain/player.entity';
+import { Player, UPDATE_STATUS } from './domain/player.entity';
 import {
+  GetPlayersResult,
   PlayerRepositoryPort,
-  PurPlayersResult,
 } from './ports/player-repository.port';
 import { ProviderRepositoryPort } from './ports/provider-repository.port';
 
 export class PutPlayerResponse {
-  public constructor(
-    public readonly success: boolean,
-    public readonly result?: PurPlayersResult,
-    public readonly message?: string,
-  ) {}
+  private success: boolean = true;
+  private updatedPlayers: number = 0;
+  private newPlayers: number = 0;
+  private message?: string;
+
+  public toObject(): Record<string, unknown> {
+    return {
+      success: this.success,
+      updatedPlayers: this.updatedPlayers,
+      newPlayers: this.newPlayers,
+      message: this.message,
+    };
+  }
+
+  public increaseUpdatedPlayers(): PutPlayerResponse {
+    this.updatedPlayers++;
+    return this;
+  }
+
+  public setNewPlayers(newPlayers: number): PutPlayerResponse {
+    this.newPlayers = newPlayers;
+    return this;
+  }
+
+  public setMessage(message: string): PutPlayerResponse {
+    this.message = message;
+    return this;
+  }
+
+  public fail(message: string): PutPlayerResponse {
+    this.success = false;
+    this.message = message;
+    return this;
+  }
 }
 
 export class PutPlayersAction {
@@ -20,28 +49,52 @@ export class PutPlayersAction {
     private readonly playerRepository: PlayerRepositoryPort,
   ) {}
 
-  public async execute(clubId: string): Promise<PutPlayerResponse> {
+  public async execute(clubId: string): Promise<Record<string, unknown>> {
+    const response = new PutPlayerResponse();
     try {
       const players = await this.providerRepository.getPlayersByClubId(clubId);
-      if (players.length > 0) {
-        const result = await this.playerRepository.putPlayers(players);
-        const playersToUpdate = await this.playerRepository.getPlayers(
-          new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
-        );
-        return new PutPlayerResponse(true, result);
-      } else {
-        return new PutPlayerResponse(
-          true,
-          undefined,
-          `Club with id: ${clubId} not found`,
-        );
-      }
-    } catch (error) {
-      return new PutPlayerResponse(
-        false,
-        undefined,
-        `PUT PLAYERS ERROR: ${(error as Error).message}`,
+      await this.putPlayersForUpdate(players, response);
+      const playersToUpdate = await this.playerRepository.getPlayers(
+        new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
       );
+
+      await this.forEachPlayerUpdateIsActive(playersToUpdate, response);
+    } catch (error) {
+      response.fail(`PUT PLAYERS ERROR: ${(error as Error).message}`);
     }
+
+    return response.toObject();
+  }
+
+  private async putPlayersForUpdate(
+    players: Player[],
+    response: PutPlayerResponse,
+  ): Promise<void> {
+    if (players.length > 0) {
+      const putPlayersResult = await this.playerRepository.putPlayers(players);
+      if (putPlayersResult.insertedPlayers) {
+        response.setNewPlayers(putPlayersResult.insertedPlayers);
+      }
+    }
+  }
+
+  private async forEachPlayerUpdateIsActive(
+    playersToUpdate: GetPlayersResult,
+    response: PutPlayerResponse,
+  ): Promise<void> {
+    if (playersToUpdate.players.length > 0) {
+      for (const player of playersToUpdate.players) {
+        await this.updateIsActiveFor(player);
+        response.increaseUpdatedPlayers();
+      }
+    }
+  }
+
+  private async updateIsActiveFor(player: Player): Promise<void> {
+    const isActive = await this.providerRepository.getPlayerActiveStatus(
+      player.id,
+    );
+    player.setIsActive(isActive);
+    await this.playerRepository.putPlayers([player], true);
   }
 }

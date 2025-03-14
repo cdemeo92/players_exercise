@@ -287,15 +287,44 @@ describe('PlayerRepositoryAdapter', () => {
         isActive: true,
       }),
     ];
-    it('should insert the players in the db without overwrite the ones with updateStatus TO_UPDATE', async () => {
-      await repository.putPlayers(playersStub);
+    it.each([undefined, false])(
+      'should insert the players in the db without overwrite the ones with updateStatus TO_UPDATE when the overwrite parameter is %s',
+      async (overwrite) => {
+        await repository.putPlayers(playersStub, overwrite);
+
+        expect(spyBulkWrite).toHaveBeenCalledWith([
+          {
+            updateOne: {
+              filter: {
+                id: playersStub[0].id,
+                updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+              },
+              update: { $set: playersStub[0] },
+              upsert: true,
+            },
+          },
+          {
+            updateOne: {
+              filter: {
+                id: playersStub[1].id,
+                updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+              },
+              update: { $set: playersStub[1] },
+              upsert: true,
+            },
+          },
+        ]);
+      },
+    );
+
+    it('should insert the players in the db without check the updateStatus when the overwrite parameter is true', async () => {
+      await repository.putPlayers(playersStub, true);
 
       expect(spyBulkWrite).toHaveBeenCalledWith([
         {
           updateOne: {
             filter: {
               id: playersStub[0].id,
-              updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
             },
             update: { $set: playersStub[0] },
             upsert: true,
@@ -305,7 +334,6 @@ describe('PlayerRepositoryAdapter', () => {
           updateOne: {
             filter: {
               id: playersStub[1].id,
-              updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
             },
             update: { $set: playersStub[1] },
             upsert: true,

@@ -20,5 +20,8 @@ export interface PlayerRepositoryPort {
     pagination?: Pagination,
   ): Promise<GetPlayersResult>;
 
-  putPlayers(players: Array<Player>): Promise<PurPlayersResult>;
+  putPlayers(
+    players: Array<Player>,
+    overwrite?: boolean,
+  ): Promise<PurPlayersResult>;
 }
