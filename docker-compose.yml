@@ -20,9 +20,9 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
+  players:
     build: .
-    container_name: player_exercise
+    container_name: players
     restart: always
     depends_on:
       - mongodb
