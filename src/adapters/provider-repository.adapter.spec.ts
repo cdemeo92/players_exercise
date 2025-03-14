@@ -4,6 +4,8 @@ import { ProviderRepositoryAdapter } from './provider-repository.adapter';
 
 jest.mock('axios');
 
+jest.spyOn(console, 'log').mockImplementation(() => {});
+
 describe('ProviderRepositoryAdapter', () => {
   const providerRepository = new ProviderRepositoryAdapter(
     'https://transfermarkt-api.fly.dev',

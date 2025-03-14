@@ -1,4 +1,5 @@
-import { BirthYearRange } from './filter.value-object';
+import { BirthYearRange, Filter } from './filter.value-object';
+import { UPDATE_STATUS } from './player.entity';
 
 describe('BirthYearRange', () => {
   describe('fromString', () => {
@@ -24,6 +25,18 @@ describe('BirthYearRange', () => {
 
     it('should not set the start and end year if the input is not valid', () => {
       expect(BirthYearRange.fromString('not-valid')).toEqual({});
+    });
+  });
+});
+
+describe('Filter', () => {
+  it('should create a filter with updateStatus UPDATED by default', () => {
+    expect(new Filter({})).toEqual({ updateStatus: UPDATE_STATUS.UPDATED });
+  });
+
+  it('should create a filter with updateStatus TO_UPDATE when provided', () => {
+    expect(new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE })).toEqual({
+      updateStatus: UPDATE_STATUS.TO_UPDATE,
     });
   });
 });

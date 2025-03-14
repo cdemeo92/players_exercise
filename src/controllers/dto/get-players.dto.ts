@@ -95,14 +95,14 @@ export class GetPlayersParams {
   }
 
   public toFilter(): Filter {
-    return new Filter(
-      this.position,
-      this.birthYearRange
+    return new Filter({
+      position: this.position,
+      isActive: this.isActive,
+      clubId: this.clubId,
+      birthYearRange: this.birthYearRange
         ? BirthYearRange.fromString(this.birthYearRange)
         : undefined,
-      this.isActive,
-      this.clubId,
-    );
+    });
   }
 
   public toPagination(): Pagination {
@@ -173,7 +173,9 @@ export class Player {
   clubId: string;
 
   public constructor(player: Partial<Player>) {
-    Object.assign(this, player);
+    for (const key in player) {
+      this[key] = player[key];
+    }
   }
 }
 
@@ -206,6 +208,8 @@ export class GetPlayersResponse {
     this.page = playerResult.page;
     this.pageSize = playerResult.pageSize;
     this.totalCount = playerResult.totalCount;
-    this.players = playerResult.players.map((player) => new Player(player));
+    this.players = playerResult.players.map(
+      (player) => new Player(player.toObject()),
+    );
   }
 }

@@ -2,7 +2,7 @@ import { mock } from 'jest-mock-extended';
 import { AggregationCursor, Collection, Db, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
 import { Pagination } from '../application/domain/pagination.value-object';
-import { Player } from '../application/domain/player.entity';
+import { Player, UPDATE_STATUS } from '../application/domain/player.entity';
 import { PlayerRepositoryAdapter } from './player-repository.adapter';
 
 jest.mock('mongodb', () => ({
@@ -53,6 +53,15 @@ describe('PlayerRepositoryAdapter', () => {
       });
     });
 
+    it('should always retrieve players with updateStatus UPDATED', async () => {
+      await repository.getPlayers();
+      expect(spyAggregate).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          { $match: { updateStatus: UPDATE_STATUS.UPDATED } },
+        ]),
+      );
+    });
+
     it('should return an array of players when the DB is not empty', async () => {
       const playersStub = Array<Player>(10).fill(
         new Player({
@@ -94,6 +103,7 @@ describe('PlayerRepositoryAdapter', () => {
           isActive: undefined,
           clubId: undefined,
           birthYearRange: undefined,
+          updateStatus: UPDATE_STATUS.UPDATED,
         },
       ],
       [
@@ -103,6 +113,7 @@ describe('PlayerRepositoryAdapter', () => {
           isActive: true,
           clubId: undefined,
           birthYearRange: undefined,
+          updateStatus: UPDATE_STATUS.UPDATED,
         },
       ],
       [
@@ -112,6 +123,7 @@ describe('PlayerRepositoryAdapter', () => {
           isActive: undefined,
           clubId: '5',
           birthYearRange: undefined,
+          updateStatus: UPDATE_STATUS.UPDATED,
         },
       ],
       [
@@ -121,17 +133,23 @@ describe('PlayerRepositoryAdapter', () => {
           isActive: true,
           clubId: '5',
           birthYearRange: undefined,
+          updateStatus: UPDATE_STATUS.UPDATED,
+        },
+      ],
+      [
+        'updateStatus UPDATED',
+        {
+          updateStatus: UPDATE_STATUS.UPDATED,
+        },
+      ],
+      [
+        'updateStatus TO_UPDATE',
+        {
+          updateStatus: UPDATE_STATUS.TO_UPDATE,
         },
       ],
     ])('should query the db filtering by %s', async (_, filter) => {
-      await repository.getPlayers(
-        new Filter(
-          filter.position,
-          filter.birthYearRange,
-          filter.isActive,
-          filter.clubId,
-        ),
-      );
+      await repository.getPlayers(new Filter(filter));
       expect(spyAggregate).toHaveBeenCalledWith(
         expect.arrayContaining([{ $match: filter }]),
       );
@@ -139,12 +157,13 @@ describe('PlayerRepositoryAdapter', () => {
 
     it('should query the db filtering by birth year range', async () => {
       await repository.getPlayers(
-        new Filter(undefined, { start: 1992, end: 2000 }),
+        new Filter({ birthYearRange: { start: 1992, end: 2000 } }),
       );
       expect(spyAggregate).toHaveBeenCalledWith(
         expect.arrayContaining([
           {
             $match: {
+              updateStatus: UPDATE_STATUS.UPDATED,
               dateOfBirth: {
                 $gte: '1992-01-01',
                 $lte: '2000-12-31',
@@ -157,12 +176,13 @@ describe('PlayerRepositoryAdapter', () => {
 
     it('should not query the db filtering by birth year range when not valid', async () => {
       await repository.getPlayers(
-        new Filter(undefined, { start: undefined, end: undefined }),
+        new Filter({ birthYearRange: { start: undefined, end: undefined } }),
       );
       expect(spyAggregate).toHaveBeenCalledWith(
         expect.not.arrayContaining([
           {
             $match: {
+              updateStatus: UPDATE_STATUS.UPDATED,
               dateOfBirth: {
                 $gte: expect.any(String),
                 $lte: expect.any(String),
@@ -267,20 +287,26 @@ describe('PlayerRepositoryAdapter', () => {
         isActive: true,
       }),
     ];
-    it('should insert the players in the db', async () => {
+    it('should insert the players in the db without overwrite the ones with updateStatus TO_UPDATE', async () => {
       await repository.putPlayers(playersStub);
 
       expect(spyBulkWrite).toHaveBeenCalledWith([
         {
           updateOne: {
-            filter: { id: playersStub[0].id },
+            filter: {
+              id: playersStub[0].id,
+              updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+            },
             update: { $set: playersStub[0] },
             upsert: true,
           },
         },
         {
           updateOne: {
-            filter: { id: playersStub[1].id },
+            filter: {
+              id: playersStub[1].id,
+              updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+            },
             update: { $set: playersStub[1] },
             upsert: true,
           },

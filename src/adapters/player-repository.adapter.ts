@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Collection, MongoClient } from 'mongodb';
 import { Filter } from '../application/domain/filter.value-object';
 import { Pagination } from '../application/domain/pagination.value-object';
-import { Player } from '../application/domain/player.entity';
+import { Player, UPDATE_STATUS } from '../application/domain/player.entity';
 import {
   GetPlayersResult,
   PlayerRepositoryPort,
@@ -57,8 +57,11 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
     const result = await this.playerCollection.bulkWrite(
       players.map((player) => ({
         updateOne: {
-          filter: { id: player.id },
-          update: { $set: player },
+          filter: {
+            id: player.id,
+            updateStatus: { $ne: UPDATE_STATUS.TO_UPDATE },
+          },
+          update: { $set: player.toObject() },
           upsert: true,
         },
       })),
@@ -72,6 +75,7 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
 
   private filterToMatch(filter?: Filter): Record<string, unknown> {
     return {
+      updateStatus: filter?.updateStatus ?? UPDATE_STATUS.UPDATED,
       ...(filter?.position !== undefined && { position: filter.position }),
       ...(filter?.birthYearRange !== undefined &&
         (filter?.birthYearRange?.start != undefined ||

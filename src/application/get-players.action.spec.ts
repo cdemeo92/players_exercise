@@ -1,6 +1,6 @@
 import { Filter } from './domain/filter.value-object';
 import { Pagination } from './domain/pagination.value-object';
-import { Player } from './domain/player.entity';
+import { Player, UPDATE_STATUS } from './domain/player.entity';
 import { GetPlayersAction } from './get-players.action';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 
@@ -113,17 +113,16 @@ describe('GetPlayersAction', () => {
           birthYearRange: { start: 1992, end: 2000 },
         },
       ],
-    ])('should query the db filtering by %s', async (_, filter) => {
-      await action.execute(
-        new Filter(
-          filter.position,
-          filter.birthYearRange,
-          filter.isActive,
-          filter.clubId,
-        ),
-      );
-      expect(getPlayersMock).toHaveBeenCalledWith(filter, undefined);
-    });
+    ])(
+      'should query the db filtering by %s and updateStatus UPDATED',
+      async (_, filter) => {
+        await action.execute(new Filter(filter));
+        expect(getPlayersMock).toHaveBeenCalledWith(
+          { ...filter, updateStatus: UPDATE_STATUS.UPDATED },
+          undefined,
+        );
+      },
+    );
 
     it.each([
       ['page', { page: 2 }],

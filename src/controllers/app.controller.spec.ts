@@ -92,14 +92,14 @@ describe('AppController', () => {
       async (queryParams) => {
         await appController.getPlayers(queryParams);
         expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
-          new Filter(
-            queryParams.position,
-            queryParams.birthYearRange
+          new Filter({
+            position: queryParams.position,
+            birthYearRange: queryParams.birthYearRange
               ? BirthYearRange.fromString(queryParams.birthYearRange)
               : undefined,
-            queryParams.isActive,
-            queryParams.clubId,
-          ),
+            isActive: queryParams.isActive,
+            clubId: queryParams.clubId,
+          }),
           expect.anything(),
         );
       },
@@ -132,14 +132,14 @@ describe('AppController', () => {
 
       await appController.getPlayers(queryParams);
       expect(getPlayersActionExecuteMock).toHaveBeenCalledWith(
-        new Filter(
-          queryParams.position,
-          queryParams.birthYearRange
+        new Filter({
+          position: queryParams.position,
+          birthYearRange: queryParams.birthYearRange
             ? BirthYearRange.fromString(queryParams.birthYearRange)
             : undefined,
-          queryParams.isActive,
-          queryParams.clubId,
-        ),
+          isActive: queryParams.isActive,
+          clubId: queryParams.clubId,
+        }),
         { page: queryParams.page, pageSize: queryParams.pageSize },
       );
     });
