@@ -118,7 +118,7 @@ jobs:
           path: |
             .npm
             node_modules
-      - name: GitHub Container Registry Login 
+      - name: GitHub Container Registry Login
         run: echo "${{ secrets.CONTAINERS_REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Semantic release
         env:
@@ -156,6 +156,12 @@ jobs:
           path: |
             .npm
             node_modules
+      - name: Start transfermarkt-api
+        run: |
+          git clone https://github.com/felipeall/transfermarkt-api.git
+          cd transfermarkt-api
+          docker build -t transfermarkt-api .
+          docker run -d -p 8000:8000 transfermarkt-api
       - name: Run e2e tests
         run: npm run test:e2e:ci
 

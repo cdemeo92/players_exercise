@@ -3,15 +3,19 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MongoClient } from 'mongodb';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
+import { PlayerRepositoryAdapter } from '../../src/adapters/player-repository.adapter';
+import { ProviderRepositoryAdapter } from '../../src/adapters/provider-repository.adapter';
 import { appBuilder, AppModule } from '../../src/app.module';
+import { PutPlayersAction } from '../../src/application/put-players.action';
+import config from '../../src/configuration';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
-import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(30000);
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
   let mongoClient: MongoClient;
+  let putPlayersAction: PutPlayersAction;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -25,14 +29,19 @@ describe('AppController (e2e)', () => {
     mongoClient = app.get<MongoClient>('MONGO_CLIENT');
 
     await app.init();
+
+    putPlayersAction = new PutPlayersAction(
+      new ProviderRepositoryAdapter(config().providerDomain),
+      new PlayerRepositoryAdapter(mongoClient, 'players_e2e', 'players'),
+    );
   });
 
   beforeEach(async () => {
     await mongoClient.db('players_e2e').dropCollection('players');
-    await mongoClient
-      .db('players_e2e')
-      .collection('players')
-      .insertMany(playersStub);
+
+    await putPlayersAction.execute('1');
+    await putPlayersAction.execute('5');
+    await putPlayersAction.execute('6');
   });
 
   afterAll(async () => {
