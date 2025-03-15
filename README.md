@@ -1,5 +1,8 @@
 # Players Exercise
 
+[![semantic-release: 📦🚀](https://img.shields.io/badge/semantic--release-📦🚀-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
+
 ## Description
 
 This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job that allows retrieving all players of a specific club through [transfermarkt-api](https://github.com/felipeall/transfermarkt-api).
