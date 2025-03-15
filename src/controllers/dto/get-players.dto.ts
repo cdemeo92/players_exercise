@@ -110,7 +110,7 @@ export class GetPlayersParams {
   }
 }
 
-export class Player {
+export class PlayerDto {
   @ApiProperty({ description: 'The player id', type: 'string' })
   id: string;
 
@@ -172,7 +172,7 @@ export class Player {
   })
   clubId: string;
 
-  public constructor(player: Partial<Player>) {
+  public constructor(player: Partial<PlayerDto>) {
     for (const key in player) {
       this[key] = player[key];
     }
@@ -182,9 +182,9 @@ export class Player {
 export class GetPlayersResponse {
   @ApiProperty({
     description: 'The list of players',
-    type: [Player],
+    type: [PlayerDto],
   })
-  players: Player[];
+  players: PlayerDto[];
 
   @ApiProperty({
     description: 'The current page number',
@@ -209,7 +209,7 @@ export class GetPlayersResponse {
     this.pageSize = playerResult.pageSize;
     this.totalCount = playerResult.totalCount;
     this.players = playerResult.players.map(
-      (player) => new Player(player.toObject()),
+      (player) => new PlayerDto(player.toObject()),
     );
   }
 }
