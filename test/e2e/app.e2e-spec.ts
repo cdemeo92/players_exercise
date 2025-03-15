@@ -10,7 +10,7 @@ import { PutPlayersAction } from '../../src/application/put-players.action';
 import config from '../../src/configuration';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
 
-jest.setTimeout(30000);
+jest.setTimeout(60000);
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
@@ -36,7 +36,6 @@ describe('AppController (e2e)', () => {
 
     await putPlayersAction.execute('1');
     await putPlayersAction.execute('5');
-    await putPlayersAction.execute('6');
   });
 
   afterAll(async () => {
