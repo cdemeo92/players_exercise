@@ -1,6 +1,6 @@
 {
   "name": "players_exercise",
-  "version": "1.9.11",
+  "version": "1.9.12",
   "description": "This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job to save all players of a specific club.",
   "repository": {
     "type": "git",
