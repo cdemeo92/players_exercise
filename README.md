@@ -62,19 +62,13 @@ $ cd players_exercise
    $ npm run start
    ```
 
-### Running with Docker
+### Running with Docker Compose
 
-1. Configure the environment [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) domain:
+Build and start the containers with Docker Compose:
 
-   ```bash
-   $ export PROVIDER_DOMAIN=https://transfermarkt-api.fly.dev
-   ```
-
-2. Build and start the containers with Docker Compose:
-
-   ```bash
-   $ docker-compose up --build -d
-   ```
+```bash
+$ docker-compose up --build -d
+```
 
 ## Usage
 
