@@ -1,3 +1,10 @@
+## [1.9.13](https://github.com/devclay92/players_exercise/compare/v1.9.12...v1.9.13) (2025-03-15)
+
+
+### Bug Fixes
+
+* update GitHub Container Registry login token in CI/CD workflow ([d8a1406](https://github.com/devclay92/players_exercise/commit/d8a14061e8a40959796515457343f3056aebc32a))
+
 ## [1.9.12](https://github.com/devclay92/players_exercise/compare/v1.9.11...v1.9.12) (2025-03-15)
 
 ## [1.9.11](https://github.com/devclay92/players_exercise/compare/v1.9.10...v1.9.11) (2025-03-15)
