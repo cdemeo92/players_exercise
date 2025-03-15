@@ -73,7 +73,7 @@ $ cd players_exercise
 2. Build and start the containers with Docker Compose:
 
    ```bash
-   $ docker compose up --build -d
+   $ docker-compose up --build -d
    ```
 
 ## Usage
