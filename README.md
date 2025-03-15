@@ -1,48 +1,98 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Players Exercise
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job that allows retrieving all players of a specific club through [transfermarkt-api](https://github.com/felipeall/transfermarkt-api).
+
+## Requirements
+
+- [Node.js](https://nodejs.org/en) >= 20
+
+- npm >= 10
+
+- [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) (optional for containerized execution)
 
 ## Project setup
 
-```bash
-$ npm install
-```
-
-## Compile and run the project
+Clone the repository:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ git clone https://github.com/devclay92/players_exercise.git
+$ cd players_exercise
 ```
+
+### Local installation and execution
+
+1. Install dependencies:
+
+   ```bash
+   $ npm install
+   ```
+
+2. Ensure MongoDB is installed and running. For demo purpouse a mongodb container can be started:
+
+   ```bash
+   $ docker run -d \
+     --name mongodb-container \
+     -p 27017:27017 \
+     -e MONGO_INITDB_ROOT_USERNAME=<db-username> \
+     -e MONGO_INITDB_ROOT_PASSWORD=<db-password> \
+     mongo:latest
+   ```
+
+3. Configure the environment variables for db credentials:
+
+   ```bash
+   $ export DB_USER=<db-username>
+   $ export DB_PASSWORD=<db-password>
+   ```
+
+4. Configure the environment [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) domain:
+
+   ```bash
+   $ export PROVIDER_DOMAIN=https://transfermarkt-api.fly.dev
+   ```
+
+5. Start the application:
+
+   ```bash
+   $ npm run start
+   ```
+
+### Running with Docker
+
+1. Configure the environment [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) domain:
+
+   ```bash
+   $ export PROVIDER_DOMAIN=https://transfermarkt-api.fly.dev
+   ```
+
+2. Build and start the containers with Docker Compose:
+
+   ```bash
+   $ docker compose up --build -d
+   ```
+
+## Usage
+
+Check-out the API spec at http://localhost:3000.
+
+To save players from a club id run the job:
+
+```bash
+$ npm run start:job <club-id>
+```
+
+## Environment Variables
+
+| Variable          | Description                                                                         | Default                 |
+| ----------------- | ----------------------------------------------------------------------------------- | ----------------------- |
+| `PORT`            | The port the application listens on                                                 | `3000`                  |
+| `DB_HOST`         | MongoDB server address                                                              | `localhost`             |
+| `DB_PORT`         | MongoDB server port                                                                 | `27017`                 |
+| `DB_USER`         | Username for connecting to the MongoDB database                                     | `none`                  |
+| `DB_PASSWORD`     | Password for connecting to the MongoDB database                                     | `none`                  |
+| `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance | `http://localhost:8000` |
 
 ## Run tests
 
@@ -50,49 +100,31 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
+# unit tests with coverage
+$ npm run test:ci
+
+# integration tests
+$ npm run test:integ
+
 # e2e tests
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Deployment
+## Useful Commands
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+| Command                  | Description                                                   |
+| ------------------------ | ------------------------------------------------------------- |
+| `npm run build`          | Compiles the project for production                           |
+| `npm run start`          | Starts the app                                                |
+| `npm run start:dev`      | Starts the app in development mode with live-reload           |
+| `npm run start:debug`    | Starts the app in development mode with live-reload and debug |
+| `npm run start:prod`     | Starts the app in production mode                             |
+| `npm run start:job`      | Start the job to save players of a given club id              |
+| `npm run start:job:prod` | Start the job to save players in production mode              |
+| `npm run lint`           | Runs eslint and automatically fixes errors                    |
+| `npm run test`           | Runs tests                                                    |
+| `npm run test:watch`     | Runs tests in watch mode                                      |
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Author
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+[Claudio De Meo](https://www.linkedin.com/in/claudio-de-meo-6a746412b/)
