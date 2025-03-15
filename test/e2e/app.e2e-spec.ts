@@ -31,7 +31,7 @@ describe('AppController (e2e)', () => {
 
     const putPlayersAction = new PutPlayersAction(
       new ProviderRepositoryAdapter(config().providerDomain),
-      new PlayerRepositoryAdapter(mongoClient, 'players_e2e', 'players'),
+      new PlayerRepositoryAdapter(mongoClient, 'players', 'players'),
     );
 
     await putPlayersAction.execute('1');

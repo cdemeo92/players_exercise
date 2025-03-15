@@ -63,7 +63,7 @@ export function appBuilder(app: INestApplication): INestApplication {
     .build();
 
   const document = SwaggerModule.createDocument(app, docConfig);
-  SwaggerModule.setup('docs', app, document);
+  SwaggerModule.setup('', app, document);
 
   app.useGlobalPipes(
     new ValidationPipe({

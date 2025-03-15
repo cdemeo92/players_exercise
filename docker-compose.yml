@@ -33,3 +33,4 @@ services:
       DB_HOST: mongodb
       DB_USER: dev_user
       DB_PASSWORD: dev_password
+      PROVIDER_DOMAIN: https://transfermarkt-api.fly.dev

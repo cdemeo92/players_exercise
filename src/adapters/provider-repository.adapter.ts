@@ -7,7 +7,7 @@ export class ProviderRepositoryAdapter implements ProviderRepositoryPort {
 
   public async getPlayersByClubId(clubId: string): Promise<Array<Player>> {
     const response = await axios.get<{ players: Player[] }>(
-      `${this.domain}/clubs/${clubId}/players`,
+      new URL(`clubs/${clubId}/players`, this.domain).href,
     );
 
     return (
@@ -19,7 +19,7 @@ export class ProviderRepositoryAdapter implements ProviderRepositoryPort {
 
   public async getPlayerActiveStatus(playerId: string): Promise<boolean> {
     const response = await axios.get<{ isRetired: boolean }>(
-      `${this.domain}/players/${playerId}/profile`,
+      new URL(`players/${playerId}/profile`, this.domain).href,
     );
 
     if (!response.data || response.data.isRetired === undefined) {

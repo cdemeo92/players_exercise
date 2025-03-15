@@ -1,4 +1,4 @@
-type Stage = 'dev' | 'e2e' | 'prod';
+type Stage = 'dev' | 'prod';
 
 interface Config {
   port: number;
@@ -13,20 +13,10 @@ interface Config {
 
 const config: Record<Stage, Config> = {
   dev: {
-    port: 3000,
+    port: parseInt(process.env.PORT as string) || 3000,
     dbHost: (process.env.DB_HOST as string) ?? 'localhost',
-    dbPort: 27017,
-    dbName: 'players_dev',
-    dbUser: process.env.DB_USER as string,
-    dbPassword: process.env.DB_PASSWORD as string,
-    collectionName: 'players',
-    providerDomain: 'http://localhost:8000',
-  },
-  e2e: {
-    port: 8080,
-    dbHost: (process.env.DB_HOST as string) ?? 'localhost',
-    dbPort: 27017,
-    dbName: 'players_e2e',
+    dbPort: parseInt(process.env.DB_PORT as string) || 27017,
+    dbName: 'players',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
@@ -37,7 +27,7 @@ const config: Record<Stage, Config> = {
     port: 80,
     dbHost: process.env.DB_HOST as string,
     dbPort: 27017,
-    dbName: 'players_prod',
+    dbName: 'players',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
     collectionName: 'players',
