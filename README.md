@@ -103,7 +103,7 @@ $ npm run test:ci
 # integration tests
 $ npm run test:integ
 
-# e2e tests
+# e2e tests NOTE: it will start a mongodb container
 $ npm run test:e2e
 ```
 
