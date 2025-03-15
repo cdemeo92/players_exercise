@@ -36,6 +36,7 @@ describe('AppController (e2e)', () => {
 
     await putPlayersAction.execute('1');
     await putPlayersAction.execute('5');
+    await putPlayersAction.execute('6');
   });
 
   afterAll(async () => {
@@ -117,10 +118,10 @@ describe('AppController (e2e)', () => {
     });
   });
 
-  describe('/docs (GET)', () => {
+  describe('/ (GET) docs', () => {
     it('should return the swagger page', () => {
       return request(app.getHttpServer())
-        .get('/docs')
+        .get('/')
         .expect(200)
         .expect((res) => {
           expect(res.text).toContain('Swagger UI');

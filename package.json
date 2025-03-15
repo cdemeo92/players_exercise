@@ -1,6 +1,6 @@
 {
   "name": "players_exercise",
-  "version": "1.9.13",
+  "version": "1.9.10",
   "description": "This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job to save all players of a specific club.",
   "repository": {
     "type": "git",
@@ -26,7 +26,8 @@
     "pretest:e2e": "source .env.e2e && ./scripts/mongo_init.sh",
     "test:e2e": "source .env.e2e && jest --config ./test/e2e/jest-e2e.json",
     "test:e2e:ci": "jest --config ./test/e2e/jest-e2e.json",
-    "prepare": "husky"
+    "prepare": "husky",
+    "doc": "compodoc -d docs -p tsconfig.json --hideGenerator --disableSourceCode --disableInternal"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
+    "@compodoc/compodoc": "^1.1.26",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",

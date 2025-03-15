@@ -29,6 +29,12 @@
           }
       ],
       [
+        "@semantic-release/exec", 
+        {
+          "publishCmd": "docker build -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:${nextRelease.version} -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:latest . && docker push ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise --all-tags"
+        }
+      ],
+      [
           "@semantic-release/git",
           {
               "assets": [
@@ -38,12 +44,6 @@
               ],
               "message": "chore(release): ${nextRelease.version}\n"
           }
-      ],
-      [
-        "@semantic-release/exec", 
-        {
-          "publishCmd": "docker build -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:${nextRelease.version} -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:latest . && docker push ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise --all-tags"
-        }
       ]
   ]
 }

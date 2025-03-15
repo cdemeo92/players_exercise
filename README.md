@@ -62,7 +62,7 @@ $ cd players_exercise
    $ npm run start
    ```
 
-### Running with Docker Compose
+### Running with Docker
 
 Build and start the containers with Docker Compose:
 
