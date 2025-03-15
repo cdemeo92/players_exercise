@@ -80,6 +80,12 @@ To save players from a club id run the job:
 $ npm run start:job <club-id>
 ```
 
+or if you are using docker:
+
+```bash
+$ docker exec -it player_exercise npm run start:job <club-id>
+```
+
 ## Environment Variables
 
 | Variable          | Description                                                                         | Default                 |

@@ -20,16 +20,15 @@ services:
       timeout: 5s
       retries: 5
 
-  players:
+  player_exercise:
     build: .
-    container_name: players
+    container_name: player_exercise
     restart: always
     depends_on:
       - mongodb
     ports:
       - '3000:3000'
     environment:
-      STAGE: dev
       DB_HOST: mongodb
       DB_USER: dev_user
       DB_PASSWORD: dev_password
