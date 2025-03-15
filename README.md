@@ -51,7 +51,7 @@ $ cd players_exercise
    $ export DB_PASSWORD=<db-password>
    ```
 
-4. Configure the environment [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) domain:
+4. Configure the environment variable for [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) domain:
 
    ```bash
    $ export PROVIDER_DOMAIN=https://transfermarkt-api.fly.dev
