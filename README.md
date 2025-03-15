@@ -2,6 +2,7 @@
 
 [![semantic-release: 📦🚀](https://img.shields.io/badge/semantic--release-📦🚀-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
+[![player-exercises:latest](https://img.shields.io/badge/players--exercise-latest-blue?logo=docker)](https://github.com/devclay92/players_exercise/pkgs/container/players_exercise)
 
 ## Description
 
