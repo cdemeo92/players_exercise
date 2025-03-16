@@ -10,7 +10,7 @@ This project provides an API to filter players based on position, birth year ran
 
 ## Live demo
 
-This application is built and deployed automatically using the [project's GitHub Actions workflow](https://github.com/devclay92/players_exercise/actions). Every push or merge to the main branch triggers the deployment process.
+The application is built and deployed automatically using the [project's GitHub Actions workflow](https://github.com/devclay92/players_exercise/actions). Every push or merge to the main branch triggers the deployment process.
 
 The application is hosted on Vercel. You can access the API's Swagger documentation at https://players-exercise.vercel.app.
 
@@ -23,7 +23,7 @@ To execute the job that imports players of a specific club id, run the following
      --rm  ghcr.io/devclay92/players_exercise:latest npm run start:job <club-id>
 ```
 
-The `<mongo-uri>` can be found on the following one-password link: https://share.1password.com/s#Yz_26eKQpwHtCpOn8FEVg6My7HbP99yW8kV6PKRn_3M
+The `<mongo-uri>` secret can be found on the following link: https://share.1password.com/s#Yz_26eKQpwHtCpOn8FEVg6My7HbP99yW8kV6PKRn_3M
 
 ## Requirements
 
@@ -82,7 +82,7 @@ $ cd players_exercise
 
 ### Running with Docker
 
-Build and start the containers with Docker Compose:
+The installation steps can be avoided by starting the containers with Docker Compose:
 
 ```bash
 $ docker-compose up --build -d
@@ -92,7 +92,7 @@ $ docker-compose up --build -d
 
 Check-out the API spec at http://localhost:3000.
 
-To save players from a club id run the job:
+To import players belonging to a club, run the job:
 
 ```bash
 $ npm run start:job <club-id>
@@ -142,8 +142,8 @@ $ npm run test:e2e
 | `npm run start:dev`      | Starts the app in development mode with live-reload           |
 | `npm run start:debug`    | Starts the app in development mode with live-reload and debug |
 | `npm run start:prod`     | Starts the app in production mode                             |
-| `npm run start:job`      | Start the job to save players of a given club id              |
-| `npm run start:job:prod` | Start the job to save players in production mode              |
+| `npm run start:job`      | Starts the job to save players of a given club id              |
+| `npm run start:job:prod` | Starts the job to save players in production mode              |
 | `npm run lint`           | Runs eslint and automatically fixes errors                    |
 | `npm run test`           | Runs tests                                                    |
 | `npm run test:watch`     | Runs tests in watch mode                                      |
