@@ -22,6 +22,7 @@ To execute the job that imports players of a specific club id, run the following
      -e DB_URI="<mongo-uri>" \
      --rm  ghcr.io/devclay92/players_exercise:latest npm run start:job <club-id>
 ```
+
 The `<mongo-uri>` can be found on the following one-password link: https://share.1password.com/s#Yz_26eKQpwHtCpOn8FEVg6My7HbP99yW8kV6PKRn_3M
 
 ## Requirements
@@ -113,7 +114,7 @@ $ docker exec -it player_exercise npm run start:job <club-id>
 | `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                                                                                             | `27017`                 |
 | `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
 | `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
-| `DB_URI`          | The MongoDB uri connection string                                                                                                                 |                         |
+| `DB_URI`          | The MongoDB uri connection string                                                                                                                 | `none`                  |
 | `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance (`https://transfermarkt-api.fly.dev/` when `STAGE` is `prod`) | `http://localhost:8000` |
 
 ## Run tests
