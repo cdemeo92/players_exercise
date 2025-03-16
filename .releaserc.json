@@ -37,7 +37,7 @@
       [
         "@semantic-release/exec", 
         {
-          "deployCmd": "npx vercel --prod --token ${{ VERCEL_TOKEN }} --yes"
+          "publishCmd": "npx vercel --prod --token ${{ VERCEL_TOKEN }} --yes"
         }
       ],
       [
