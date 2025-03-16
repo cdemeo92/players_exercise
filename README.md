@@ -19,9 +19,10 @@ To execute the job that imports players of a specific club id, run the following
 ```bash
    $ docker run \
      -e STAGE=prod \
-     -e DB_URI="mongodb+srv://demeoclaudio92:DRvpVUNqcdhmcI37@cluster0.tzr8u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" \
+     -e DB_URI="<mongo-uri>" \
      --rm  ghcr.io/devclay92/players_exercise:latest npm run start:job <club-id>
 ```
+The `<mongo-uri>` can be found on the following one-password link: https://share.1password.com/s#Yz_26eKQpwHtCpOn8FEVg6My7HbP99yW8kV6PKRn_3M
 
 ## Requirements
 
