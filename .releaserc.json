@@ -34,12 +34,7 @@
           "publishCmd": "docker build -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:${nextRelease.version} -t ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise:latest . && docker push ghcr.io/$GITHUB_REPOSITORY_OWNER/players_exercise --all-tags"
         }
       ],
-      [
-        "@semantic-release/exec", 
-        {
-          "publishCmd": "npx vercel --prod --token $VERCEL_TOKEN --yes"
-        }
-      ],
+      
       [
           "@semantic-release/git",
           {
