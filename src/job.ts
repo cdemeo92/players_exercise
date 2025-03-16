@@ -9,8 +9,9 @@ async function start(clubId: string) {
   const password = config().dbPassword;
   const host = config().dbHost;
   const port = config().dbPort;
+  const dbUri = config().dbUri;
   const client = new MongoClient(
-    `mongodb://${username}:${password}@${host}:${port}`,
+    dbUri ?? `mongodb://${username}:${password}@${host}:${port}`,
   );
 
   const providerRepository = new ProviderRepositoryAdapter(
