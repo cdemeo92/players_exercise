@@ -1,3 +1,10 @@
+## [1.9.15](https://github.com/devclay92/players_exercise/compare/v1.9.14...v1.9.15) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix players pagination ([20c5c04](https://github.com/devclay92/players_exercise/commit/20c5c04cc7bd50e5ab736009aa0d39f548cd1fd1))
+
 ## [1.9.14](https://github.com/devclay92/players_exercise/compare/v1.9.13...v1.9.14) (2025-03-16)
 
 ## [1.9.13](https://github.com/devclay92/players_exercise/compare/v1.9.12...v1.9.13) (2025-03-15)
