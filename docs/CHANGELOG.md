@@ -1,3 +1,10 @@
+## [1.9.22](https://github.com/devclay92/players_exercise/compare/v1.9.21...v1.9.22) (2025-03-16)
+
+
+### Bug Fixes
+
+* update Vercel configuration to use publish command instead of deploy command ([17166b2](https://github.com/devclay92/players_exercise/commit/17166b2f4e88af3f60f25db6209e29d8b5feed46))
+
 ## [1.9.21](https://github.com/devclay92/players_exercise/compare/v1.9.20...v1.9.21) (2025-03-16)
 
 
