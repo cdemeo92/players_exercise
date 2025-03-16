@@ -195,4 +195,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run smoke tests
-        run: echo "Running smoke tests"
+        run: |
+          echo "Running smoke tests..."
+          API_URL="https://players-exercise.vercel.app/players"
+          RESPONSE_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null "$API_URL")
+          if [ "$RESPONSE_CODE" -eq 200 ]; then
+            echo "Smoke test passed: API returned status code 200"
+          else
+            echo "Smoke test failed: API returned status code $RESPONSE_CODE"
+            exit 1
+          fi
