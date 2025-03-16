@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { MongoClient } from 'mongodb';
-import path from 'path';
+import * as path from 'path';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
