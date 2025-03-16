@@ -1,3 +1,11 @@
+## [1.9.17](https://github.com/devclay92/players_exercise/compare/v1.9.16...v1.9.17) (2025-03-16)
+
+
+### Bug Fixes
+
+* update player import IDs in e2e test for accuracy ([4945483](https://github.com/devclay92/players_exercise/commit/49454839e01e1ee5afa04bae3e44b54520ac0a27))
+* update Swagger UI setup and routing for custom assets ([f973b7d](https://github.com/devclay92/players_exercise/commit/f973b7d969f63789138e4bd64bbadfd3601c6550))
+
 ## [1.9.16](https://github.com/devclay92/players_exercise/compare/v1.9.15...v1.9.16) (2025-03-16)
 
 ## [1.9.15](https://github.com/devclay92/players_exercise/compare/v1.9.14...v1.9.15) (2025-03-16)
