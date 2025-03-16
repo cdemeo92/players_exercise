@@ -1,7 +1,9 @@
 import { INestApplication, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { MongoClient } from 'mongodb';
+import path from 'path';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
@@ -63,17 +65,14 @@ export function appBuilder(app: INestApplication): INestApplication {
     .setVersion('1.0')
     .build();
 
+  (app as NestExpressApplication).useStaticAssets(
+    path.join(__dirname, '..', 'public'),
+  );
+
   const document = SwaggerModule.createDocument(app, docConfig);
   SwaggerModule.setup('', app, document, {
-    customCss:
-      'https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.20.1/swagger-ui.css',
-    customJs: [
-      'https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.20.1/swagger-ui-bundle.js',
-      'https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.20.1/swagger-ui-standalone-preset.js',
-    ],
-    swaggerOptions: {
-      url: '/api-json',
-    },
+    customCss: '/swagger-ui.css',
+    customJs: ['/swagger-ui-bundle.js', '/swagger-ui-standalone-preset.js'],
   });
 
   app.useGlobalPipes(
