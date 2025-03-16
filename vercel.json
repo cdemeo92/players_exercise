@@ -7,9 +7,6 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/dist/main.js" },
-    { "src": "/swagger-ui.css", "dest": "/node_modules/swagger-ui/swagger-ui.css" },
-    { "src": "/swagger-ui-bundle.js", "dest": "/node_modules/swagger-ui/swagger-ui-bundle.js" },
-    { "src": "/swagger-ui-standalone-preset.js", "dest": "/node_modules/swagger-ui/swagger-ui-standalone-preset.js" }
+    { "src": "/(.*)", "dest": "/dist/main.js" }
   ]
 }
