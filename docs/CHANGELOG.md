@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/devclay92/players_exercise/compare/v1.9.23...v1.10.0) (2025-03-16)
+
+
+### Bug Fixes
+
+* update import statement for path module to use namespace import ([63210ff](https://github.com/devclay92/players_exercise/commit/63210ff123436bd0e82892a857c081ce8ddbccb7))
+
+
+### Features
+
+* expose swagger ([a304f55](https://github.com/devclay92/players_exercise/commit/a304f55cc8b75c1acde63da37151656c0d9da698))
+
 ## [1.9.23](https://github.com/devclay92/players_exercise/compare/v1.9.22...v1.9.23) (2025-03-16)
 
 
