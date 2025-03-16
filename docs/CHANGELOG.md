@@ -1,3 +1,10 @@
+## [1.9.23](https://github.com/devclay92/players_exercise/compare/v1.9.22...v1.9.23) (2025-03-16)
+
+
+### Bug Fixes
+
+* update Vercel configuration to use environment variable for token ([254ea9a](https://github.com/devclay92/players_exercise/commit/254ea9abc1d6306d28d0f76428c3cfcee78caf8a))
+
 ## [1.9.22](https://github.com/devclay92/players_exercise/compare/v1.9.21...v1.9.22) (2025-03-16)
 
 
