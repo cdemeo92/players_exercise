@@ -1,3 +1,5 @@
+## [1.10.1](https://github.com/devclay92/players_exercise/compare/v1.10.0...v1.10.1) (2025-03-16)
+
 # [1.10.0](https://github.com/devclay92/players_exercise/compare/v1.9.23...v1.10.0) (2025-03-16)
 
 
