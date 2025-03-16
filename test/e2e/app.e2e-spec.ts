@@ -41,9 +41,9 @@ describe('AppController (e2e)', () => {
       playerRepository,
     );
 
-    await importPlayers.importPlayersById('3');
+    await importPlayers.importPlayersById('1');
+    await importPlayers.importPlayersById('5');
     await importPlayers.importPlayersById('6');
-    await importPlayers.importPlayersById('10');
   });
 
   afterAll(async () => {
