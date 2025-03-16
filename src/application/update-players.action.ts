@@ -1,4 +1,5 @@
 import { Filter } from './domain/filter.value-object';
+import { Pagination } from './domain/pagination.value-object';
 import { Player, UPDATE_STATUS } from './domain/player.entity';
 import {
   GetPlayersResult,
@@ -53,7 +54,9 @@ export class UpdatePlayersAction {
     try {
       const playersToUpdate = await this.playerRepository.getPlayers(
         new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
+        new Pagination(undefined, Infinity),
       );
+
       await this.forEachPlayerUpdateIsActive(playersToUpdate, response);
     } catch (error) {
       response.fail(`UPDATE PLAYERS ERROR: ${(error as Error).message}`);

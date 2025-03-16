@@ -249,6 +249,24 @@ describe('PlayerRepositoryAdapter', () => {
         ]),
       );
     });
+
+    it('should not limit the retuned players when pagSize is Infinity', async () => {
+      await repository.getPlayers(
+        undefined,
+        new Pagination(undefined, Infinity),
+      );
+
+      expect(spyAggregate).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          {
+            $facet: {
+              metadata: [{ $count: 'totalCount' }],
+              players: [{ $skip: 0 }],
+            },
+          },
+        ]),
+      );
+    });
   });
 
   describe('putPlayers', () => {

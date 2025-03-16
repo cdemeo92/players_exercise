@@ -1,4 +1,5 @@
 import { Filter } from './domain/filter.value-object';
+import { Pagination } from './domain/pagination.value-object';
 import { Player, UPDATE_STATUS } from './domain/player.entity';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 import { ProviderRepositoryPort } from './ports/provider-repository.port';
@@ -71,6 +72,7 @@ describe('UpdatePlayersAction', () => {
       await action.execute();
       expect(getPlayersMock).toHaveBeenCalledWith(
         new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
+        new Pagination(undefined, Infinity),
       );
     });
 

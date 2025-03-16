@@ -39,7 +39,10 @@ export class PlayerRepositoryAdapter implements PlayerRepositoryPort {
         {
           $facet: {
             metadata: [{ $count: 'totalCount' }],
-            players: [{ $skip: (page - 1) * pageSize }, { $limit: pageSize }],
+            players: [
+              { $skip: (page - 1) * pageSize || 0 },
+              ...(isFinite(pageSize) ? [{ $limit: pageSize }] : []),
+            ],
           },
         },
       ])

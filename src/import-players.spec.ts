@@ -1,4 +1,5 @@
 import { Filter } from './application/domain/filter.value-object';
+import { Pagination } from './application/domain/pagination.value-object';
 import { Player, UPDATE_STATUS } from './application/domain/player.entity';
 import { PlayerRepositoryPort } from './application/ports/player-repository.port';
 import { ProviderRepositoryPort } from './application/ports/provider-repository.port';
@@ -90,6 +91,7 @@ describe('ImportPlayers', () => {
       await importPlayers.importPlayersById('5');
       expect(getPlayersMock).toHaveBeenCalledWith(
         new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
+        new Pagination(undefined, Infinity),
       );
     });
 
@@ -98,6 +100,7 @@ describe('ImportPlayers', () => {
       await importPlayers.importPlayersById('5');
       expect(getPlayersMock).toHaveBeenCalledWith(
         new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
+        new Pagination(undefined, Infinity),
       );
     });
 
