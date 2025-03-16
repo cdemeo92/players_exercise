@@ -186,7 +186,7 @@ jobs:
             .npm
             node_modules
       - name: Deploy
-        run: echo "Deploying to production"
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
 
   smoke:
     name: Smoke tests
