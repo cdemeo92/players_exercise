@@ -1,3 +1,11 @@
+## [1.9.20](https://github.com/devclay92/players_exercise/compare/v1.9.19...v1.9.20) (2025-03-16)
+
+
+### Bug Fixes
+
+* enhance smoke tests to validate API response status code ([3df7481](https://github.com/devclay92/players_exercise/commit/3df74819b4f7c9a34b739fa7dd13173c5e4ca364))
+* fix Swagger UI setup with custom CSS and JS options ([d3c08de](https://github.com/devclay92/players_exercise/commit/d3c08def344c797dc6815eb8c0f474d036be6841))
+
 ## [1.9.19](https://github.com/devclay92/players_exercise/compare/v1.9.18...v1.9.19) (2025-03-16)
 
 
