@@ -35,6 +35,12 @@
         }
       ],
       [
+        "@semantic-release/exec", 
+        {
+          "deployCmd": "npx vercel --prod --token ${{ VERCEL_TOKEN }} --yes"
+        }
+      ]
+      [
           "@semantic-release/git",
           {
               "assets": [

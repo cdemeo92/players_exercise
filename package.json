@@ -9,7 +9,6 @@
   "author": "Claudio De Meo",
   "license": "ISC",
   "scripts": {
-    "postbuild": "mkdir -p dist/swagger-ui && cp -R node_modules/swagger-ui-dist/swagger-ui* dist/swagger-ui",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
