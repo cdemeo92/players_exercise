@@ -92,10 +92,11 @@ $ docker exec -it player_exercise npm run start:job <club-id>
 | Variable          | Description                                                                         | Default                 |
 | ----------------- | ----------------------------------------------------------------------------------- | ----------------------- |
 | `PORT`            | The port the application listens on                                                 | `3000`                  |
-| `DB_HOST`         | MongoDB server address                                                              | `localhost`             |
-| `DB_PORT`         | MongoDB server port                                                                 | `27017`                 |
-| `DB_USER`         | Username for connecting to the MongoDB database                                     | `none`                  |
-| `DB_PASSWORD`     | Password for connecting to the MongoDB database                                     | `none`                  |
+| `DB_HOST`         | MongoDB server address (Not used when `DB_URI` is present)                          | `localhost`             |
+| `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                               | `27017`                 |
+| `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present) | `none`                  |
+| `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present) | `none`                  |
+| `DB_URI`          | The MongoDB uri connection string                                                   |                         |
 | `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance | `http://localhost:8000` |
 
 ## Run tests

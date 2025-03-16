@@ -7,6 +7,7 @@ interface Config {
   dbName: string;
   dbUser: string;
   dbPassword: string;
+  dbUri?: string;
   collectionName: string;
   providerDomain: string;
 }
@@ -19,6 +20,7 @@ const config: Record<Stage, Config> = {
     dbName: 'players',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
+    dbUri: process.env.DB_URI as string,
     collectionName: 'players',
     providerDomain:
       (process.env.PROVIDER_DOMAIN as string) ?? 'http://localhost:8000',
@@ -30,6 +32,7 @@ const config: Record<Stage, Config> = {
     dbName: 'players',
     dbUser: process.env.DB_USER as string,
     dbPassword: process.env.DB_PASSWORD as string,
+    dbUri: process.env.DB_URI as string,
     collectionName: 'players',
     providerDomain: 'https://transfermarkt-api.fly.dev',
   },

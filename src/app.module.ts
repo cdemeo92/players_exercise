@@ -30,8 +30,9 @@ import { GetPlayersController } from './controllers/get-players.controller';
         const password = configService.get<string>('dbPassword');
         const host = configService.get<string>('dbHost');
         const port = configService.get<number>('dbPort');
+        const dbUri = configService.get<string>('dbUri');
         const client = new MongoClient(
-          `mongodb://${username}:${password}@${host}:${port}`,
+          dbUri ?? `mongodb://${username}:${password}@${host}:${port}`,
         );
         await client.connect();
         return client;
