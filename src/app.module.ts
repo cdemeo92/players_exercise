@@ -64,7 +64,13 @@ export function appBuilder(app: INestApplication): INestApplication {
     .build();
 
   const document = SwaggerModule.createDocument(app, docConfig);
-  SwaggerModule.setup('', app, document);
+  SwaggerModule.setup('', app, document, {
+    customCssUrl: '/swagger-ui/swagger-ui.css',
+    customJs: [
+      '/swagger-ui/swagger-ui-bundle.js',
+      '/swagger-ui/swagger-ui-standalone-preset.js',
+    ],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

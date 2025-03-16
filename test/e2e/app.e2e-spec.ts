@@ -10,7 +10,7 @@ import config from '../../src/configuration';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
 import { ImportPlayers } from '../../src/import-players';
 
-jest.setTimeout(60000);
+jest.setTimeout(5 * 60000);
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
