@@ -8,6 +8,21 @@
 
 This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job that allows retrieving all players of a specific club through [transfermarkt-api](https://github.com/felipeall/transfermarkt-api).
 
+## Live demo
+
+This application is built and deployed automatically using the [project's GitHub Actions workflow](https://github.com/devclay92/players_exercise/actions). Every push or merge to the main branch triggers the deployment process.
+
+The application is hosted on Vercel. You can access the API's Swagger documentation at https://players-exercise.vercel.app.
+
+To execute the job that imports players of a specific club id, run the following Docker command using the image deployed in the [project's package registry](https://github.com/devclay92/players_exercise/pkgs/container/players_exercise):
+
+```bash
+   $ docker run \
+     -e STAGE=prod \
+     -e DB_URI="mongodb+srv://demeoclaudio92:DRvpVUNqcdhmcI37@cluster0.tzr8u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" \
+     --rm  ghcr.io/devclay92/players_exercise:latest npm run start:job <club-id>
+```
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/en) >= 20
@@ -89,15 +104,16 @@ $ docker exec -it player_exercise npm run start:job <club-id>
 
 ## Environment Variables
 
-| Variable          | Description                                                                         | Default                 |
-| ----------------- | ----------------------------------------------------------------------------------- | ----------------------- |
-| `PORT`            | The port the application listens on                                                 | `3000`                  |
-| `DB_HOST`         | MongoDB server address (Not used when `DB_URI` is present)                          | `localhost`             |
-| `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                               | `27017`                 |
-| `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present) | `none`                  |
-| `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present) | `none`                  |
-| `DB_URI`          | The MongoDB uri connection string                                                   |                         |
-| `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance | `http://localhost:8000` |
+| Variable          | Description                                                                                                                                       | Default                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `STAGE`           | Set the environment configuration                                                                                                                 | `dev`                   |
+| `PORT`            | The port the application listens on (`80` when `STAGE` is `prod`)                                                                                 | `3000`                  |
+| `DB_HOST`         | MongoDB server address (Not used when `DB_URI` is present)                                                                                        | `localhost`             |
+| `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                                                                                             | `27017`                 |
+| `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
+| `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
+| `DB_URI`          | The MongoDB uri connection string                                                                                                                 |                         |
+| `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance (`https://transfermarkt-api.fly.dev/` when `STAGE` is `prod`) | `http://localhost:8000` |
 
 ## Run tests
 

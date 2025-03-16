@@ -9,7 +9,6 @@ import { PlayerRepositoryPort } from '../../src/application/ports/player-reposit
 import config from '../../src/configuration';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
 import { ImportPlayers } from '../../src/import-players';
-import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(60000);
 
@@ -42,13 +41,9 @@ describe('AppController (e2e)', () => {
       playerRepository,
     );
 
-    await mongoClient
-      .db(config().dbName)
-      .collection(config().collectionName)
-      .insertMany(playersStub);
-
     await importPlayers.importPlayersById('3');
     await importPlayers.importPlayersById('6');
+    await importPlayers.importPlayersById('10');
   });
 
   afterAll(async () => {
