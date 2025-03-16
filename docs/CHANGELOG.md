@@ -1,3 +1,10 @@
+## [1.9.18](https://github.com/devclay92/players_exercise/compare/v1.9.17...v1.9.18) (2025-03-16)
+
+
+### Bug Fixes
+
+* use dbUri from config for MongoDB connection string ([ab1c887](https://github.com/devclay92/players_exercise/commit/ab1c887388564b95a8939cfc63cc7c53e83a467b))
+
 ## [1.9.17](https://github.com/devclay92/players_exercise/compare/v1.9.16...v1.9.17) (2025-03-16)
 
 
