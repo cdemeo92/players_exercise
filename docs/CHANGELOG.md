@@ -1,3 +1,10 @@
+## [1.9.19](https://github.com/devclay92/players_exercise/compare/v1.9.18...v1.9.19) (2025-03-16)
+
+
+### Bug Fixes
+
+* add --yes flag to Vercel deployment command for automatic confirmation ([5dfcf4d](https://github.com/devclay92/players_exercise/commit/5dfcf4d13fd87e0634f986c8a2e2266e2ddc8833))
+
 ## [1.9.18](https://github.com/devclay92/players_exercise/compare/v1.9.17...v1.9.18) (2025-03-16)
 
 
