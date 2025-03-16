@@ -1,3 +1,10 @@
+## [1.9.21](https://github.com/devclay92/players_exercise/compare/v1.9.20...v1.9.21) (2025-03-16)
+
+
+### Bug Fixes
+
+* update Vercel configuration to include Swagger UI assets ([249053c](https://github.com/devclay92/players_exercise/commit/249053c6305bc4be4abd9f2dd14eaa6346dd73a3))
+
 ## [1.9.20](https://github.com/devclay92/players_exercise/compare/v1.9.19...v1.9.20) (2025-03-16)
 
 
