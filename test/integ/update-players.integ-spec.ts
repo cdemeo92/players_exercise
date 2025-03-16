@@ -3,9 +3,9 @@ import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { PlayerRepositoryAdapter } from '../../src/adapters/player-repository.adapter';
 import { ProviderRepositoryAdapter } from '../../src/adapters/provider-repository.adapter';
-import { PutPlayersAction } from '../../src/application/put-players.action';
-import * as clubStub from '../stub/club.stub.json';
+import { UpdatePlayersAction } from '../../src/application/update-players.action';
 import * as playersStub from '../stub/players.stub.json';
+import * as profilesStub from '../stub/profiles.stub.json';
 
 jest.setTimeout(30000);
 jest.mock('axios');
@@ -17,13 +17,12 @@ describe('PutPlayers (Job)', () => {
   let mongoClient: MongoClient;
   let db: Db;
 
-  let action: PutPlayersAction;
+  let action: UpdatePlayersAction;
 
   (axios.get as jest.Mock).mockImplementation((url: string) => {
-    const match = url.match(/\/clubs\/(\d+)\/players/);
-
+    const match = url.match(/\/players\/(\d+)\/profile/);
     if (match) {
-      return Promise.resolve({ data: clubStub[match[1]] });
+      return Promise.resolve({ data: profilesStub[match[1]] });
     }
   });
 
@@ -34,7 +33,7 @@ describe('PutPlayers (Job)', () => {
 
     await db.collection('players').insertMany(playersStub);
 
-    action = new PutPlayersAction(
+    action = new UpdatePlayersAction(
       new ProviderRepositoryAdapter('https://transfermarkt-api.fly.dev'),
       new PlayerRepositoryAdapter(mongoClient, 'players_integ', 'players'),
     );
@@ -46,11 +45,19 @@ describe('PutPlayers (Job)', () => {
   });
 
   describe('execute', () => {
-    it('should save the new players', async () => {
-      await db.dropCollection('players');
-      expect(await action.execute('5')).toMatchObject({
+    it('should update the players status', async () => {
+      expect(await action.execute()).toMatchObject({
         success: true,
-        newPlayers: 5,
+        updatedPlayers: 6,
+      });
+    });
+
+    it('should skip players whose status cannot be found', async () => {
+      (axios.get as jest.Mock).mockResolvedValueOnce({ data: {} });
+      expect(await action.execute()).toMatchObject({
+        success: true,
+        updatedPlayers: 5,
+        skipped: ['109855'],
       });
     });
   });

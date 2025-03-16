@@ -11,7 +11,7 @@ import { GetPlayersParams, GetPlayersResponse } from './dto/get-players.dto';
 
 @Controller('players')
 @ApiTags('players')
-export class AppController {
+export class GetPlayersController {
   constructor(private readonly getPlayersAction: GetPlayersAction) {}
 
   @Get()

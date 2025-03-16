@@ -5,8 +5,8 @@ import { MongoClient } from 'mongodb';
 import { PlayerRepositoryAdapter } from './adapters/player-repository.adapter';
 import { GetPlayersAction } from './application/get-players.action';
 import configuration from './configuration';
-import { AppController } from './controllers/app.controller';
 import { GetPlayersParams } from './controllers/dto/get-players.dto';
+import { GetPlayersController } from './controllers/get-players.controller';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { GetPlayersParams } from './controllers/dto/get-players.dto';
       load: [configuration],
     }),
   ],
-  controllers: [AppController],
+  controllers: [GetPlayersController],
   providers: [
     GetPlayersAction,
     {

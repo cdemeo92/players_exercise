@@ -3,12 +3,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MongoClient } from 'mongodb';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
-import { PlayerRepositoryAdapter } from '../../src/adapters/player-repository.adapter';
 import { ProviderRepositoryAdapter } from '../../src/adapters/provider-repository.adapter';
 import { appBuilder, AppModule } from '../../src/app.module';
-import { PutPlayersAction } from '../../src/application/put-players.action';
+import { PlayerRepositoryPort } from '../../src/application/ports/player-repository.port';
 import config from '../../src/configuration';
 import { GetPlayersResponse } from '../../src/controllers/dto/get-players.dto';
+import { ImportPlayers } from '../../src/import-players';
+import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(60000);
 
@@ -29,14 +30,26 @@ describe('AppController (e2e)', () => {
 
     await app.init();
 
-    const putPlayersAction = new PutPlayersAction(
-      new ProviderRepositoryAdapter(config().providerDomain),
-      new PlayerRepositoryAdapter(mongoClient, 'players', 'players'),
+    const providerRepository = new ProviderRepositoryAdapter(
+      config().providerDomain,
+    );
+    const playerRepository = app.get<PlayerRepositoryPort>(
+      'PlayerRepositoryPort',
     );
 
-    await putPlayersAction.execute('1');
-    await putPlayersAction.execute('5');
-    await putPlayersAction.execute('6');
+    const importPlayers = new ImportPlayers(
+      providerRepository,
+      playerRepository,
+    );
+
+    await mongoClient
+      .db(config().dbName)
+      .collection(config().collectionName)
+      .insertMany(playersStub);
+
+    await importPlayers.importPlayersById('3');
+    await importPlayers.importPlayersById('6');
+    await importPlayers.importPlayersById('10');
   });
 
   afterAll(async () => {

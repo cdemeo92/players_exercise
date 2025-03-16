@@ -7,11 +7,11 @@ import {
 import { Player } from '../application/domain/player.entity';
 import { GetPlayersAction } from '../application/get-players.action';
 import { GetPlayersResult } from '../application/ports/player-repository.port';
-import { AppController } from './app.controller';
 import { GetPlayersParams } from './dto/get-players.dto';
+import { GetPlayersController } from './get-players.controller';
 
-describe('AppController', () => {
-  let appController: AppController;
+describe('GetPlayersController', () => {
+  let appController: GetPlayersController;
   const getPlayersActionExecuteMock = jest.fn(
     (): Promise<GetPlayersResult> =>
       Promise.resolve({ players: [], page: 1, pageSize: 10, totalCount: 0 }),
@@ -19,7 +19,7 @@ describe('AppController', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
+      controllers: [GetPlayersController],
       providers: [
         {
           provide: GetPlayersAction,
@@ -28,7 +28,7 @@ describe('AppController', () => {
       ],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<GetPlayersController>(GetPlayersController);
   });
 
   describe('getPlayers', () => {

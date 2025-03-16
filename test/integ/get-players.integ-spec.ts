@@ -3,14 +3,14 @@ import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { PlayerRepositoryAdapter } from '../../src/adapters/player-repository.adapter';
 import { GetPlayersAction } from '../../src/application/get-players.action';
-import { AppController } from '../../src/controllers/app.controller';
 import { GetPlayersParams } from '../../src/controllers/dto/get-players.dto';
+import { GetPlayersController } from '../../src/controllers/get-players.controller';
 import * as playersStub from '../stub/players.stub.json';
 
 jest.setTimeout(30000);
 
 describe('AppController (integ)', () => {
-  let appController: AppController;
+  let appController: GetPlayersController;
   let mongodb: MongoMemoryServer;
   let mongoClient: MongoClient;
   let db: Db;
@@ -23,7 +23,7 @@ describe('AppController (integ)', () => {
     await db.collection('players').insertMany(playersStub);
 
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
+      controllers: [GetPlayersController],
       providers: [
         GetPlayersAction,
         {
@@ -45,7 +45,7 @@ describe('AppController (integ)', () => {
       ],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<GetPlayersController>(GetPlayersController);
   });
 
   afterEach(async () => {

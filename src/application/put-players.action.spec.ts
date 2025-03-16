@@ -1,8 +1,9 @@
-import { Filter } from './domain/filter.value-object';
-import { Player, UPDATE_STATUS } from './domain/player.entity';
+import { Player } from './domain/player.entity';
 import { PlayerRepositoryPort } from './ports/player-repository.port';
 import { ProviderRepositoryPort } from './ports/provider-repository.port';
 import { PutPlayersAction } from './put-players.action';
+
+jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('PutPlayerAction', () => {
   const playersStub: Array<Player> = [
@@ -41,29 +42,23 @@ describe('PutPlayerAction', () => {
     }),
   ];
   const getPlayersByClubIdMock = jest.fn().mockResolvedValue([]);
-  const getPlayerActiveStatusMock = jest.fn().mockResolvedValue(true);
 
   const providerRepository: ProviderRepositoryPort = {
     getPlayersByClubId: getPlayersByClubIdMock,
-    getPlayerActiveStatus: getPlayerActiveStatusMock,
+    getPlayerActiveStatus: jest.fn(),
   };
 
   const putPlayersMock = jest.fn().mockResolvedValue({});
-  const getPlayersMock = jest
-    .fn()
-    .mockResolvedValue({ players: [], page: 1, pageSize: 10, totalCount: 0 });
 
   const playerRepository: PlayerRepositoryPort = {
-    getPlayers: getPlayersMock,
+    getPlayers: jest.fn(),
     putPlayers: putPlayersMock,
   };
   const action = new PutPlayersAction(providerRepository, playerRepository);
 
   beforeEach(() => {
     getPlayersByClubIdMock.mockClear();
-    getPlayerActiveStatusMock.mockClear();
     putPlayersMock.mockClear();
-    getPlayersMock.mockClear();
   });
 
   describe('execute', () => {
@@ -83,78 +78,11 @@ describe('PutPlayerAction', () => {
       expect(putPlayersMock).toHaveBeenCalledWith(playersStub);
     });
 
-    it('should get the players to update from the db when there are no players with the given club id', async () => {
-      await action.execute('5');
-      expect(getPlayersMock).toHaveBeenCalledWith(
-        new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
-      );
-    });
-
-    it('should get the players to update from the db when there are players with the given club id', async () => {
-      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
-      await action.execute('5');
-      expect(getPlayersMock).toHaveBeenCalledWith(
-        new Filter({ updateStatus: UPDATE_STATUS.TO_UPDATE }),
-      );
-    });
-
-    it('should retrieve the active status from the provider api', async () => {
-      getPlayersMock.mockResolvedValueOnce({
-        players: playersStub,
-      });
-      await action.execute('5');
-
-      playersStub.forEach((player) => {
-        expect(getPlayerActiveStatusMock).toHaveBeenCalledWith(player.id);
-      });
-    });
-
-    it('should not retrieve the active status from the provider api when there are no players to update', async () => {
-      getPlayersMock.mockResolvedValueOnce({
-        players: [],
-        page: 1,
-        pageSize: 10,
-        totalCount: 0,
-      });
-      await action.execute('5');
-
-      expect(getPlayerActiveStatusMock).not.toHaveBeenCalled();
-    });
-
-    it('should update the active status in the db for the players', async () => {
-      getPlayersMock.mockResolvedValueOnce({
-        players: playersStub,
-      });
-      await action.execute('5');
-
-      playersStub.forEach((player) => {
-        expect(putPlayersMock).toHaveBeenCalledWith([player], true);
-      });
-    });
-
-    it('should not update the active status in the db for the players when there are no players to update', async () => {
-      getPlayersMock.mockResolvedValueOnce({
-        players: [],
-      });
-      await action.execute('5');
-
-      expect(putPlayersMock).not.toHaveBeenCalled();
-    });
-
     it('should return a success true when the players are saved', async () => {
       getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
       const result = await action.execute('5');
 
       expect(result).toMatchObject({ success: true });
-    });
-
-    it('should return a success true and 0 updatedPlayers when there are no players to update', async () => {
-      const result = await action.execute('5');
-
-      expect(result).toMatchObject({
-        success: true,
-        updatedPlayers: 0,
-      });
     });
 
     it('should return a success true and 0 newPlayers when there are no new players to insert', async () => {
@@ -166,18 +94,15 @@ describe('PutPlayerAction', () => {
       });
     });
 
-    it('should return a success true and the numbers of new and updated players', async () => {
+    it('should return a success true and the numbers of new players', async () => {
       getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
-      getPlayersMock.mockResolvedValueOnce({ players: playersStub });
       putPlayersMock.mockResolvedValue({
         insertedPlayers: 5,
-        modifiedPlayers: 1,
       });
       const result = await action.execute('5');
 
       expect(result).toMatchObject({
         success: true,
-        updatedPlayers: 2,
         newPlayers: 5,
       });
     });
@@ -200,18 +125,6 @@ describe('PutPlayerAction', () => {
       expect(result).toMatchObject({
         success: false,
         message: 'PUT PLAYERS ERROR: Error message',
-      });
-    });
-
-    it('should skip players whose status cannot be retrieved', async () => {
-      getPlayersByClubIdMock.mockResolvedValueOnce(playersStub);
-      getPlayersMock.mockResolvedValueOnce({ players: playersStub });
-      getPlayerActiveStatusMock.mockRejectedValue(new Error('Error message'));
-      const result = await action.execute('5');
-
-      expect(result).toMatchObject({
-        success: true,
-        skipped: ['182906', '199976'],
       });
     });
   });
