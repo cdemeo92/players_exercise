@@ -23,7 +23,7 @@ To execute the job that imports players of a specific club id, run the following
      --rm  ghcr.io/devclay92/players_exercise:latest npm run start:job <club-id>
 ```
 
-The `<mongo-uri>` secret can be found on the following link: https://share.1password.com/s#Yz_26eKQpwHtCpOn8FEVg6My7HbP99yW8kV6PKRn_3M
+The `<mongo-uri>` secret can be found on the following link: https://share.1password.com/s#Vl_YG7dZ8qj2o8C1Lr9V9V44spr04tQkJlp8v7ZNrRw
 
 ## Requirements
 
@@ -104,19 +104,6 @@ or if you are using docker:
 $ docker exec -it player_exercise npm run start:job <club-id>
 ```
 
-## Environment Variables
-
-| Variable          | Description                                                                                                                                       | Default                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `STAGE`           | Set the environment configuration                                                                                                                 | `dev`                   |
-| `PORT`            | The port the application listens on (`80` when `STAGE` is `prod`)                                                                                 | `3000`                  |
-| `DB_HOST`         | MongoDB server address (Not used when `DB_URI` is present)                                                                                        | `localhost`             |
-| `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                                                                                             | `27017`                 |
-| `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
-| `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
-| `DB_URI`          | The MongoDB uri connection string                                                                                                                 | `none`                  |
-| `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance (`https://transfermarkt-api.fly.dev/` when `STAGE` is `prod`) | `http://localhost:8000` |
-
 ## Run tests
 
 ```bash
@@ -133,6 +120,19 @@ $ npm run test:integ
 $ npm run test:e2e
 ```
 
+## Environment Variables
+
+| Variable          | Description                                                                                                                                       | Default                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `STAGE`           | Set the environment configuration                                                                                                                 | `dev`                   |
+| `PORT`            | The port the application listens on (`80` when `STAGE` is `prod`)                                                                                 | `3000`                  |
+| `DB_HOST`         | MongoDB server address (Not used when `DB_URI` is present)                                                                                        | `localhost`             |
+| `DB_PORT`         | MongoDB server port (Not used when DB_URI is present)                                                                                             | `27017`                 |
+| `DB_USER`         | Username for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
+| `DB_PASSWORD`     | Password for connecting to the MongoDB database (Not used when `DB_URI` is present)                                                               | `none`                  |
+| `DB_URI`          | The MongoDB uri connection string                                                                                                                 | `none`                  |
+| `PROVIDER_DOMAIN` | URL of [transfermarkt-api](https://github.com/felipeall/transfermarkt-api) instance (`https://transfermarkt-api.fly.dev/` when `STAGE` is `prod`) | `http://localhost:8000` |
+
 ## Useful Commands
 
 | Command                  | Description                                                   |
@@ -142,8 +142,8 @@ $ npm run test:e2e
 | `npm run start:dev`      | Starts the app in development mode with live-reload           |
 | `npm run start:debug`    | Starts the app in development mode with live-reload and debug |
 | `npm run start:prod`     | Starts the app in production mode                             |
-| `npm run start:job`      | Starts the job to save players of a given club id              |
-| `npm run start:job:prod` | Starts the job to save players in production mode              |
+| `npm run start:job`      | Starts the job to save players of a given club id             |
+| `npm run start:job:prod` | Starts the job to save players in production mode             |
 | `npm run lint`           | Runs eslint and automatically fixes errors                    |
 | `npm run test`           | Runs tests                                                    |
 | `npm run test:watch`     | Runs tests in watch mode                                      |
