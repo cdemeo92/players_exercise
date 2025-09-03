@@ -8,11 +8,11 @@
 
 This project provides an API to filter players based on position, birth year range, active status, and club. It also includes a job that allows retrieving all players of a specific club through [transfermarkt-api](https://github.com/felipeall/transfermarkt-api).
 
-## Live demo
+## Demo
 
 The application is built and deployed automatically using the [project's GitHub Actions workflow](https://github.com/devclay92/players_exercise/actions). Every push or merge to the main branch triggers the deployment process.
 
-The application is hosted on Vercel. You can access the API's Swagger documentation at https://players-exercise.vercel.app.
+<del>The application is hosted on Vercel. You can access the API's Swagger documentation at https://players-exercise.vercel.app.</del> ❌ Hosting on Vercel is no longer available.
 
 To execute the job that imports players of a specific club id, run the following Docker command using the image deployed in the [project's package registry](https://github.com/devclay92/players_exercise/pkgs/container/players_exercise):
 
